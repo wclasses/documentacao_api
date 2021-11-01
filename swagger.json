@@ -176,7 +176,7 @@
     "/perletivo" : {
       "get" : {
         "tags" : [ "Acadêmico" ],
-        "summary" : "Lista Período Letivo",
+        "summary" : "Listar Período Letivo",
         "operationId" : "Perletivo - Index",
         "description" : "Lista os períodos letivos cadastrados\n",
         "produces" : [ "application/json" ],
@@ -187,6 +187,37 @@
               "type" : "array",
               "items" : {
                 "$ref" : "#/definitions/Perletivo"
+              }
+            }
+          },
+          "400" : {
+            "description" : "Não autorizado"
+          }
+        }
+      }
+    },
+    "/contrato/pessoa/{id}" : {
+      "get" : {
+        "tags" : [ "Financeiro" ],
+        "summary" : "Listar Contratos Responsável",
+        "operationId" : "Contrato - Index",
+        "description" : "Lista os contratos de um responsável financeiro\n",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "ID da pessoa",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Resposta da requisição",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Contrato"
               }
             }
           },
@@ -506,7 +537,33 @@
           "type" : "number",
           "format" : "enum[1, 2, 3, 4, 5]",
           "example" : 1,
-          "description" : "Lista de Status:\n * `1` - Aberto\n * `2` - Baixado\n * `3` - Baixa Parcial\n * `4` - Baixa Manual\n * `5` - Cancelado\n \n"
+          "description" : "Lista de Status:\n * `1` - Aberto\n * `2` - Baixado\n * `3` - Baixa Parcial\n * `4` - Baixa Manual\n * `5` - Cancelado\n"
+        }
+      }
+    },
+    "Contrato" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "format" : "uuid",
+          "example" : 10
+        },
+        "validade_inicio" : {
+          "type" : "string",
+          "format" : "date",
+          "example" : "2021-01-01"
+        },
+        "validade_fim" : {
+          "type" : "string",
+          "format" : "date",
+          "example" : "2021-12-30"
+        },
+        "status" : {
+          "type" : "number",
+          "format" : "enum[1, 2]",
+          "example" : 1,
+          "description" : "Lista de Status:\n * `1` - Ativo\n * `2` - Cancelado\n"
         }
       }
     }
