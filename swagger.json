@@ -172,6 +172,55 @@
           }
         }
       }
+    },
+    "/fatura/pessoa/{id}" : {
+      "get" : {
+        "tags" : [ "Financeiro" ],
+        "summary" : "Faturas do responsável",
+        "operationId" : "Fatura - View",
+        "description" : "Retorna as Faturas de um responsável financeiro.\nPode ser utilizado filtros como \"ano\", \"mes\" e \"status\"\n",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "type" : "number",
+          "description" : "ID da Pessoa (Responsável)",
+          "required" : true
+        }, {
+          "in" : "query",
+          "name" : "ano",
+          "description" : "Ano de vencimento da Fatura",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "in" : "query",
+          "name" : "mes",
+          "description" : "Mês de vencimento da Fatura",
+          "type" : "integer",
+          "enum" : [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ]
+        }, {
+          "in" : "query",
+          "name" : "status",
+          "type" : "integer",
+          "enum" : [ 1, 2, 3, 4, 5 ],
+          "description" : "Lista de Status:\n * `1` - Aberto\n * `2` - Baixado\n * `3` - Baixa Parcial\n * `4` - Baixa Manual\n * `5` - Cancelado\n",
+          "required" : false
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Resposta da requisição",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Fatura"
+              }
+            }
+          },
+          "400" : {
+            "description" : "Não autorizado"
+          }
+        }
+      }
     }
   },
   "definitions" : {
@@ -353,6 +402,57 @@
         }
       },
       "description" : "Dados da Coligada"
+    },
+    "Fatura" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "format" : "uuid",
+          "example" : 10
+        },
+        "vencimento" : {
+          "type" : "string",
+          "format" : "date",
+          "example" : "2021-10-15"
+        },
+        "valor_bruto" : {
+          "type" : "number",
+          "format" : "decimal",
+          "example" : 1499.9
+        },
+        "desconto_condicional" : {
+          "type" : "number",
+          "format" : "decimal",
+          "example" : 19.9
+        },
+        "desconto_incondicional" : {
+          "type" : "number",
+          "format" : "decimal",
+          "example" : 29.9
+        },
+        "desconto_adicional" : {
+          "type" : "number",
+          "format" : "decimal",
+          "example" : 9.9
+        },
+        "hash" : {
+          "type" : "string",
+          "example" : "76ec5c9b169786fa62d597be5b6587732f793ee0",
+          "description" : "Hash de acesso ao boleto"
+        },
+        "linha_digitavel" : {
+          "type" : "string",
+          "example" : "34191.09008 04071.558451 41363.280002 1 87180000206667",
+          "description" : "Linha digitável de pagamento do boleto"
+        },
+        "status_id" : {
+          "type" : "number",
+          "format" : "enum[1, 2, 3, 4, 5]",
+          "example" : 1,
+          "description" : "Lista de Status:\n * `1` - Aberto\n * `2` - Baixado\n * `3` - Baixa Parcial\n * `4` - Baixa Manual\n * `5` - Cancelado\n \n"
+        }
+      }
     }
   },
   "schemes" : [ "https" ],
