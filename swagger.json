@@ -1,0 +1,371 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "## API do Sistema WClasses Educacional\nDeve ser utilizado token do tipo **Bearer** em todas as requisições.\n\nExemplo:\n```Bearer NzM.HNWRIkyFLgrIduVuBitlrs9hoYtahwmYFlLDGVVu6wqn3ODElWV_cQQ_Uslo```\n\nPara obter o token de acesso entre em contato. ",
+    "version" : "1.0.0",
+    "title" : "WClasses API - 1.0.0",
+    "contact" : {
+      "email" : "desenvolvimento@wclasses.com.br"
+    },
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "tags" : [ {
+    "name" : "Instituição",
+    "description" : "Coligada, filial, dados da instituição de ensino"
+  }, {
+    "name" : "Acadêmico",
+    "description" : "Período Letivo, Cursos, Turmas, Currículos, Diário, etc"
+  }, {
+    "name" : "Usuários",
+    "description" : "Usuários, funcionários, professores, responsáveis e alunos"
+  }, {
+    "name" : "Financeiro",
+    "description" : "Contratos, lançamentos, faturas, dados financeiros"
+  } ],
+  "paths" : {
+    "/coligada" : {
+      "get" : {
+        "tags" : [ "Instituição" ],
+        "summary" : "Coligada - Index",
+        "operationId" : "Coligada - Index",
+        "description" : "Lista as filiais cadastradas no sistema\n",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Resposta da requisição",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Coligada"
+              }
+            }
+          },
+          "401" : {
+            "description" : "Não autorizado"
+          }
+        }
+      }
+    },
+    "/filial" : {
+      "get" : {
+        "tags" : [ "Instituição" ],
+        "summary" : "Filial - Index",
+        "operationId" : "Filial - Index",
+        "description" : "Lista as filiais cadastradas no sistema\n",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Resposta da requisição",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Filial"
+              }
+            }
+          },
+          "401" : {
+            "description" : "Não autorizado"
+          }
+        }
+      }
+    },
+    "/pessoa" : {
+      "get" : {
+        "tags" : [ "Usuários" ],
+        "summary" : "Listar Pessoas",
+        "operationId" : "Pessoa - Index",
+        "description" : "Lista as pessoas cadastradasno sistema, pode ser utilizado paginação\n",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "offset",
+          "description" : "Paginação offset",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "in" : "query",
+          "name" : "limit",
+          "description" : "Paginação limit",
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Resposta da requisição",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/PessoaLista"
+              }
+            }
+          },
+          "401" : {
+            "description" : "Não autorizado"
+          }
+        }
+      }
+    },
+    "/pessoa/{id}" : {
+      "get" : {
+        "tags" : [ "Usuários" ],
+        "summary" : "Detalhes da Pessoa",
+        "operationId" : "Pessoa - View",
+        "description" : "Detalhe da pessoa cadastrada no sistema\n",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "ID da pessoa",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Resposta da requisição",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Pessoa"
+              }
+            }
+          },
+          "401" : {
+            "description" : "Não autorizado"
+          }
+        }
+      }
+    },
+    "/aluno" : {
+      "get" : {
+        "tags" : [ "Usuários" ],
+        "summary" : "Listar Alunos",
+        "operationId" : "Aluno - Index",
+        "description" : "Lista os alunos cadastrados no sistema, pode ser utilizado paginação\n",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "offset",
+          "description" : "Paginação offset",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "in" : "query",
+          "name" : "limit",
+          "description" : "Paginação limit",
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Resposta da requisição",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Aluno"
+              }
+            }
+          },
+          "400" : {
+            "description" : "Não autorizado"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "PessoaLista" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "example" : 100
+        },
+        "nome" : {
+          "type" : "string",
+          "example" : "João da Silva"
+        },
+        "data_nascimento" : {
+          "type" : "string",
+          "format" : "date",
+          "example" : "2000-01-01"
+        },
+        "cpf" : {
+          "type" : "string",
+          "example" : "11122233345"
+        },
+        "sexo" : {
+          "type" : "string",
+          "format" : "enum",
+          "example" : "M"
+        },
+        "email" : {
+          "type" : "string",
+          "example" : "email@provedor.com.br"
+        }
+      }
+    },
+    "Pessoa" : {
+      "type" : "object",
+      "required" : [ "id", "tipo_pessoa", "sexo", "nome", "cpf", "email", "data_nascimento" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "format" : "uuid",
+          "example" : 10056
+        },
+        "tipo_pessoa" : {
+          "type" : "string",
+          "enum" : [ "F", "J" ],
+          "example" : "F",
+          "description" : "Valores aceitos:\n * `F` - Física\n * `J` - Jurídica\n"
+        },
+        "nome" : {
+          "type" : "string",
+          "example" : "João da Silva"
+        },
+        "nomesocial" : {
+          "type" : "string",
+          "example" : "Maria da Silva"
+        },
+        "data_nascimento" : {
+          "type" : "string",
+          "format" : "date",
+          "example" : "1990-01-01"
+        },
+        "cpf" : {
+          "type" : "string",
+          "example" : "08654587075"
+        },
+        "estadocivil" : {
+          "type" : "string",
+          "example" : "Casado"
+        },
+        "sexo" : {
+          "type" : "string",
+          "enum" : [ "M", "F", "N" ],
+          "example" : "M",
+          "description" : "Valores aceitos:\n * `F` - Feminino\n * `M` - Masculino\n * `N` - Não declarar\n"
+        },
+        "email" : {
+          "type" : "string",
+          "format" : "email",
+          "example" : "contato@email.com.br"
+        },
+        "cep" : {
+          "type" : "string",
+          "example" : "05535000",
+          "minLength" : 8,
+          "maxLength" : 8
+        },
+        "rua" : {
+          "type" : "string",
+          "maxLength" : 140,
+          "example" : "Rua dos coqueiros",
+          "description" : "Endereço - Rua"
+        },
+        "numero" : {
+          "type" : "string",
+          "maxLength" : 12,
+          "example" : "196",
+          "description" : "Endereço - Número"
+        },
+        "complemento" : {
+          "type" : "string",
+          "maxLength" : 150,
+          "example" : "Casa 2"
+        },
+        "bairro" : {
+          "type" : "string",
+          "maxLength" : 50,
+          "example" : "Vila dos Coqueiros"
+        },
+        "cidade" : {
+          "type" : "string",
+          "maxLength" : 50,
+          "example" : "São Paulo"
+        },
+        "estado" : {
+          "type" : "string",
+          "example" : "SP",
+          "minLength" : 2,
+          "maxLength" : 2,
+          "description" : "Código da UF"
+        },
+        "cidade_ibge" : {
+          "type" : "string",
+          "example" : "02606",
+          "description" : "Código IBGE da cidade"
+        }
+      }
+    },
+    "Aluno" : {
+      "type" : "object",
+      "required" : [ "alumatricula" ],
+      "properties" : {
+        "matricula" : {
+          "type" : "string",
+          "example" : "MAT-1234"
+        },
+        "ra" : {
+          "type" : "string",
+          "example" : "RA-1234"
+        },
+        "pessoa_id" : {
+          "type" : "integer",
+          "example" : 100
+        },
+        "pessoa" : {
+          "$ref" : "#/definitions/Pessoa"
+        }
+      }
+    },
+    "Filial" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "format" : "uuid",
+          "example" : 10
+        },
+        "filialnome" : {
+          "type" : "string",
+          "example" : "WClasses Educacional"
+        }
+      }
+    },
+    "Coligada" : {
+      "type" : "object",
+      "properties" : {
+        "coligadacodigo" : {
+          "type" : "integer",
+          "format" : "int64",
+          "example" : 1
+        },
+        "coligadanome" : {
+          "type" : "string",
+          "example" : "WClasses Educacional"
+        },
+        "cnpj" : {
+          "type" : "string",
+          "example" : "32409931000134"
+        }
+      },
+      "description" : "Dados da Coligada"
+    }
+  },
+  "schemes" : [ "https" ],
+  "basePath" : "/",
+  "host" : "api.wclasses.com.br",
+  "securityDefinitions" : {
+    "Bearer" : {
+      "type" : "apiKey",
+      "name" : "Authorization",
+      "in" : "header"
+    }
+  },
+  "security" : [ {
+    "Bearer" : [ ]
+  } ]
+}
