@@ -199,7 +199,7 @@
     "/contrato/pessoa/{id}" : {
       "get" : {
         "tags" : [ "Financeiro" ],
-        "summary" : "Listar Contratos Responsável",
+        "summary" : "Contratos Responsável",
         "operationId" : "Contrato - Index",
         "description" : "Lista os contratos de um responsável financeiro\n",
         "produces" : [ "application/json" ],
