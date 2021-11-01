@@ -178,6 +178,7 @@
         "tags" : [ "Acadêmico" ],
         "summary" : "Lista os períodos letivos cadastrados",
         "operationId" : "Perletivo - Index",
+        "produces" : [ "application/json" ],
         "responses" : {
           "200" : {
             "description" : "Resposta da requisição",
