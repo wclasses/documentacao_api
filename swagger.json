@@ -428,14 +428,14 @@
     },
     "Perletivo" : {
       "type" : "object",
-      "required" : [ "codigo", "descricao", "ano" ],
+      "required" : [ "plcodigo", "pldescricao", "ano" ],
       "properties" : {
-        "codigo" : {
+        "plcodigo" : {
           "type" : "string",
           "example" : "2021",
           "description" : "Ano letivo"
         },
-        "descricao" : {
+        "pldescricao" : {
           "type" : "string",
           "example" : "Período Letivo 2021",
           "description" : "Descrição do período"
@@ -445,11 +445,17 @@
           "example" : 2021,
           "description" : "Ano em que o período letivo irá ocorrer"
         },
-        "aberto" : {
+        "plaberto" : {
           "type" : "string",
           "format" : "enum[S, N]",
           "example" : "S",
           "description" : "Se o período letivo esta aberto. Valores possíveis:\n * `S` - Sim\n * `N` - Não\n"
+        },
+        "plcorrente" : {
+          "type" : "string",
+          "format" : "enum[S, N]",
+          "example" : "S",
+          "description" : "Se o período letivo é o período corrente Valores possíveis:\n * `S` - Sim\n * `N` - Não\n"
         }
       }
     },
