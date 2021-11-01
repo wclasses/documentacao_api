@@ -176,8 +176,9 @@
     "/perletivo" : {
       "get" : {
         "tags" : [ "Acadêmico" ],
-        "summary" : "Lista os períodos letivos cadastrados",
+        "summary" : "Lista Período Letivo",
         "operationId" : "Perletivo - Index",
+        "description" : "Lista os períodos letivos cadastrados\n",
         "produces" : [ "application/json" ],
         "responses" : {
           "200" : {
@@ -446,7 +447,7 @@
         },
         "aberto" : {
           "type" : "string",
-          "format" : "enum['S', 'N']",
+          "format" : "enum[S, N]",
           "example" : "S",
           "description" : "Se o período letivo esta aberto. Valores possíveis:\n * `S` - Sim\n * `N` - Não\n"
         }
