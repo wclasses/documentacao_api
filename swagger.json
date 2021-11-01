@@ -77,7 +77,7 @@
         "tags" : [ "Usuários" ],
         "summary" : "Listar Pessoas",
         "operationId" : "Pessoa - Index",
-        "description" : "Lista as pessoas cadastradasno sistema, pode ser utilizado paginação\n",
+        "description" : "Lista as pessoas cadastradas no sistema, pode ser utilizado paginação. Retorna todos os tipo de usuários/perfis.\n",
         "produces" : [ "application/json" ],
         "parameters" : [ {
           "in" : "query",
