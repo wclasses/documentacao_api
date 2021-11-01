@@ -447,6 +447,7 @@
         "aberto" : {
           "type" : "string",
           "format" : "enum['S', 'N']",
+          "example" : "S",
           "description" : "Se o período letivo esta aberto. Valores possíveis:\n * `S` - Sim\n * `N` - Não\n"
         }
       }
