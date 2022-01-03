@@ -568,7 +568,7 @@
           "type" : "number",
           "format" : "enum[1, 2, 3, 4, 5]",
           "example" : 1,
-          "description" : "Lista de Status:\n * `1` - Aberto\n * `2` - Baixado\n * `3` - Baixa Parcial\n * `4` - Baixa Manual\n * `5` - Cancelado\n"
+          "description" : "Status da Fatura.\nLista de Status:\n * `1` - Aberto\n * `2` - Baixado\n * `3` - Baixa Parcial\n * `4` - Baixa Manual\n * `5` - Cancelado\n"
         },
         "status_remessa" : {
           "type" : "number",
