@@ -490,6 +490,32 @@
         }
       }
     },
+    "Contrato" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "format" : "uuid",
+          "example" : 10
+        },
+        "validade_inicio" : {
+          "type" : "string",
+          "format" : "date",
+          "example" : "2021-01-01"
+        },
+        "validade_fim" : {
+          "type" : "string",
+          "format" : "date",
+          "example" : "2021-12-30"
+        },
+        "status" : {
+          "type" : "number",
+          "format" : "enum[1, 2]",
+          "example" : 1,
+          "description" : "Lista de Status:\n * `1` - Ativo\n * `2` - Cancelado\n"
+        }
+      }
+    },
     "Fatura" : {
       "type" : "object",
       "properties" : {
@@ -538,32 +564,26 @@
           "format" : "enum[1, 2, 3, 4, 5]",
           "example" : 1,
           "description" : "Lista de Status:\n * `1` - Aberto\n * `2` - Baixado\n * `3` - Baixa Parcial\n * `4` - Baixa Manual\n * `5` - Cancelado\n"
+        },
+        "status_remessa" : {
+          "type" : "number",
+          "format" : "enum[0, 1, 2, 3]",
+          "example" : 1,
+          "description" : "Lista de Status:\n * `0` - Não Remetido\n * `1` - Remetido\n * `2` - Registrado\n * `3` - Não registrado\n"
         }
       }
     },
-    "Contrato" : {
+    "FaturaStatus" : {
       "type" : "object",
       "properties" : {
         "id" : {
-          "type" : "string",
+          "type" : "integer",
           "format" : "uuid",
-          "example" : 10
-        },
-        "validade_inicio" : {
-          "type" : "string",
-          "format" : "date",
-          "example" : "2021-01-01"
-        },
-        "validade_fim" : {
-          "type" : "string",
-          "format" : "date",
-          "example" : "2021-12-30"
+          "example" : 1
         },
         "status" : {
-          "type" : "number",
-          "format" : "enum[1, 2]",
-          "example" : 1,
-          "description" : "Lista de Status:\n * `1` - Ativo\n * `2` - Cancelado\n"
+          "type" : "string",
+          "example" : "Aberto"
         }
       }
     }
