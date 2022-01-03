@@ -527,27 +527,32 @@
         "vencimento" : {
           "type" : "string",
           "format" : "date",
-          "example" : "2021-10-15"
+          "example" : "2021-10-15",
+          "description" : "Data de vencimento da fatura"
         },
         "valor_bruto" : {
           "type" : "number",
           "format" : "decimal",
-          "example" : 1499.9
+          "example" : 1499.9,
+          "description" : "Valor Bruto - Sem descontos aplicados"
         },
         "desconto_condicional" : {
           "type" : "number",
           "format" : "decimal",
-          "example" : 19.9
+          "example" : 19.9,
+          "description" : "Valido até a data de vencimento"
         },
         "desconto_incondicional" : {
           "type" : "number",
           "format" : "decimal",
-          "example" : 29.9
+          "example" : 29.9,
+          "description" : "Válido mesmo após o vencimento"
         },
         "desconto_adicional" : {
           "type" : "number",
           "format" : "decimal",
-          "example" : 9.9
+          "example" : 9.9,
+          "description" : "Outros tipos de desconto"
         },
         "hash" : {
           "type" : "string",
@@ -569,7 +574,7 @@
           "type" : "number",
           "format" : "enum[0, 1, 2, 3]",
           "example" : 1,
-          "description" : "Lista de Status:\n * `0` - Não Remetido\n * `1` - Remetido\n * `2` - Registrado\n * `3` - Não registrado\n"
+          "description" : "Status da fatura na remessa bancária.\nLista de Status:\n * `0` - Não Remetido\n * `1` - Remetido\n * `2` - Registrado\n * `3` - Não registrado\n"
         }
       }
     },
