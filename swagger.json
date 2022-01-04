@@ -208,8 +208,7 @@
           "in" : "path",
           "description" : "ID da pessoa",
           "required" : true,
-          "type" : "integer",
-          "format" : "int64"
+          "type" : "integer"
         }, {
           "name" : "status",
           "in" : "query",
