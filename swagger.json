@@ -498,15 +498,33 @@
           "format" : "uuid",
           "example" : 10
         },
+        "plano_pagamento_id" : {
+          "type" : "string",
+          "format" : "uuid",
+          "example" : 50,
+          "description" : "ID do Plano de Pagamento selecionado"
+        },
+        "servico_nome" : {
+          "type" : "string",
+          "example" : "Mensalidade Escolar - Ensino Fundamental",
+          "description" : "Nome do serviço contratado"
+        },
         "validade_inicio" : {
           "type" : "string",
           "format" : "date",
-          "example" : "2021-01-01"
+          "example" : "2021-01-01",
+          "description" : "Validade Inicial do contrato"
         },
         "validade_fim" : {
           "type" : "string",
           "format" : "date",
-          "example" : "2021-12-30"
+          "example" : "2021-12-30",
+          "description" : "Validade Final do contrato"
+        },
+        "parcelas" : {
+          "type" : "string",
+          "example" : "12",
+          "description" : "Total de parcelas (parcelamento)"
         },
         "status" : {
           "type" : "number",
