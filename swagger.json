@@ -232,6 +232,36 @@
         }
       }
     },
+    "/contrato/{id}" : {
+      "get" : {
+        "tags" : [ "Financeiro" ],
+        "summary" : "Detalhes do Contrato",
+        "operationId" : "Contrato - View",
+        "description" : "Exibe os detalhes do contrato\n",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "ID do contrato",
+          "required" : true,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Resposta da requisição",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/ContratoView"
+              }
+            }
+          },
+          "400" : {
+            "description" : "Não autorizado"
+          }
+        }
+      }
+    },
     "/fatura/pessoa/{id}" : {
       "get" : {
         "tags" : [ "Financeiro" ],
@@ -535,7 +565,115 @@
           "type" : "number",
           "format" : "enum[1, 2]",
           "example" : 1,
+          "description" : "Lista de Status:\n * `1` - Ativo\n * `2` - Cancelado\n \n"
+        }
+      }
+    },
+    "ContratoView" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "format" : "uuid",
+          "example" : 10
+        },
+        "plano_pagamento_id" : {
+          "type" : "string",
+          "format" : "uuid",
+          "example" : 50,
+          "description" : "ID do Plano de Pagamento"
+        },
+        "responsavel_financeiro_id" : {
+          "type" : "string",
+          "format" : "uuid",
+          "example" : 1500,
+          "description" : "ID da Pessoa - Responsável Financeiro"
+        },
+        "matricula_perletivo_id" : {
+          "type" : "string",
+          "format" : "uuid",
+          "example" : 1500,
+          "description" : "ID da matrícula no período letivo (Matricula Perletivo)"
+        },
+        "validade_inicio" : {
+          "type" : "string",
+          "format" : "date",
+          "example" : "2021-01-01",
+          "description" : "Validade Inicial do contrato"
+        },
+        "validade_fim" : {
+          "type" : "string",
+          "format" : "date",
+          "example" : "2021-12-30",
+          "description" : "Validade Final do contrato"
+        },
+        "status" : {
+          "type" : "number",
+          "format" : "enum[1, 2]",
+          "example" : 1,
           "description" : "Lista de Status:\n * `1` - Ativo\n * `2` - Cancelado\n"
+        },
+        "servico_nome" : {
+          "type" : "string",
+          "example" : "Mensalidade Escolar - Ensino Fundamental",
+          "description" : "Nome do serviço contratado"
+        },
+        "servico_descricao" : {
+          "type" : "string",
+          "example" : "Mensalidade Escolar - Ensino Fundamental",
+          "description" : "Descrição do serviço contratado"
+        },
+        "servico_periodo_inicio" : {
+          "type" : "string",
+          "format" : "date",
+          "example" : "2021-01-15",
+          "description" : "Início da prestação do serviço contratado"
+        },
+        "servico_periodo_fim" : {
+          "type" : "string",
+          "format" : "date",
+          "example" : "2021-12-15",
+          "description" : "Fim da prestação do serviço contratado"
+        },
+        "plano_nome" : {
+          "type" : "string",
+          "example" : "Mensalidade EF - 2021 - 12x",
+          "description" : "Nome do Plano de Pagamento contratado"
+        },
+        "total_bruto" : {
+          "type" : "number",
+          "format" : "decimal",
+          "example" : 1200.0,
+          "description" : "Total Bruto do Contrato, sem considerar descontos ou valor proporcional"
+        },
+        "valor_poporcional" : {
+          "type" : "number",
+          "format" : "decimal",
+          "example" : 6000.0,
+          "description" : "Valor Proporcional ao período de ingresso/contratação"
+        },
+        "desconto_incondicional" : {
+          "type" : "number",
+          "format" : "decimal",
+          "example" : 1000.0,
+          "description" : "Desconto incondicional aplicado"
+        },
+        "desconto_condicional" : {
+          "type" : "number",
+          "format" : "decimal",
+          "example" : 500.0,
+          "description" : "Desconto condicional aplicado"
+        },
+        "total_liquido" : {
+          "type" : "number",
+          "format" : "decimal",
+          "example" : 5000.0,
+          "description" : "Total líquido do contrato, aplicado descontos (apenas incondicionais) em cima do valor proporcional"
+        },
+        "parcelas" : {
+          "type" : "string",
+          "example" : "12",
+          "description" : "Total de parcelas (parcelamento)"
         }
       }
     },
