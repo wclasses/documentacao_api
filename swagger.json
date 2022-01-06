@@ -674,6 +674,23 @@
           "type" : "string",
           "example" : "12",
           "description" : "Total de parcelas (parcelamento)"
+        },
+        "dia_vencimento" : {
+          "type" : "string",
+          "example" : "15",
+          "description" : "Dia selecionado para vencimento das faturas"
+        },
+        "tipo" : {
+          "type" : "string",
+          "example" : "S",
+          "format" : "enum[\"S\", \"P\"]",
+          "description" : "Tipo do contrato:\n * `S` - Serviço\n * `P` - Produto\n"
+        },
+        "data_cadastro" : {
+          "type" : "string",
+          "format" : "date",
+          "example" : "2021-06-10",
+          "description" : "Data de cadastro/contratação"
         }
       }
     },
