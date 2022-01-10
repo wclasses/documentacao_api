@@ -72,10 +72,72 @@
         }
       }
     },
+    "/aluno" : {
+      "get" : {
+        "tags" : [ "Usuários" ],
+        "summary" : "Aluno - Listar",
+        "operationId" : "Aluno - Index",
+        "description" : "Lista os alunos cadastrados no sistema, pode ser utilizado paginação\n",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "offset",
+          "description" : "Paginação offset",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "in" : "query",
+          "name" : "limit",
+          "description" : "Paginação limit",
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Resposta da requisição",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Aluno"
+              }
+            }
+          },
+          "400" : {
+            "description" : "Não autorizado"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Usuários" ],
+        "summary" : "Aluno - Cadastro",
+        "operationId" : "Aluno - Create",
+        "description" : "Cadastra um aluno no sistema\n",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body,",
+          "description" : "Objeto Pessoa - Aluno",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AlunoCadastro"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Resposta da requisição",
+            "schema" : {
+              "$ref" : "#/definitions/AlunoIndex"
+            }
+          },
+          "400" : {
+            "description" : "Não autorizado"
+          }
+        }
+      }
+    },
     "/pessoa" : {
       "get" : {
         "tags" : [ "Usuários" ],
-        "summary" : "Listar Pessoas",
+        "summary" : "Pessoas - Listar",
         "operationId" : "Pessoa - Index",
         "description" : "Lista as pessoas cadastradas no sistema, pode ser utilizado paginação. Retorna todos os tipo de usuários/perfis.\n",
         "produces" : [ "application/json" ],
@@ -110,7 +172,7 @@
     "/pessoa/{id}" : {
       "get" : {
         "tags" : [ "Usuários" ],
-        "summary" : "Detalhes da Pessoa",
+        "summary" : "Pessoa - Detalhes",
         "operationId" : "Pessoa - View",
         "description" : "Detalhe da pessoa cadastrada no sistema\n",
         "produces" : [ "application/json" ],
@@ -133,68 +195,6 @@
             }
           },
           "401" : {
-            "description" : "Não autorizado"
-          }
-        }
-      }
-    },
-    "/aluno" : {
-      "get" : {
-        "tags" : [ "Usuários" ],
-        "summary" : "Listar Alunos",
-        "operationId" : "Aluno - Index",
-        "description" : "Lista os alunos cadastrados no sistema, pode ser utilizado paginação\n",
-        "produces" : [ "application/json" ],
-        "parameters" : [ {
-          "in" : "query",
-          "name" : "offset",
-          "description" : "Paginação offset",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "in" : "query",
-          "name" : "limit",
-          "description" : "Paginação limit",
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Resposta da requisição",
-            "schema" : {
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/definitions/Aluno"
-              }
-            }
-          },
-          "400" : {
-            "description" : "Não autorizado"
-          }
-        }
-      },
-      "post" : {
-        "tags" : [ "Usuários" ],
-        "summary" : "Cadastrar Aluno",
-        "operationId" : "Aluno - Create",
-        "description" : "Cadastra um aluno no sistema\n",
-        "produces" : [ "application/json" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body,",
-          "description" : "Objeto Pessoa - Aluno",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/AlunoCadastro"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Resposta da requisição",
-            "schema" : {
-              "$ref" : "#/definitions/AlunoCadastro"
-            }
-          },
-          "400" : {
             "description" : "Não autorizado"
           }
         }
@@ -340,164 +340,6 @@
     }
   },
   "definitions" : {
-    "Filial" : {
-      "type" : "object",
-      "properties" : {
-        "id" : {
-          "type" : "string",
-          "format" : "uuid",
-          "example" : 10
-        },
-        "filialnome" : {
-          "type" : "string",
-          "example" : "WClasses Educacional"
-        }
-      }
-    },
-    "Coligada" : {
-      "type" : "object",
-      "properties" : {
-        "coligadacodigo" : {
-          "type" : "integer",
-          "format" : "int64",
-          "example" : 1
-        },
-        "coligadanome" : {
-          "type" : "string",
-          "example" : "WClasses Educacional"
-        },
-        "cnpj" : {
-          "type" : "string",
-          "example" : "32409931000134"
-        }
-      },
-      "description" : "Dados da Coligada"
-    },
-    "PessoaLista" : {
-      "type" : "object",
-      "properties" : {
-        "id" : {
-          "type" : "string",
-          "example" : 100
-        },
-        "nome" : {
-          "type" : "string",
-          "example" : "João da Silva"
-        },
-        "data_nascimento" : {
-          "type" : "string",
-          "format" : "date",
-          "example" : "2000-01-01"
-        },
-        "cpf" : {
-          "type" : "string",
-          "example" : "11122233345"
-        },
-        "sexo" : {
-          "type" : "string",
-          "format" : "enum",
-          "example" : "M"
-        },
-        "email" : {
-          "type" : "string",
-          "example" : "email@provedor.com.br"
-        }
-      }
-    },
-    "Pessoa" : {
-      "type" : "object",
-      "required" : [ "id", "tipo_pessoa", "sexo", "nome", "cpf", "email", "data_nascimento" ],
-      "properties" : {
-        "id" : {
-          "type" : "string",
-          "format" : "uuid",
-          "example" : 10056
-        },
-        "tipo_pessoa" : {
-          "type" : "string",
-          "enum" : [ "F", "J" ],
-          "example" : "F",
-          "description" : "Valores aceitos:\n * `F` - Física\n * `J` - Jurídica\n"
-        },
-        "nome" : {
-          "type" : "string",
-          "example" : "João da Silva"
-        },
-        "nomesocial" : {
-          "type" : "string",
-          "example" : "Maria da Silva"
-        },
-        "data_nascimento" : {
-          "type" : "string",
-          "format" : "date",
-          "example" : "1990-01-01"
-        },
-        "cpf" : {
-          "type" : "string",
-          "example" : "08654587075"
-        },
-        "estadocivil" : {
-          "type" : "string",
-          "example" : "Casado"
-        },
-        "sexo" : {
-          "type" : "string",
-          "enum" : [ "M", "F", "N" ],
-          "example" : "M",
-          "description" : "Valores aceitos:\n * `F` - Feminino\n * `M` - Masculino\n * `N` - Não declarar\n"
-        },
-        "email" : {
-          "type" : "string",
-          "format" : "email",
-          "example" : "contato@email.com.br"
-        },
-        "cep" : {
-          "type" : "string",
-          "example" : "05535000",
-          "minLength" : 8,
-          "maxLength" : 8
-        },
-        "rua" : {
-          "type" : "string",
-          "maxLength" : 140,
-          "example" : "Rua dos coqueiros",
-          "description" : "Endereço - Rua"
-        },
-        "numero" : {
-          "type" : "string",
-          "maxLength" : 12,
-          "example" : "196",
-          "description" : "Endereço - Número"
-        },
-        "complemento" : {
-          "type" : "string",
-          "maxLength" : 150,
-          "example" : "Casa 2"
-        },
-        "bairro" : {
-          "type" : "string",
-          "maxLength" : 50,
-          "example" : "Vila dos Coqueiros"
-        },
-        "cidade" : {
-          "type" : "string",
-          "maxLength" : 50,
-          "example" : "São Paulo"
-        },
-        "estado" : {
-          "type" : "string",
-          "example" : "SP",
-          "minLength" : 2,
-          "maxLength" : 2,
-          "description" : "Código da UF"
-        },
-        "cidade_ibge" : {
-          "type" : "string",
-          "example" : "02606",
-          "description" : "Código IBGE da cidade"
-        }
-      }
-    },
     "Aluno" : {
       "type" : "object",
       "required" : [ "alumatricula" ],
@@ -521,7 +363,7 @@
     },
     "AlunoCadastro" : {
       "type" : "object",
-      "required" : [ "matricula" ],
+      "required" : [ "nome", "matricula", "data_nascimento", "senha" ],
       "properties" : {
         "nome" : {
           "type" : "string",
@@ -619,38 +461,41 @@
         }
       }
     },
-    "Perletivo" : {
+    "AlunoIndex" : {
       "type" : "object",
-      "required" : [ "plcodigo", "pldescricao", "ano" ],
       "properties" : {
-        "plcodigo" : {
+        "id" : {
           "type" : "string",
-          "example" : "2021",
-          "description" : "Ano letivo"
+          "example" : "124"
         },
-        "pldescricao" : {
+        "nome" : {
           "type" : "string",
-          "example" : "Período Letivo 2021",
-          "description" : "Descrição do período"
+          "example" : "Arthur da Silva"
         },
-        "ano" : {
-          "type" : "integer",
-          "example" : 2021,
-          "description" : "Ano em que o período letivo irá ocorrer"
-        },
-        "plaberto" : {
+        "matricula" : {
           "type" : "string",
-          "format" : "enum[S, N]",
-          "example" : "S",
-          "description" : "Se o período letivo esta aberto. Valores possíveis:\n * `S` - Sim\n * `N` - Não\n"
-        },
-        "plcorrente" : {
-          "type" : "string",
-          "format" : "enum[S, N]",
-          "example" : "S",
-          "description" : "Se o período letivo é o período corrente Valores possíveis:\n * `S` - Sim\n * `N` - Não\n"
+          "example" : "MAT-1234"
         }
       }
+    },
+    "Coligada" : {
+      "type" : "object",
+      "properties" : {
+        "coligadacodigo" : {
+          "type" : "integer",
+          "format" : "int64",
+          "example" : 1
+        },
+        "coligadanome" : {
+          "type" : "string",
+          "example" : "WClasses Educacional"
+        },
+        "cnpj" : {
+          "type" : "string",
+          "example" : "32409931000134"
+        }
+      },
+      "description" : "Dados da Coligada"
     },
     "Contrato" : {
       "type" : "object",
@@ -894,6 +739,178 @@
         "status" : {
           "type" : "string",
           "example" : "Aberto"
+        }
+      }
+    },
+    "Filial" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "format" : "uuid",
+          "example" : 10
+        },
+        "filialnome" : {
+          "type" : "string",
+          "example" : "WClasses Educacional"
+        }
+      }
+    },
+    "Perletivo" : {
+      "type" : "object",
+      "required" : [ "plcodigo", "pldescricao", "ano" ],
+      "properties" : {
+        "plcodigo" : {
+          "type" : "string",
+          "example" : "2021",
+          "description" : "Ano letivo"
+        },
+        "pldescricao" : {
+          "type" : "string",
+          "example" : "Período Letivo 2021",
+          "description" : "Descrição do período"
+        },
+        "ano" : {
+          "type" : "integer",
+          "example" : 2021,
+          "description" : "Ano em que o período letivo irá ocorrer"
+        },
+        "plaberto" : {
+          "type" : "string",
+          "format" : "enum[S, N]",
+          "example" : "S",
+          "description" : "Se o período letivo esta aberto. Valores possíveis:\n * `S` - Sim\n * `N` - Não\n"
+        },
+        "plcorrente" : {
+          "type" : "string",
+          "format" : "enum[S, N]",
+          "example" : "S",
+          "description" : "Se o período letivo é o período corrente Valores possíveis:\n * `S` - Sim\n * `N` - Não\n"
+        }
+      }
+    },
+    "Pessoa" : {
+      "type" : "object",
+      "required" : [ "id", "tipo_pessoa", "sexo", "nome", "cpf", "email", "data_nascimento" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "format" : "uuid",
+          "example" : 10056
+        },
+        "tipo_pessoa" : {
+          "type" : "string",
+          "enum" : [ "F", "J" ],
+          "example" : "F",
+          "description" : "Valores aceitos:\n * `F` - Física\n * `J` - Jurídica\n"
+        },
+        "nome" : {
+          "type" : "string",
+          "example" : "João da Silva"
+        },
+        "nomesocial" : {
+          "type" : "string",
+          "example" : "Maria da Silva"
+        },
+        "data_nascimento" : {
+          "type" : "string",
+          "format" : "date",
+          "example" : "1990-01-01"
+        },
+        "cpf" : {
+          "type" : "string",
+          "example" : "08654587075"
+        },
+        "estadocivil" : {
+          "type" : "string",
+          "example" : "Casado"
+        },
+        "sexo" : {
+          "type" : "string",
+          "enum" : [ "M", "F", "N" ],
+          "example" : "M",
+          "description" : "Valores aceitos:\n * `F` - Feminino\n * `M` - Masculino\n * `N` - Não declarar\n"
+        },
+        "email" : {
+          "type" : "string",
+          "format" : "email",
+          "example" : "contato@email.com.br"
+        },
+        "cep" : {
+          "type" : "string",
+          "example" : "05535000",
+          "minLength" : 8,
+          "maxLength" : 8
+        },
+        "rua" : {
+          "type" : "string",
+          "maxLength" : 140,
+          "example" : "Rua dos coqueiros",
+          "description" : "Endereço - Rua"
+        },
+        "numero" : {
+          "type" : "string",
+          "maxLength" : 12,
+          "example" : "196",
+          "description" : "Endereço - Número"
+        },
+        "complemento" : {
+          "type" : "string",
+          "maxLength" : 150,
+          "example" : "Casa 2"
+        },
+        "bairro" : {
+          "type" : "string",
+          "maxLength" : 50,
+          "example" : "Vila dos Coqueiros"
+        },
+        "cidade" : {
+          "type" : "string",
+          "maxLength" : 50,
+          "example" : "São Paulo"
+        },
+        "estado" : {
+          "type" : "string",
+          "example" : "SP",
+          "minLength" : 2,
+          "maxLength" : 2,
+          "description" : "Código da UF"
+        },
+        "cidade_ibge" : {
+          "type" : "string",
+          "example" : "02606",
+          "description" : "Código IBGE da cidade"
+        }
+      }
+    },
+    "PessoaLista" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "example" : 100
+        },
+        "nome" : {
+          "type" : "string",
+          "example" : "João da Silva"
+        },
+        "data_nascimento" : {
+          "type" : "string",
+          "format" : "date",
+          "example" : "2000-01-01"
+        },
+        "cpf" : {
+          "type" : "string",
+          "example" : "11122233345"
+        },
+        "sexo" : {
+          "type" : "string",
+          "format" : "enum",
+          "example" : "M"
+        },
+        "email" : {
+          "type" : "string",
+          "example" : "email@provedor.com.br"
         }
       }
     }
