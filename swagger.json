@@ -44,7 +44,10 @@
             }
           },
           "401" : {
-            "description" : "Não autorizado"
+            "description" : "Não autorizado",
+            "schema" : {
+              "$ref" : "#/definitions/ErroToken"
+            }
           }
         }
       }
@@ -67,7 +70,10 @@
             }
           },
           "401" : {
-            "description" : "Não autorizado"
+            "description" : "Não autorizado",
+            "schema" : {
+              "$ref" : "#/definitions/ErroToken"
+            }
           }
         }
       }
@@ -102,7 +108,10 @@
             }
           },
           "401" : {
-            "description" : "Não autorizado"
+            "description" : "Não autorizado",
+            "schema" : {
+              "$ref" : "#/definitions/ErroToken"
+            }
           }
         }
       },
@@ -146,7 +155,10 @@
             }
           },
           "401" : {
-            "description" : "Não autorizado"
+            "description" : "Não autorizado",
+            "schema" : {
+              "$ref" : "#/definitions/ErroToken"
+            }
           },
           "422" : {
             "description" : "Erro de validação de dados",
@@ -207,7 +219,10 @@
             }
           },
           "401" : {
-            "description" : "Não autorizado"
+            "description" : "Não autorizado",
+            "schema" : {
+              "$ref" : "#/definitions/ErroToken"
+            }
           }
         }
       }
@@ -238,7 +253,10 @@
             }
           },
           "401" : {
-            "description" : "Não autorizado"
+            "description" : "Não autorizado",
+            "schema" : {
+              "$ref" : "#/definitions/ErroToken"
+            }
           }
         }
       }
@@ -261,7 +279,10 @@
             }
           },
           "401" : {
-            "description" : "Não autorizado"
+            "description" : "Não autorizado",
+            "schema" : {
+              "$ref" : "#/definitions/ErroToken"
+            }
           }
         }
       }
@@ -297,7 +318,10 @@
             }
           },
           "401" : {
-            "description" : "Não autorizado"
+            "description" : "Não autorizado",
+            "schema" : {
+              "$ref" : "#/definitions/ErroToken"
+            }
           }
         }
       }
@@ -327,7 +351,10 @@
             }
           },
           "401" : {
-            "description" : "Não autorizado"
+            "description" : "Não autorizado",
+            "schema" : {
+              "$ref" : "#/definitions/ErroToken"
+            }
           }
         }
       }
@@ -376,7 +403,10 @@
             }
           },
           "401" : {
-            "description" : "Não autorizado"
+            "description" : "Não autorizado",
+            "schema" : {
+              "$ref" : "#/definitions/ErroToken"
+            }
           }
         }
       }
@@ -689,6 +719,23 @@
           "format" : "date",
           "example" : "2021-06-10",
           "description" : "Data de cadastro/contratação"
+        }
+      }
+    },
+    "ErroToken" : {
+      "properties" : {
+        "errors" : {
+          "type" : "array",
+          "items" : {
+            "type" : "object",
+            "properties" : {
+              "message" : {
+                "type" : "string",
+                "description" : "Descrição do erro",
+                "example" : "E_INVALID_API_TOKEN: Invalid API token"
+              }
+            }
+          }
         }
       }
     },
