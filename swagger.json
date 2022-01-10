@@ -101,7 +101,7 @@
               }
             }
           },
-          "400" : {
+          "401" : {
             "description" : "Não autorizado"
           }
         }
@@ -115,7 +115,7 @@
         "parameters" : [ {
           "in" : "body",
           "name" : "body,",
-          "description" : "Objeto Pessoa - Aluno",
+          "description" : "Dados do aluno",
           "required" : true,
           "schema" : {
             "$ref" : "#/definitions/AlunoCadastro"
@@ -125,11 +125,54 @@
           "200" : {
             "description" : "Resposta da requisição",
             "schema" : {
-              "$ref" : "#/definitions/AlunoIndex"
+              "type" : "object",
+              "properties" : {
+                "id" : {
+                  "type" : "string",
+                  "format" : "uuid",
+                  "example" : 10056
+                },
+                "nome" : {
+                  "type" : "string",
+                  "description" : "Nome Cadastrado",
+                  "example" : "Arthur da Silva"
+                },
+                "matricula" : {
+                  "type" : "string",
+                  "description" : "Matrícula Cadastrada",
+                  "example" : "MAT-1234"
+                }
+              }
             }
           },
-          "400" : {
+          "401" : {
             "description" : "Não autorizado"
+          },
+          "422" : {
+            "description" : "Erro de validação de dados",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "type" : "object",
+                "properties" : {
+                  "rule" : {
+                    "type" : "string",
+                    "description" : "Regra quebrada que retornou o erro",
+                    "example" : "required"
+                  },
+                  "field" : {
+                    "type" : "string",
+                    "description" : "Campo que apresenta o erro",
+                    "example" : "matricula"
+                  },
+                  "message" : {
+                    "type" : "string",
+                    "description" : "Mensagem de errro",
+                    "example" : "required validation failed"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -217,7 +260,7 @@
               }
             }
           },
-          "400" : {
+          "401" : {
             "description" : "Não autorizado"
           }
         }
@@ -253,7 +296,7 @@
               }
             }
           },
-          "400" : {
+          "401" : {
             "description" : "Não autorizado"
           }
         }
@@ -283,7 +326,7 @@
               }
             }
           },
-          "400" : {
+          "401" : {
             "description" : "Não autorizado"
           }
         }
@@ -332,7 +375,7 @@
               }
             }
           },
-          "400" : {
+          "401" : {
             "description" : "Não autorizado"
           }
         }
@@ -458,23 +501,6 @@
           "format" : "email",
           "example" : "arthur.silva@email.com.br",
           "description" : "E-mail do aluno"
-        }
-      }
-    },
-    "AlunoIndex" : {
-      "type" : "object",
-      "properties" : {
-        "id" : {
-          "type" : "string",
-          "example" : "124"
-        },
-        "nome" : {
-          "type" : "string",
-          "example" : "Arthur da Silva"
-        },
-        "matricula" : {
-          "type" : "string",
-          "example" : "MAT-1234"
         }
       }
     },
@@ -725,20 +751,6 @@
           "format" : "enum[0, 1, 2, 3]",
           "example" : 1,
           "description" : "Status da fatura na remessa bancária.\nLista de Status:\n * `0` - Não Remetido\n * `1` - Remetido\n * `2` - Registrado\n * `3` - Não registrado\n"
-        }
-      }
-    },
-    "FaturaStatus" : {
-      "type" : "object",
-      "properties" : {
-        "id" : {
-          "type" : "integer",
-          "format" : "uuid",
-          "example" : 1
-        },
-        "status" : {
-          "type" : "string",
-          "example" : "Aberto"
         }
       }
     },
