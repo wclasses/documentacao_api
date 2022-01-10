@@ -565,6 +565,57 @@
           "format" : "enum[\"Solteiro\", \"Casado\", \"Separado\", \"Divorciado\", \"Viuvo\", \"Marital\", \"Separado Judicialmente\", \"União Estável\"]",
           "example" : "Solteiro",
           "description" : "Estado Civil:\n * `Solteiro`\n * `Casado`\n * `Separado`\n * `Divorciado`\n * `Viuvo`\n * `Marital`\n * `Separado Judicialmente`\n * `União Estável`\n"
+        },
+        "cep" : {
+          "type" : "string",
+          "example" : "08473805",
+          "description" : "Endereço - CEP"
+        },
+        "rua" : {
+          "type" : "string",
+          "example" : "Rua Flamboyant",
+          "description" : "Endereço - Rua"
+        },
+        "numero" : {
+          "type" : "string",
+          "example" : "35",
+          "description" : "Endereço - Número"
+        },
+        "complemento" : {
+          "type" : "string",
+          "example" : "Fundos",
+          "description" : "Endereço - Complemento"
+        },
+        "bairro" : {
+          "type" : "string",
+          "example" : "Jardim Pérola II",
+          "description" : "Endereço - Bairro"
+        },
+        "cidade" : {
+          "type" : "string",
+          "example" : "São Paulo",
+          "description" : "Endereço - Cidade"
+        },
+        "estado" : {
+          "type" : "string",
+          "example" : "SP",
+          "description" : "Endereço - UF - Estado"
+        },
+        "telefone1" : {
+          "type" : "string",
+          "example" : "1127966700",
+          "description" : "Telefone 1: Residencial"
+        },
+        "telefone2" : {
+          "type" : "string",
+          "example" : "11982913802",
+          "description" : "Telefone 2: Celular"
+        },
+        "email" : {
+          "type" : "string",
+          "format" : "email",
+          "example" : "arthur.silva@email.com.br",
+          "description" : "E-mail do aluno"
         }
       }
     },
