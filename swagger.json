@@ -171,6 +171,33 @@
             "description" : "Não autorizado"
           }
         }
+      },
+      "post" : {
+        "tags" : [ "Usuários" ],
+        "summary" : "Cadastrar Aluno",
+        "operationId" : "Aluno - Create",
+        "description" : "Cadastra um aluno no sistema\n",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body,",
+          "description" : "Objeto Pessoa - Aluno",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AlunoCadastro"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Resposta da requisição",
+            "schema" : {
+              "$ref" : "#/definitions/AlunoCadastro"
+            }
+          },
+          "400" : {
+            "description" : "Não autorizado"
+          }
+        }
       }
     },
     "/perletivo" : {
@@ -489,6 +516,55 @@
         },
         "pessoa" : {
           "$ref" : "#/definitions/Pessoa"
+        }
+      }
+    },
+    "AlunoCadastro" : {
+      "type" : "object",
+      "required" : [ "matricula" ],
+      "properties" : {
+        "nome" : {
+          "type" : "string",
+          "example" : "Arthur da Silva",
+          "description" : "Nome do Aluno"
+        },
+        "data_nascimento" : {
+          "type" : "string",
+          "format" : "date",
+          "example" : "2012-01-20",
+          "description" : "Data de nascimento formato yyyy-mm-dd"
+        },
+        "matricula" : {
+          "type" : "string",
+          "example" : "MAT-1234",
+          "description" : "Matrícula do Aluno"
+        },
+        "sexo" : {
+          "type" : "string",
+          "format" : "enum[M, F, N]",
+          "example" : "S",
+          "description" : "Sexo do aluno:\n * `M` - Masculino\n * `F` - Feminino\n * `N` - Não Declarar\n"
+        },
+        "cpf" : {
+          "type" : "number",
+          "example" : 82544369086,
+          "description" : "CPF do aluno - Apenas números"
+        },
+        "senha" : {
+          "type" : "string",
+          "example" : "123456789@abcdef",
+          "description" : "Senha de acesso ao portal"
+        },
+        "filial" : {
+          "type" : "number",
+          "example" : 1,
+          "description" : "ID da filial que o aluno será cadastrado, deve ser um ID válido"
+        },
+        "estadocivil" : {
+          "type" : "string",
+          "format" : "enum[\"Solteiro\", \"Casado\", \"Separado\", \"Divorciado\", \"Viuvo\", \"Marital\", \"Separado Judicialmente\", \"União Estável\"]",
+          "example" : "Solteiro",
+          "description" : "Estado Civil:\n * `Solteiro`\n * `Casado`\n * `Separado`\n * `Divorciado`\n * `Viuvo`\n * `Marital`\n * `Separado Judicialmente`\n * `União Estável`\n"
         }
       }
     },
