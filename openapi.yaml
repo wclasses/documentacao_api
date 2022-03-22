@@ -4,12 +4,27 @@ info:
   description: "
     ## API do Sistema WClasses Educacional
     
-    Deve ser utilizado token do tipo Bearer em todas as requisições. \n
+    Documentação da API do Sistema <a href='https://wclasses.com.br' target='_blank'>WClasses Educacional.</a>
+    
+    <br />
+    
+    Caso tenha alguma dúvida entre 
+    em contato com os nossos <a href='https://wclasses.freshdesk.com/a/' target='_blank'>Canais de Suporte</a>
+    
+    <br /><br />
+    
+    ### Requisições
+    
+    Deve ser utilizado token do tipo Bearer em todas as requisições. <br>
   
-    Exemplo: ```Bearer NzM.HNWRIkyFLgrIduVuBitlrs9hoYtahwmYFlLDGVVu6wqn3ODElWV_cQQ_Uslo``` \n
+    Exemplo: ```Bearer NzM.HNWRIkyFLgrIduVuBitlrs9hoYtahwmYFlLDGVVu6wqn3ODElWV_cQQ_Uslo``` 
+    
+    <br />
+    <br />
 
-    Para obter o token de acesso entre em contato: ```suporte@wclasses.com.br```
-"
+    Para obter o token de acesso entre em contato: 
+    <a href='mailto:desenvolvimento@wclasses.com.br'>desenvolvimento@wclasses.com.br</a>
+    "
   contact:
     email: desenvolvimento@wclasses.com.br
   license:
@@ -30,6 +45,9 @@ tags:
 - name: Financeiro
   description: Contratos, lançamentos, faturas, dados financeiros
 paths:
+
+  ##### Instituição #####
+
   /coligada:
     get:
       tags:
@@ -66,6 +84,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErroToken'
+  
   /coligada/{id}:
     get:
       tags:
@@ -164,6 +183,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFound'
+  
+  /filial:
+    get:
+      tags:
+      - Instituição
+      summary: Filial - Lista
+      description: |
+        Lista as filiais cadastradas no sistema
+      operationId: Filial - Index
+      responses:
+        200:
+          description: Resposta da requisição
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Filial'
+        401:
+          description: Não autorizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroToken'
+
+
+  ##### Instituição #####
+  
   /disciplina:
     get:
       tags:
@@ -207,14 +254,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErroToken'
-  /filial:
+
+  /perletivo:
     get:
       tags:
-      - Instituição
-      summary: Filial - Lista
+      - Acadêmico
+      summary: Período Letivo - Lista
       description: |
-        Lista as filiais cadastradas no sistema
-      operationId: Filial - Index
+        Lista os períodos letivos cadastrados
+      operationId: Perletivo - Index
       responses:
         200:
           description: Resposta da requisição
@@ -223,13 +271,16 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Filial'
+                  $ref: '#/components/schemas/Perletivo'
         401:
           description: Não autorizado
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErroToken'
+  
+  ##### Usuários #####
+  
   /aluno:
     get:
       tags:
@@ -325,6 +376,7 @@ paths:
                       description: Mensagem de errro
                       example: required validation failed
       x-codegen-request-body-name: body,
+
   /pessoa:
     get:
       tags:
@@ -359,6 +411,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErroToken'
+
   /pessoa/{id}:
     get:
       tags:
@@ -396,29 +449,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFound'
-  /perletivo:
-    get:
-      tags:
-      - Acadêmico
-      summary: Período Letivo - Lista
-      description: |
-        Lista os períodos letivos cadastrados
-      operationId: Perletivo - Index
-      responses:
-        200:
-          description: Resposta da requisição
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Perletivo'
-        401:
-          description: Não autorizado
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErroToken'
+  
+  
+  ##### Financeiro #####
+  
   /contrato/pessoa/{id}:
     get:
       tags:
@@ -562,6 +596,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErroToken'
+
+
+###
 components:
   schemas:
     Aluno:
