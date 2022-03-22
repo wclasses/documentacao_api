@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: WClasses API - 1.0.0
-  description: "
+  description: >
     ## API do Sistema WClasses Educacional
     
     Documentação da API do Sistema <a href='https://wclasses.com.br' target='_blank'>WClasses Educacional.</a>
@@ -24,7 +24,6 @@ info:
 
     Para obter o token de acesso entre em contato: 
     <a href='mailto:desenvolvimento@wclasses.com.br'>desenvolvimento@wclasses.com.br</a>
-    "
   contact:
     email: desenvolvimento@wclasses.com.br
   license:
@@ -46,7 +45,7 @@ tags:
   description: Contratos, lançamentos, faturas, dados financeiros
 paths:
 
-  ##### Instituição #####
+##### Instituição 
 
   /coligada:
     get:
@@ -208,8 +207,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErroToken'
 
-
-  ##### Instituição #####
+##### Acadêmico 
   
   /disciplina:
     get:
@@ -279,7 +277,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErroToken'
   
-  ##### Usuários #####
+##### Usuários 
   
   /aluno:
     get:
@@ -449,9 +447,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFound'
-  
-  
-  ##### Financeiro #####
+
+##### Financeiro 
   
   /contrato/pessoa/{id}:
     get:
@@ -599,8 +596,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErroToken'
 
-
-###
+#####
 components:
   schemas:
     Aluno:
@@ -633,7 +629,7 @@ components:
           type: string
           description: Data de nascimento formato yyyy-mm-dd
           format: date
-          example: 2012-01-20
+          example: "2012-01-20"
         matricula:
           type: string
           description: Matrícula do Aluno

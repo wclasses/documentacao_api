@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "WClasses API - 1.0.0",
-    "description": " ## API do Sistema WClasses Educacional\nDocumentação da API do Sistema <a href='https://wclasses.com.br' target='_blank'>WClasses Educacional.</a>\n<br />\nCaso tenha alguma dúvida entre  em contato com os nossos <a href='https://wclasses.freshdesk.com/a/' target='_blank'>Canais de Suporte</a>\n<br /><br />\n### Requisições\nDeve ser utilizado token do tipo Bearer em todas as requisições. <br>\nExemplo: ```Bearer NzM.HNWRIkyFLgrIduVuBitlrs9hoYtahwmYFlLDGVVu6wqn3ODElWV_cQQ_Uslo``` \n<br /> <br />\nPara obter o token de acesso entre em contato:  <a href='mailto:desenvolvimento@wclasses.com.br'>desenvolvimento@wclasses.com.br</a> ",
+    "description": "## API do Sistema WClasses Educacional\nDocumentação da API do Sistema <a href='https://wclasses.com.br' target='_blank'>WClasses Educacional.</a>\n<br />\nCaso tenha alguma dúvida entre  em contato com os nossos <a href='https://wclasses.freshdesk.com/a/' target='_blank'>Canais de Suporte</a>\n<br /><br />\n### Requisições\nDeve ser utilizado token do tipo Bearer em todas as requisições. <br>\nExemplo: ```Bearer NzM.HNWRIkyFLgrIduVuBitlrs9hoYtahwmYFlLDGVVu6wqn3ODElWV_cQQ_Uslo``` \n<br /> <br />\nPara obter o token de acesso entre em contato:  <a href='mailto:desenvolvimento@wclasses.com.br'>desenvolvimento@wclasses.com.br</a>\n",
     "contact": {
       "email": "desenvolvimento@wclasses.com.br"
     },
@@ -849,7 +849,7 @@
             "type": "string",
             "description": "Data de nascimento formato yyyy-mm-dd",
             "format": "date",
-            "example": "2012-01-20T00:00:00.000Z"
+            "example": "2012-01-20"
           },
           "matricula": {
             "type": "string",
