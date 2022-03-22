@@ -175,6 +175,12 @@
             "schema" : {
               "$ref" : "#/definitions/ErroToken"
             }
+          },
+          "404" : {
+            "description" : "Não encontrado",
+            "schema" : {
+              "$ref" : "#/definitions/NotFound"
+            }
           }
         }
       }
@@ -829,6 +835,25 @@
               }
             }
           }
+        }
+      }
+    },
+    "NotFound" : {
+      "properties" : {
+        "message" : {
+          "type" : "string",
+          "description" : "Mensagem de erro",
+          "example" : "Not Found"
+        },
+        "code" : {
+          "type" : "number",
+          "description" : "Código do erro",
+          "example" : 404
+        },
+        "error" : {
+          "type" : "string",
+          "description" : "Descriçao técnica do erro",
+          "example" : "E_ROW_NOT_FOUND"
         }
       }
     },
