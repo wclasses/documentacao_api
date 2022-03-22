@@ -36,7 +36,7 @@
         "tags": [
           "Instituição"
         ],
-        "summary": "Listar Coligadas",
+        "summary": "Coligada - Lista",
         "operationId": "Coligada - Index",
         "description": "Lista as coligadas cadastradas no sistema\n",
         "produces": [
@@ -82,7 +82,7 @@
         "tags": [
           "Instituição"
         ],
-        "summary": "Detalhes da Coligada",
+        "summary": "Coligada - Detalhes",
         "operationId": "Coligada - View",
         "description": "Exibe todos os detalhes de uma coligada\n",
         "produces": [
@@ -205,7 +205,7 @@
         "tags": [
           "Acadêmico"
         ],
-        "summary": "Lista as Disciplinas",
+        "summary": "Disciplinas - Lista",
         "operationId": "Disciplina - Index",
         "description": "Lista as disciplinas cadastradas no sistema\n",
         "produces": [
@@ -251,7 +251,7 @@
         "tags": [
           "Instituição"
         ],
-        "summary": "Listar Filiais",
+        "summary": "Filial - Lista",
         "operationId": "Filial - Index",
         "description": "Lista as filiais cadastradas no sistema\n",
         "produces": [
@@ -281,7 +281,7 @@
         "tags": [
           "Usuários"
         ],
-        "summary": "Aluno - Listar",
+        "summary": "Aluno - Lista",
         "operationId": "Aluno - Index",
         "description": "Lista os alunos cadastrados no sistema, pode ser utilizado paginação\n",
         "produces": [
@@ -405,7 +405,7 @@
         "tags": [
           "Usuários"
         ],
-        "summary": "Pessoas - Listar",
+        "summary": "Pesosa - Lista",
         "operationId": "Pessoa - Index",
         "description": "Lista as pessoas cadastradas no sistema, pode ser utilizado paginação. Retorna todos os tipo de usuários/perfis.\n",
         "produces": [
@@ -496,7 +496,7 @@
         "tags": [
           "Acadêmico"
         ],
-        "summary": "Listar Período Letivo",
+        "summary": "Período Letivo - Lista",
         "operationId": "Perletivo - Index",
         "description": "Lista os períodos letivos cadastrados\n",
         "produces": [
@@ -526,7 +526,7 @@
         "tags": [
           "Financeiro"
         ],
-        "summary": "Contratos Responsável",
+        "summary": "Contratos do Responsável",
         "operationId": "Contrato - Index",
         "description": "Lista os contratos de um responsável financeiro\n",
         "produces": [
@@ -575,7 +575,7 @@
         "tags": [
           "Financeiro"
         ],
-        "summary": "Detalhes do Contrato",
+        "summary": "Contrato - Detalhes",
         "operationId": "Contrato - View",
         "description": "Exibe os detalhes do contrato\n",
         "produces": [
