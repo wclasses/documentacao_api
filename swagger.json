@@ -390,6 +390,12 @@
             "schema" : {
               "$ref" : "#/definitions/ErroToken"
             }
+          },
+          "404" : {
+            "description" : "Não encontrado",
+            "schema" : {
+              "$ref" : "#/definitions/NotFound"
+            }
           }
         }
       }
