@@ -1,17 +1,27 @@
 {
-  "swagger": "2.0",
+  "openapi": "3.0.1",
   "info": {
-    "description": "## API do Sistema WClasses Educacional\nDeve ser utilizado token do tipo **Bearer** em todas as requisições.\n\nExemplo: \n```Bearer NzM.HNWRIkyFLgrIduVuBitlrs9hoYtahwmYFlLDGVVu6wqn3ODElWV_cQQ_Uslo```\n\nPara obter o token de acesso entre em contato: suporte@wclasses.com.br",
-    "version": "1.0.0",
     "title": "WClasses API - 1.0.0",
+    "description": " ## API do Sistema WClasses Educacional\nDeve ser utilizado token do tipo Bearer em todas as requisições. \n\nExemplo: ```Bearer NzM.HNWRIkyFLgrIduVuBitlrs9hoYtahwmYFlLDGVVu6wqn3ODElWV_cQQ_Uslo``` \n\nPara obter o token de acesso entre em contato: ```suporte@wclasses.com.br``` ",
     "contact": {
       "email": "desenvolvimento@wclasses.com.br"
     },
     "license": {
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
-    }
+    },
+    "version": "1.0.0"
   },
+  "servers": [
+    {
+      "url": "https://api.wclasses.com.br/"
+    }
+  ],
+  "security": [
+    {
+      "Bearer": []
+    }
+  ],
   "tags": [
     {
       "name": "Instituição",
@@ -37,32 +47,34 @@
           "Instituição"
         ],
         "summary": "Coligada - Lista",
-        "operationId": "Coligada - Index",
         "description": "Lista as coligadas cadastradas no sistema\n",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "Coligada - Index",
         "responses": {
           "200": {
             "description": "Resposta da requisição",
-            "schema": {
-              "type": "array",
-              "items": {
-                "properties": {
-                  "id": {
-                    "type": "number",
-                    "description": "ID da coligada",
-                    "example": 1
-                  },
-                  "nome": {
-                    "type": "string",
-                    "description": "Nome da Coligada",
-                    "example": "Coligada WClasses"
-                  },
-                  "cnpj": {
-                    "type": "number",
-                    "description": "CNPJ da coligada, apenas números",
-                    "example": "03607190000106"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "description": "ID da coligada",
+                        "example": 1
+                      },
+                      "nome": {
+                        "type": "string",
+                        "description": "Nome da Coligada",
+                        "example": "Coligada WClasses"
+                      },
+                      "cnpj": {
+                        "type": "number",
+                        "description": "CNPJ da coligada, apenas números",
+                        "example": 3607190000106
+                      }
+                    }
                   }
                 }
               }
@@ -70,8 +82,12 @@
           },
           "401": {
             "description": "Não autorizado",
-            "schema": {
-              "$ref": "#/definitions/ErroToken"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroToken"
+                }
+              }
             }
           }
         }
@@ -83,103 +99,106 @@
           "Instituição"
         ],
         "summary": "Coligada - Detalhes",
-        "operationId": "Coligada - View",
         "description": "Exibe todos os detalhes de uma coligada\n",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "Coligada - View",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "description": "ID da coligada",
             "required": true,
-            "type": "integer",
-            "format": "int64"
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "Resposta da requisição",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "number",
-                    "description": "ID da Coligada",
-                    "example": 1
-                  },
-                  "nome": {
-                    "type": "string",
-                    "description": "Nome da coligada",
-                    "example": "WClasses Educacional"
-                  },
-                  "cnpj": {
-                    "type": "number",
-                    "description": "CNPJ da coligada",
-                    "example": "16590268000160"
-                  },
-                  "razao_social": {
-                    "type": "string",
-                    "description": "Razão social da Coligada",
-                    "example": "WClasses Educacional LTDA"
-                  },
-                  "nome_fantasia": {
-                    "type": "string",
-                    "description": "Nome Fantasia da Coligada",
-                    "example": "WClasses Sistema de Gestão Educacional"
-                  },
-                  "cep": {
-                    "type": "number",
-                    "description": "CEP da Coligada",
-                    "example": "04207900"
-                  },
-                  "endereco": {
-                    "type": "string",
-                    "description": "Endereço da Coligada",
-                    "example": "R. Nove de Julho"
-                  },
-                  "numero": {
-                    "type": "number",
-                    "description": "Número do endereço",
-                    "example": 72
-                  },
-                  "bairro": {
-                    "type": "string",
-                    "description": "Bairro da coligada",
-                    "example": "Santo Amaro"
-                  },
-                  "cidade": {
-                    "type": "string",
-                    "description": "Cidade da Coligada",
-                    "example": "São Paulo"
-                  },
-                  "estado": {
-                    "type": "string",
-                    "description": "Estado da Coligada",
-                    "example": "SP"
-                  },
-                  "complemento": {
-                    "type": "string",
-                    "description": "Complemento do endereço",
-                    "example": "Sala 116"
-                  },
-                  "telefone1": {
-                    "type": "string",
-                    "description": "Telefone 1 - Coligada",
-                    "example": "1133118185"
-                  },
-                  "telefone2": {
-                    "type": "string",
-                    "description": "Telefone 2 - Coligada",
-                    "example": "11999995555"
-                  },
-                  "site": {
-                    "type": "string",
-                    "description": "Site da Coligada",
-                    "example": "https://wclasses.com.br"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "description": "ID da Coligada",
+                        "example": 1
+                      },
+                      "nome": {
+                        "type": "string",
+                        "description": "Nome da coligada",
+                        "example": "WClasses Educacional"
+                      },
+                      "cnpj": {
+                        "type": "number",
+                        "description": "CNPJ da coligada",
+                        "example": 16590268000160
+                      },
+                      "razao_social": {
+                        "type": "string",
+                        "description": "Razão social da Coligada",
+                        "example": "WClasses Educacional LTDA"
+                      },
+                      "nome_fantasia": {
+                        "type": "string",
+                        "description": "Nome Fantasia da Coligada",
+                        "example": "WClasses Sistema de Gestão Educacional"
+                      },
+                      "cep": {
+                        "type": "number",
+                        "description": "CEP da Coligada",
+                        "example": 4207900
+                      },
+                      "endereco": {
+                        "type": "string",
+                        "description": "Endereço da Coligada",
+                        "example": "R. Nove de Julho"
+                      },
+                      "numero": {
+                        "type": "number",
+                        "description": "Número do endereço",
+                        "example": 72
+                      },
+                      "bairro": {
+                        "type": "string",
+                        "description": "Bairro da coligada",
+                        "example": "Santo Amaro"
+                      },
+                      "cidade": {
+                        "type": "string",
+                        "description": "Cidade da Coligada",
+                        "example": "São Paulo"
+                      },
+                      "estado": {
+                        "type": "string",
+                        "description": "Estado da Coligada",
+                        "example": "SP"
+                      },
+                      "complemento": {
+                        "type": "string",
+                        "description": "Complemento do endereço",
+                        "example": "Sala 116"
+                      },
+                      "telefone1": {
+                        "type": "string",
+                        "description": "Telefone 1 - Coligada",
+                        "example": "1133118185"
+                      },
+                      "telefone2": {
+                        "type": "string",
+                        "description": "Telefone 2 - Coligada",
+                        "example": "11999995555"
+                      },
+                      "site": {
+                        "type": "string",
+                        "description": "Site da Coligada",
+                        "example": "https://wclasses.com.br"
+                      }
+                    }
                   }
                 }
               }
@@ -187,14 +206,22 @@
           },
           "401": {
             "description": "Não autorizado",
-            "schema": {
-              "$ref": "#/definitions/ErroToken"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroToken"
+                }
+              }
             }
           },
           "404": {
             "description": "Não encontrado",
-            "schema": {
-              "$ref": "#/definitions/NotFound"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
             }
           }
         }
@@ -206,32 +233,50 @@
           "Acadêmico"
         ],
         "summary": "Disciplinas - Lista",
-        "operationId": "Disciplina - Index",
         "description": "Lista as disciplinas cadastradas no sistema\n",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "Disciplina - Index",
         "responses": {
           "200": {
-            "description": "Resposta da requisição",
-            "schema": {
-              "type": "array",
-              "items": {
-                "properties": {
-                  "codigo": {
-                    "type": "string",
-                    "description": "Código da disciplina",
-                    "example": "001"
-                  },
-                  "nome": {
-                    "type": "string",
-                    "description": "Nome da Disciplina",
-                    "example": "Português"
-                  },
-                  "nome_reduzido": {
-                    "type": "string",
-                    "description": "Nome reduzido da Disciplina",
-                    "example": "POR"
+            "description": "Resposta da Requisição",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "codigo": {
+                        "type": "string",
+                        "description": "Código da disciplina",
+                        "example": "001"
+                      },
+                      "nome": {
+                        "type": "string",
+                        "description": "Nome da Disciplina",
+                        "example": "Português"
+                      },
+                      "nome_reduzido": {
+                        "type": "string",
+                        "description": "Nome reduzido da Disciplina",
+                        "example": "POR"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "SUCESSO": {
+                    "value": [
+                      {
+                        "codigo": 1,
+                        "nome": "Português",
+                        "nome_reduzido": "POR"
+                      },
+                      {
+                        "codigo": 2,
+                        "nome": "Matemática",
+                        "nome_reduzido": "MAT"
+                      }
+                    ]
                   }
                 }
               }
@@ -239,8 +284,12 @@
           },
           "401": {
             "description": "Não autorizado",
-            "schema": {
-              "$ref": "#/definitions/ErroToken"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroToken"
+                }
+              }
             }
           }
         }
@@ -252,25 +301,30 @@
           "Instituição"
         ],
         "summary": "Filial - Lista",
-        "operationId": "Filial - Index",
         "description": "Lista as filiais cadastradas no sistema\n",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "Filial - Index",
         "responses": {
           "200": {
             "description": "Resposta da requisição",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Filial"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Filial"
+                  }
+                }
               }
             }
           },
           "401": {
             "description": "Não autorizado",
-            "schema": {
-              "$ref": "#/definitions/ErroToken"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroToken"
+                }
+              }
             }
           }
         }
@@ -282,40 +336,48 @@
           "Usuários"
         ],
         "summary": "Aluno - Lista",
-        "operationId": "Aluno - Index",
         "description": "Lista os alunos cadastrados no sistema, pode ser utilizado paginação\n",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "Aluno - Index",
         "parameters": [
           {
-            "in": "query",
             "name": "offset",
+            "in": "query",
             "description": "Paginação offset",
-            "required": false,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           },
           {
-            "in": "query",
             "name": "limit",
+            "in": "query",
             "description": "Paginação limit",
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "Resposta da requisição",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Aluno"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Aluno"
+                  }
+                }
               }
             }
           },
           "401": {
             "description": "Não autorizado",
-            "schema": {
-              "$ref": "#/definitions/ErroToken"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroToken"
+                }
+              }
             }
           }
         }
@@ -325,79 +387,88 @@
           "Usuários"
         ],
         "summary": "Aluno - Cadastro",
-        "operationId": "Aluno - Create",
         "description": "Cadastra um aluno no sistema\n",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body,",
-            "description": "Dados do aluno",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AlunoCadastro"
+        "operationId": "Aluno - Create",
+        "requestBody": {
+          "description": "Dados do aluno",
+          "content": {
+            "*/*": {
+              "schema": {
+                "$ref": "#/components/schemas/AlunoCadastro"
+              }
             }
-          }
-        ],
+          },
+          "required": true
+        },
         "responses": {
           "200": {
             "description": "Resposta da requisição",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "format": "uuid",
-                  "example": 10056
-                },
-                "nome": {
-                  "type": "string",
-                  "description": "Nome Cadastrado",
-                  "example": "Arthur da Silva"
-                },
-                "matricula": {
-                  "type": "string",
-                  "description": "Matrícula Cadastrada",
-                  "example": "MAT-1234"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "nome": {
+                      "type": "string",
+                      "description": "Nome Cadastrado",
+                      "example": "Arthur da Silva"
+                    },
+                    "matricula": {
+                      "type": "string",
+                      "description": "Matrícula Cadastrada",
+                      "example": "MAT-1234"
+                    }
+                  }
                 }
               }
             }
           },
           "401": {
             "description": "Não autorizado",
-            "schema": {
-              "$ref": "#/definitions/ErroToken"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroToken"
+                }
+              }
             }
           },
           "422": {
             "description": "Erro de validação de dados",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "rule": {
-                    "type": "string",
-                    "description": "Regra quebrada que retornou o erro",
-                    "example": "required"
-                  },
-                  "field": {
-                    "type": "string",
-                    "description": "Campo que apresenta o erro",
-                    "example": "matricula"
-                  },
-                  "message": {
-                    "type": "string",
-                    "description": "Mensagem de errro",
-                    "example": "required validation failed"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "rule": {
+                        "type": "string",
+                        "description": "Regra quebrada que retornou o erro",
+                        "example": "required"
+                      },
+                      "field": {
+                        "type": "string",
+                        "description": "Campo que apresenta o erro",
+                        "example": "matricula"
+                      },
+                      "message": {
+                        "type": "string",
+                        "description": "Mensagem de errro",
+                        "example": "required validation failed"
+                      }
+                    }
                   }
                 }
               }
             }
           }
-        }
+        },
+        "x-codegen-request-body-name": "body,"
       }
     },
     "/pessoa": {
@@ -406,40 +477,48 @@
           "Usuários"
         ],
         "summary": "Pesosa - Lista",
-        "operationId": "Pessoa - Index",
         "description": "Lista as pessoas cadastradas no sistema, pode ser utilizado paginação. Retorna todos os tipo de usuários/perfis.\n",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "Pessoa - Index",
         "parameters": [
           {
-            "in": "query",
             "name": "offset",
+            "in": "query",
             "description": "Paginação offset",
-            "required": false,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           },
           {
-            "in": "query",
             "name": "limit",
+            "in": "query",
             "description": "Paginação limit",
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "Resposta da requisição",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/PessoaLista"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PessoaLista"
+                  }
+                }
               }
             }
           },
           "401": {
             "description": "Não autorizado",
-            "schema": {
-              "$ref": "#/definitions/ErroToken"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroToken"
+                }
+              }
             }
           }
         }
@@ -451,41 +530,52 @@
           "Usuários"
         ],
         "summary": "Pessoa - Detalhes",
-        "operationId": "Pessoa - View",
         "description": "Detalhe da pessoa cadastrada no sistema\n",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "Pessoa - View",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "description": "ID da pessoa",
             "required": true,
-            "type": "integer",
-            "format": "int64"
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "Resposta da requisição",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Pessoa"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Pessoa"
+                  }
+                }
               }
             }
           },
           "401": {
             "description": "Não autorizado",
-            "schema": {
-              "$ref": "#/definitions/ErroToken"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroToken"
+                }
+              }
             }
           },
           "404": {
             "description": "Não encontrado",
-            "schema": {
-              "$ref": "#/definitions/NotFound"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
             }
           }
         }
@@ -497,25 +587,30 @@
           "Acadêmico"
         ],
         "summary": "Período Letivo - Lista",
-        "operationId": "Perletivo - Index",
         "description": "Lista os períodos letivos cadastrados\n",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "Perletivo - Index",
         "responses": {
           "200": {
             "description": "Resposta da requisição",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Perletivo"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Perletivo"
+                  }
+                }
               }
             }
           },
           "401": {
             "description": "Não autorizado",
-            "schema": {
-              "$ref": "#/definitions/ErroToken"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroToken"
+                }
+              }
             }
           }
         }
@@ -527,44 +622,53 @@
           "Financeiro"
         ],
         "summary": "Contratos do Responsável",
-        "operationId": "Contrato - Index",
         "description": "Lista os contratos de um responsável financeiro\n",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "Contrato - Index",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "description": "ID da pessoa",
             "required": true,
-            "type": "integer"
+            "schema": {
+              "type": "integer"
+            }
           },
           {
             "name": "status",
             "in": "query",
-            "type": "integer",
-            "enum": [
-              1,
-              2
-            ],
-            "description": "Status do contrato.\nLista de Status:\n * `1` - Ativo\n * `2` - Cancelado\n"
+            "description": "Status do contrato.\nLista de Status:\n * `1` - Ativo\n * `2` - Cancelado\n",
+            "schema": {
+              "type": "integer",
+              "enum": [
+                1,
+                2
+              ]
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "Resposta da requisição",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Contrato"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Contrato"
+                  }
+                }
               }
             }
           },
           "401": {
             "description": "Não autorizado",
-            "schema": {
-              "$ref": "#/definitions/ErroToken"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroToken"
+                }
+              }
             }
           }
         }
@@ -576,34 +680,41 @@
           "Financeiro"
         ],
         "summary": "Contrato - Detalhes",
-        "operationId": "Contrato - View",
         "description": "Exibe os detalhes do contrato\n",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "Contrato - View",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "description": "ID do contrato",
             "required": true,
-            "type": "integer"
+            "schema": {
+              "type": "integer"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "Resposta da requisição",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ContratoView"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContratoView"
+                  }
+                }
               }
             }
           },
           "401": {
             "description": "Não autorizado",
-            "schema": {
-              "$ref": "#/definitions/ErroToken"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroToken"
+                }
+              }
             }
           }
         }
@@ -615,669 +726,662 @@
           "Financeiro"
         ],
         "summary": "Faturas do responsável",
-        "operationId": "Fatura - View",
         "description": "Retorna as Faturas de um responsável financeiro.\nPode ser utilizado filtros como \"ano\", \"mes\" e \"status\"\n",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "Fatura - View",
         "parameters": [
           {
-            "in": "path",
             "name": "id",
-            "type": "number",
+            "in": "path",
             "description": "ID da Pessoa (Responsável)",
-            "required": true
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
           },
           {
-            "in": "query",
             "name": "ano",
+            "in": "query",
             "description": "Ano de vencimento da Fatura",
-            "required": false,
-            "type": "integer"
+            "schema": {
+              "type": "integer"
+            }
           },
           {
-            "in": "query",
             "name": "mes",
+            "in": "query",
             "description": "Mês de vencimento da Fatura",
-            "type": "integer",
-            "enum": [
-              1,
-              2,
-              3,
-              4,
-              5,
-              6,
-              7,
-              8,
-              9,
-              10,
-              11,
-              12
-            ]
+            "schema": {
+              "type": "integer",
+              "enum": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12
+              ]
+            }
           },
           {
-            "in": "query",
             "name": "status",
-            "type": "integer",
-            "enum": [
-              1,
-              2,
-              3,
-              4,
-              5
-            ],
+            "in": "query",
             "description": "Lista de Status:\n * `1` - Aberto\n * `2` - Baixado\n * `3` - Baixa Parcial\n * `4` - Baixa Manual\n * `5` - Cancelado\n",
-            "required": false
+            "schema": {
+              "type": "integer",
+              "enum": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "Resposta da requisição",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Fatura"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Fatura"
+                  }
+                }
               }
             }
           },
           "401": {
             "description": "Não autorizado",
-            "schema": {
-              "$ref": "#/definitions/ErroToken"
-            }
-          }
-        }
-      }
-    }
-  },
-  "definitions": {
-    "Aluno": {
-      "type": "object",
-      "required": [
-        "alumatricula"
-      ],
-      "properties": {
-        "matricula": {
-          "type": "string",
-          "example": "MAT-1234"
-        },
-        "ra": {
-          "type": "string",
-          "example": "RA-1234"
-        },
-        "pessoa_id": {
-          "type": "integer",
-          "example": 100
-        },
-        "pessoa": {
-          "$ref": "#/definitions/Pessoa"
-        }
-      }
-    },
-    "AlunoCadastro": {
-      "type": "object",
-      "required": [
-        "nome",
-        "matricula",
-        "data_nascimento",
-        "senha"
-      ],
-      "properties": {
-        "nome": {
-          "type": "string",
-          "example": "Arthur da Silva",
-          "description": "Nome do Aluno"
-        },
-        "data_nascimento": {
-          "type": "string",
-          "format": "date",
-          "example": "2012-01-20",
-          "description": "Data de nascimento formato yyyy-mm-dd"
-        },
-        "matricula": {
-          "type": "string",
-          "example": "MAT-1234",
-          "description": "Matrícula do Aluno"
-        },
-        "sexo": {
-          "type": "string",
-          "format": "enum[M, F, N]",
-          "example": "S",
-          "description": "Sexo do aluno:\n * `M` - Masculino\n * `F` - Feminino\n * `N` - Não Declarar\n"
-        },
-        "cpf": {
-          "type": "number",
-          "example": 82544369086,
-          "description": "CPF do aluno - Apenas números"
-        },
-        "senha": {
-          "type": "string",
-          "example": "123456789@abcdef",
-          "description": "Senha de acesso ao portal"
-        },
-        "filial": {
-          "type": "number",
-          "example": 1,
-          "description": "ID da filial que o aluno será cadastrado, deve ser um ID válido"
-        },
-        "estadocivil": {
-          "type": "string",
-          "format": "enum[\"Solteiro\", \"Casado\", \"Separado\", \"Divorciado\", \"Viuvo\", \"Marital\", \"Separado Judicialmente\", \"União Estável\"]",
-          "example": "Solteiro",
-          "description": "Estado Civil:\n * `Solteiro`\n * `Casado`\n * `Separado`\n * `Divorciado`\n * `Viuvo`\n * `Marital`\n * `Separado Judicialmente`\n * `União Estável`\n"
-        },
-        "cep": {
-          "type": "string",
-          "example": "08473805",
-          "description": "Endereço - CEP"
-        },
-        "rua": {
-          "type": "string",
-          "example": "Rua Flamboyant",
-          "description": "Endereço - Rua"
-        },
-        "numero": {
-          "type": "string",
-          "example": "35",
-          "description": "Endereço - Número"
-        },
-        "complemento": {
-          "type": "string",
-          "example": "Fundos",
-          "description": "Endereço - Complemento"
-        },
-        "bairro": {
-          "type": "string",
-          "example": "Jardim Pérola II",
-          "description": "Endereço - Bairro"
-        },
-        "cidade": {
-          "type": "string",
-          "example": "São Paulo",
-          "description": "Telefone 2: Celular"
-        },
-        "email": {
-          "type": "string",
-          "format": "email",
-          "example": "arthur.silva@email.com.br",
-          "description": "E-mail do aluno"
-        }
-      }
-    },
-    "Contrato": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "uuid",
-          "example": 10
-        },
-        "plano_pagamento_id": {
-          "type": "string",
-          "format": "uuid",
-          "example": 50,
-          "description": "ID do Plano de Pagamento"
-        },
-        "servico_nome": {
-          "type": "string",
-          "example": "Mensalidade Escolar - Ensino Fundamental",
-          "description": "Nome do serviço contratado"
-        },
-        "validade_inicio": {
-          "type": "string",
-          "format": "date",
-          "example": "2021-01-01",
-          "description": "Validade Inicial do contrato"
-        },
-        "validade_fim": {
-          "type": "string",
-          "format": "date",
-          "example": "2021-12-30",
-          "description": "Validade Final do contrato"
-        },
-        "parcelas": {
-          "type": "string",
-          "example": "12",
-          "description": "Total de parcelas (parcelamento)"
-        },
-        "status": {
-          "type": "number",
-          "format": "enum[1, 2]",
-          "example": 1,
-          "description": "Lista de Status:\n * `1` - Ativo\n * `2` - Cancelado\n \n"
-        }
-      }
-    },
-    "ContratoView": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "uuid",
-          "example": 10
-        },
-        "plano_pagamento_id": {
-          "type": "string",
-          "format": "uuid",
-          "example": 50,
-          "description": "ID do Plano de Pagamento"
-        },
-        "responsavel_financeiro_id": {
-          "type": "string",
-          "format": "uuid",
-          "example": 1500,
-          "description": "ID da Pessoa - Responsável Financeiro"
-        },
-        "matricula_perletivo_id": {
-          "type": "string",
-          "format": "uuid",
-          "example": 1500,
-          "description": "ID da matrícula no período letivo (Matricula Perletivo)"
-        },
-        "validade_inicio": {
-          "type": "string",
-          "format": "date",
-          "example": "2021-01-01",
-          "description": "Validade Inicial do contrato"
-        },
-        "validade_fim": {
-          "type": "string",
-          "format": "date",
-          "example": "2021-12-30",
-          "description": "Validade Final do contrato"
-        },
-        "status": {
-          "type": "number",
-          "format": "enum[1, 2]",
-          "example": 1,
-          "description": "Lista de Status:\n * `1` - Ativo\n * `2` - Cancelado\n"
-        },
-        "servico_nome": {
-          "type": "string",
-          "example": "Mensalidade Escolar - Ensino Fundamental",
-          "description": "Nome do serviço contratado"
-        },
-        "servico_descricao": {
-          "type": "string",
-          "example": "Mensalidade Escolar - Ensino Fundamental",
-          "description": "Descrição do serviço contratado"
-        },
-        "servico_periodo_inicio": {
-          "type": "string",
-          "format": "date",
-          "example": "2021-01-15",
-          "description": "Início da prestação do serviço contratado"
-        },
-        "servico_periodo_fim": {
-          "type": "string",
-          "format": "date",
-          "example": "2021-12-15",
-          "description": "Fim da prestação do serviço contratado"
-        },
-        "plano_nome": {
-          "type": "string",
-          "example": "Mensalidade EF - 2021 - 12x",
-          "description": "Nome do Plano de Pagamento contratado"
-        },
-        "total_bruto": {
-          "type": "number",
-          "format": "decimal",
-          "example": 1200,
-          "description": "Total Bruto do Contrato, sem considerar descontos ou valor proporcional"
-        },
-        "valor_poporcional": {
-          "type": "number",
-          "format": "decimal",
-          "example": 6000,
-          "description": "Valor Proporcional ao período de ingresso/contratação"
-        },
-        "desconto_incondicional": {
-          "type": "number",
-          "format": "decimal",
-          "example": 1000,
-          "description": "Desconto incondicional aplicado"
-        },
-        "desconto_condicional": {
-          "type": "number",
-          "format": "decimal",
-          "example": 500,
-          "description": "Desconto condicional aplicado"
-        },
-        "total_liquido": {
-          "type": "number",
-          "format": "decimal",
-          "example": 5000,
-          "description": "Total líquido do contrato, aplicado descontos (apenas incondicionais) em cima do valor proporcional"
-        },
-        "parcelas": {
-          "type": "string",
-          "example": "12",
-          "description": "Total de parcelas (parcelamento)"
-        },
-        "dia_vencimento": {
-          "type": "string",
-          "example": "15",
-          "description": "Dia selecionado para vencimento das faturas"
-        },
-        "tipo": {
-          "type": "string",
-          "example": "S",
-          "format": "enum[\"S\", \"P\"]",
-          "description": "Tipo do contrato:\n * `S` - Serviço\n * `P` - Produto\n"
-        },
-        "data_cadastro": {
-          "type": "string",
-          "format": "date",
-          "example": "2021-06-10",
-          "description": "Data de cadastro/contratação"
-        }
-      }
-    },
-    "ErroToken": {
-      "properties": {
-        "errors": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "message": {
-                "type": "string",
-                "description": "Descrição do erro",
-                "example": "E_INVALID_API_TOKEN: Invalid API token"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroToken"
+                }
               }
             }
           }
         }
       }
-    },
-    "NotFound": {
-      "properties": {
-        "message": {
-          "type": "string",
-          "description": "Mensagem de erro",
-          "example": "Not Found"
-        },
-        "code": {
-          "type": "number",
-          "description": "Código do erro",
-          "example": 404
-        },
-        "error": {
-          "type": "string",
-          "description": "Descriçao técnica do erro",
-          "example": "E_ROW_NOT_FOUND"
-        }
-      }
-    },
-    "Fatura": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "uuid",
-          "example": 10
-        },
-        "vencimento": {
-          "type": "string",
-          "format": "date",
-          "example": "2021-10-15",
-          "description": "Data de vencimento da fatura"
-        },
-        "valor_bruto": {
-          "type": "number",
-          "format": "decimal",
-          "example": 1499.9,
-          "description": "Valor Bruto - Sem descontos aplicados"
-        },
-        "desconto_condicional": {
-          "type": "number",
-          "format": "decimal",
-          "example": 19.9,
-          "description": "Valido até a data de vencimento"
-        },
-        "desconto_incondicional": {
-          "type": "number",
-          "format": "decimal",
-          "example": 29.9,
-          "description": "Válido mesmo após o vencimento"
-        },
-        "desconto_adicional": {
-          "type": "number",
-          "format": "decimal",
-          "example": 9.9,
-          "description": "Outros tipos de desconto"
-        },
-        "hash": {
-          "type": "string",
-          "example": "76ec5c9b169786fa62d597be5b6587732f793ee0",
-          "description": "Hash de acesso ao boleto"
-        },
-        "linha_digitavel": {
-          "type": "string",
-          "example": "34191.09008 04071.558451 41363.280002 1 87180000206667",
-          "description": "Linha digitável de pagamento do boleto"
-        },
-        "status_id": {
-          "type": "number",
-          "format": "enum[1, 2, 3, 4, 5]",
-          "example": 1,
-          "description": "Status da Fatura.\nLista de Status:\n * `1` - Aberto\n * `2` - Baixado\n * `3` - Baixa Parcial\n * `4` - Baixa Manual\n * `5` - Cancelado\n"
-        },
-        "status_remessa": {
-          "type": "number",
-          "format": "enum[0, 1, 2, 3]",
-          "example": 1,
-          "description": "Status da fatura na remessa bancária.\nLista de Status:\n * `0` - Não Remetido\n * `1` - Remetido\n * `2` - Registrado\n * `3` - Não registrado\n"
-        }
-      }
-    },
-    "Filial": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "uuid",
-          "example": 10
-        },
-        "filialnome": {
-          "type": "string",
-          "example": "WClasses Educacional"
-        }
-      }
-    },
-    "Perletivo": {
-      "type": "object",
-      "required": [
-        "plcodigo",
-        "pldescricao",
-        "ano"
-      ],
-      "properties": {
-        "plcodigo": {
-          "type": "string",
-          "example": "2021",
-          "description": "Ano letivo"
-        },
-        "pldescricao": {
-          "type": "string",
-          "example": "Período Letivo 2021",
-          "description": "Descrição do período"
-        },
-        "ano": {
-          "type": "integer",
-          "example": 2021,
-          "description": "Ano em que o período letivo irá ocorrer"
-        },
-        "plaberto": {
-          "type": "string",
-          "format": "enum[S, N]",
-          "example": "S",
-          "description": "Se o período letivo esta aberto. Valores possíveis:\n * `S` - Sim\n * `N` - Não\n"
-        },
-        "plcorrente": {
-          "type": "string",
-          "format": "enum[S, N]",
-          "example": "S",
-          "description": "Se o período letivo é o período corrente Valores possíveis:\n * `S` - Sim\n * `N` - Não\n"
-        }
-      }
-    },
-    "Pessoa": {
-      "type": "object",
-      "required": [
-        "id",
-        "tipo_pessoa",
-        "sexo",
-        "nome",
-        "cpf",
-        "email",
-        "data_nascimento"
-      ],
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "uuid",
-          "example": 10056
-        },
-        "tipo_pessoa": {
-          "type": "string",
-          "enum": [
-            "F",
-            "J"
-          ],
-          "example": "F",
-          "description": "Valores aceitos:\n * `F` - Física\n * `J` - Jurídica\n"
-        },
-        "nome": {
-          "type": "string",
-          "example": "João da Silva"
-        },
-        "nomesocial": {
-          "type": "string",
-          "example": "Maria da Silva"
-        },
-        "data_nascimento": {
-          "type": "string",
-          "format": "date",
-          "example": "1990-01-01"
-        },
-        "cpf": {
-          "type": "string",
-          "example": "08654587075"
-        },
-        "estadocivil": {
-          "type": "string",
-          "example": "Casado"
-        },
-        "sexo": {
-          "type": "string",
-          "enum": [
-            "M",
-            "F",
-            "N"
-          ],
-          "example": "M",
-          "description": "Valores aceitos:\n * `F` - Feminino\n * `M` - Masculino\n * `N` - Não declarar\n"
-        },
-        "email": {
-          "type": "string",
-          "format": "email",
-          "example": "contato@email.com.br"
-        },
-        "cep": {
-          "type": "string",
-          "example": "05535000",
-          "minLength": 8,
-          "maxLength": 8
-        },
-        "rua": {
-          "type": "string",
-          "maxLength": 140,
-          "example": "Rua dos coqueiros",
-          "description": "Endereço - Rua"
-        },
-        "numero": {
-          "type": "string",
-          "maxLength": 12,
-          "example": "196",
-          "description": "Endereço - Número"
-        },
-        "complemento": {
-          "type": "string",
-          "maxLength": 150,
-          "example": "Casa 2"
-        },
-        "bairro": {
-          "type": "string",
-          "maxLength": 50,
-          "example": "Vila dos Coqueiros"
-        },
-        "cidade": {
-          "type": "string",
-          "maxLength": 50,
-          "example": "São Paulo"
-        },
-        "estado": {
-          "type": "string",
-          "example": "SP",
-          "minLength": 2,
-          "maxLength": 2,
-          "description": "Código da UF"
-        },
-        "cidade_ibge": {
-          "type": "string",
-          "example": "02606",
-          "description": "Código IBGE da cidade"
-        }
-      }
-    },
-    "PessoaLista": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "example": 100
-        },
-        "nome": {
-          "type": "string",
-          "example": "João da Silva"
-        },
-        "data_nascimento": {
-          "type": "string",
-          "format": "date",
-          "example": "2000-01-01"
-        },
-        "cpf": {
-          "type": "string",
-          "example": "11122233345"
-        },
-        "sexo": {
-          "type": "string",
-          "format": "enum",
-          "example": "M"
-        },
-        "email": {
-          "type": "string",
-          "example": "email@provedor.com.br"
-        }
-      }
     }
   },
-  "schemes": [
-    "https"
-  ],
-  "basePath": "/",
-  "host": "api.wclasses.com.br",
-  "securityDefinitions": {
-    "Bearer": {
-      "type": "apiKey",
-      "name": "Authorization",
-      "in": "header"
+  "components": {
+    "schemas": {
+      "Aluno": {
+        "type": "object",
+        "properties": {
+          "matricula": {
+            "type": "string",
+            "example": "MAT-1234"
+          },
+          "ra": {
+            "type": "string",
+            "example": "RA-1234"
+          },
+          "pessoa_id": {
+            "type": "integer",
+            "example": 100
+          },
+          "pessoa": {
+            "$ref": "#/components/schemas/Pessoa"
+          }
+        }
+      },
+      "AlunoCadastro": {
+        "required": [
+          "data_nascimento",
+          "matricula",
+          "nome",
+          "senha"
+        ],
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome do Aluno",
+            "example": "Arthur da Silva"
+          },
+          "data_nascimento": {
+            "type": "string",
+            "description": "Data de nascimento formato yyyy-mm-dd",
+            "format": "date",
+            "example": "2012-01-20T00:00:00.000Z"
+          },
+          "matricula": {
+            "type": "string",
+            "description": "Matrícula do Aluno",
+            "example": "MAT-1234"
+          },
+          "sexo": {
+            "type": "string",
+            "description": "Sexo do aluno:\n * `M` - Masculino\n * `F` - Feminino\n * `N` - Não Declarar\n",
+            "format": "enum[M, F, N]",
+            "example": "S"
+          },
+          "cpf": {
+            "type": "number",
+            "description": "CPF do aluno - Apenas números",
+            "example": 82544369086
+          },
+          "senha": {
+            "type": "string",
+            "description": "Senha de acesso ao portal",
+            "example": "123456789@abcdef"
+          },
+          "filial": {
+            "type": "number",
+            "description": "ID da filial que o aluno será cadastrado, deve ser um ID válido",
+            "example": 1
+          },
+          "estadocivil": {
+            "type": "string",
+            "description": "Estado Civil:\n * `Solteiro`\n * `Casado`\n * `Separado`\n * `Divorciado`\n * `Viuvo`\n * `Marital`\n * `Separado Judicialmente`\n * `União Estável`\n",
+            "format": "enum[\"Solteiro\", \"Casado\", \"Separado\", \"Divorciado\", \"Viuvo\", \"Marital\", \"Separado Judicialmente\", \"União Estável\"]",
+            "example": "Solteiro"
+          },
+          "cep": {
+            "type": "string",
+            "description": "Endereço - CEP",
+            "example": "08473805"
+          },
+          "rua": {
+            "type": "string",
+            "description": "Endereço - Rua",
+            "example": "Rua Flamboyant"
+          },
+          "numero": {
+            "type": "string",
+            "description": "Endereço - Número",
+            "example": "35"
+          },
+          "complemento": {
+            "type": "string",
+            "description": "Endereço - Complemento",
+            "example": "Fundos"
+          },
+          "bairro": {
+            "type": "string",
+            "description": "Endereço - Bairro",
+            "example": "Jardim Pérola II"
+          },
+          "cidade": {
+            "type": "string",
+            "description": "Telefone 2: Celular",
+            "example": "São Paulo"
+          },
+          "email": {
+            "type": "string",
+            "description": "E-mail do aluno",
+            "format": "email",
+            "example": "arthur.silva@email.com.br"
+          }
+        }
+      },
+      "Contrato": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "plano_pagamento_id": {
+            "type": "string",
+            "description": "ID do Plano de Pagamento",
+            "format": "uuid"
+          },
+          "servico_nome": {
+            "type": "string",
+            "description": "Nome do serviço contratado",
+            "example": "Mensalidade Escolar - Ensino Fundamental"
+          },
+          "validade_inicio": {
+            "type": "string",
+            "description": "Validade Inicial do contrato",
+            "format": "date",
+            "example": "2021-01-01T00:00:00.000Z"
+          },
+          "validade_fim": {
+            "type": "string",
+            "description": "Validade Final do contrato",
+            "format": "date",
+            "example": "2021-12-30T00:00:00.000Z"
+          },
+          "parcelas": {
+            "type": "string",
+            "description": "Total de parcelas (parcelamento)",
+            "example": "12"
+          },
+          "status": {
+            "type": "number",
+            "description": "Lista de Status:\n * `1` - Ativo\n * `2` - Cancelado\n \n",
+            "format": "enum[1, 2]",
+            "example": 1
+          }
+        }
+      },
+      "ContratoView": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "plano_pagamento_id": {
+            "type": "string",
+            "description": "ID do Plano de Pagamento",
+            "format": "uuid"
+          },
+          "responsavel_financeiro_id": {
+            "type": "string",
+            "description": "ID da Pessoa - Responsável Financeiro",
+            "format": "uuid"
+          },
+          "matricula_perletivo_id": {
+            "type": "string",
+            "description": "ID da matrícula no período letivo (Matricula Perletivo)",
+            "format": "uuid"
+          },
+          "validade_inicio": {
+            "type": "string",
+            "description": "Validade Inicial do contrato",
+            "format": "date",
+            "example": "2021-01-01T00:00:00.000Z"
+          },
+          "validade_fim": {
+            "type": "string",
+            "description": "Validade Final do contrato",
+            "format": "date",
+            "example": "2021-12-30T00:00:00.000Z"
+          },
+          "status": {
+            "type": "number",
+            "description": "Lista de Status:\n * `1` - Ativo\n * `2` - Cancelado\n",
+            "format": "enum[1, 2]",
+            "example": 1
+          },
+          "servico_nome": {
+            "type": "string",
+            "description": "Nome do serviço contratado",
+            "example": "Mensalidade Escolar - Ensino Fundamental"
+          },
+          "servico_descricao": {
+            "type": "string",
+            "description": "Descrição do serviço contratado",
+            "example": "Mensalidade Escolar - Ensino Fundamental"
+          },
+          "servico_periodo_inicio": {
+            "type": "string",
+            "description": "Início da prestação do serviço contratado",
+            "format": "date",
+            "example": "2021-01-15T00:00:00.000Z"
+          },
+          "servico_periodo_fim": {
+            "type": "string",
+            "description": "Fim da prestação do serviço contratado",
+            "format": "date",
+            "example": "2021-12-15T00:00:00.000Z"
+          },
+          "plano_nome": {
+            "type": "string",
+            "description": "Nome do Plano de Pagamento contratado",
+            "example": "Mensalidade EF - 2021 - 12x"
+          },
+          "total_bruto": {
+            "type": "number",
+            "description": "Total Bruto do Contrato, sem considerar descontos ou valor proporcional",
+            "format": "decimal",
+            "example": 1200
+          },
+          "valor_poporcional": {
+            "type": "number",
+            "description": "Valor Proporcional ao período de ingresso/contratação",
+            "format": "decimal",
+            "example": 6000
+          },
+          "desconto_incondicional": {
+            "type": "number",
+            "description": "Desconto incondicional aplicado",
+            "format": "decimal",
+            "example": 1000
+          },
+          "desconto_condicional": {
+            "type": "number",
+            "description": "Desconto condicional aplicado",
+            "format": "decimal",
+            "example": 500
+          },
+          "total_liquido": {
+            "type": "number",
+            "description": "Total líquido do contrato, aplicado descontos (apenas incondicionais) em cima do valor proporcional",
+            "format": "decimal",
+            "example": 5000
+          },
+          "parcelas": {
+            "type": "string",
+            "description": "Total de parcelas (parcelamento)",
+            "example": "12"
+          },
+          "dia_vencimento": {
+            "type": "string",
+            "description": "Dia selecionado para vencimento das faturas",
+            "example": "15"
+          },
+          "tipo": {
+            "type": "string",
+            "description": "Tipo do contrato:\n * `S` - Serviço\n * `P` - Produto\n",
+            "format": "enum[\"S\", \"P\"]",
+            "example": "S"
+          },
+          "data_cadastro": {
+            "type": "string",
+            "description": "Data de cadastro/contratação",
+            "format": "date",
+            "example": "2021-06-10T00:00:00.000Z"
+          }
+        }
+      },
+      "ErroToken": {
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "Descrição do erro",
+                  "example": "E_INVALID_API_TOKEN: Invalid API token"
+                }
+              }
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Mensagem de erro",
+            "example": "Not Found"
+          },
+          "code": {
+            "type": "number",
+            "description": "Código do erro",
+            "example": 404
+          },
+          "error": {
+            "type": "string",
+            "description": "Descriçao técnica do erro",
+            "example": "E_ROW_NOT_FOUND"
+          }
+        }
+      },
+      "Fatura": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "vencimento": {
+            "type": "string",
+            "description": "Data de vencimento da fatura",
+            "format": "date",
+            "example": "2021-10-15T00:00:00.000Z"
+          },
+          "valor_bruto": {
+            "type": "number",
+            "description": "Valor Bruto - Sem descontos aplicados",
+            "format": "decimal",
+            "example": 1499.9
+          },
+          "desconto_condicional": {
+            "type": "number",
+            "description": "Valido até a data de vencimento",
+            "format": "decimal",
+            "example": 19.9
+          },
+          "desconto_incondicional": {
+            "type": "number",
+            "description": "Válido mesmo após o vencimento",
+            "format": "decimal",
+            "example": 29.9
+          },
+          "desconto_adicional": {
+            "type": "number",
+            "description": "Outros tipos de desconto",
+            "format": "decimal",
+            "example": 9.9
+          },
+          "hash": {
+            "type": "string",
+            "description": "Hash de acesso ao boleto",
+            "example": "76ec5c9b169786fa62d597be5b6587732f793ee0"
+          },
+          "linha_digitavel": {
+            "type": "string",
+            "description": "Linha digitável de pagamento do boleto",
+            "example": "34191.09008 04071.558451 41363.280002 1 87180000206667"
+          },
+          "status_id": {
+            "type": "number",
+            "description": "Status da Fatura.\nLista de Status:\n * `1` - Aberto\n * `2` - Baixado\n * `3` - Baixa Parcial\n * `4` - Baixa Manual\n * `5` - Cancelado\n",
+            "format": "enum[1, 2, 3, 4, 5]",
+            "example": 1
+          },
+          "status_remessa": {
+            "type": "number",
+            "description": "Status da fatura na remessa bancária.\nLista de Status:\n * `0` - Não Remetido\n * `1` - Remetido\n * `2` - Registrado\n * `3` - Não registrado\n",
+            "format": "enum[0, 1, 2, 3]",
+            "example": 1
+          }
+        }
+      },
+      "Filial": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "filialnome": {
+            "type": "string",
+            "example": "WClasses Educacional"
+          }
+        }
+      },
+      "Perletivo": {
+        "required": [
+          "ano",
+          "plcodigo",
+          "pldescricao"
+        ],
+        "type": "object",
+        "properties": {
+          "plcodigo": {
+            "type": "string",
+            "description": "Ano letivo",
+            "example": "2021"
+          },
+          "pldescricao": {
+            "type": "string",
+            "description": "Descrição do período",
+            "example": "Período Letivo 2021"
+          },
+          "ano": {
+            "type": "integer",
+            "description": "Ano em que o período letivo irá ocorrer",
+            "example": 2021
+          },
+          "plaberto": {
+            "type": "string",
+            "description": "Se o período letivo esta aberto. Valores possíveis:\n * `S` - Sim\n * `N` - Não\n",
+            "format": "enum[S, N]",
+            "example": "S"
+          },
+          "plcorrente": {
+            "type": "string",
+            "description": "Se o período letivo é o período corrente Valores possíveis:\n * `S` - Sim\n * `N` - Não\n",
+            "format": "enum[S, N]",
+            "example": "S"
+          }
+        }
+      },
+      "Pessoa": {
+        "required": [
+          "cpf",
+          "data_nascimento",
+          "email",
+          "id",
+          "nome",
+          "sexo",
+          "tipo_pessoa"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "tipo_pessoa": {
+            "type": "string",
+            "description": "Valores aceitos:\n * `F` - Física\n * `J` - Jurídica\n",
+            "example": "F",
+            "enum": [
+              "F",
+              "J"
+            ]
+          },
+          "nome": {
+            "type": "string",
+            "example": "João da Silva"
+          },
+          "nomesocial": {
+            "type": "string",
+            "example": "Maria da Silva"
+          },
+          "data_nascimento": {
+            "type": "string",
+            "format": "date",
+            "example": "1990-01-01T00:00:00.000Z"
+          },
+          "cpf": {
+            "type": "string",
+            "example": "08654587075"
+          },
+          "estadocivil": {
+            "type": "string",
+            "example": "Casado"
+          },
+          "sexo": {
+            "type": "string",
+            "description": "Valores aceitos:\n * `F` - Feminino\n * `M` - Masculino\n * `N` - Não declarar\n",
+            "example": "M",
+            "enum": [
+              "M",
+              "F",
+              "N"
+            ]
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "contato@email.com.br"
+          },
+          "cep": {
+            "maxLength": 8,
+            "minLength": 8,
+            "type": "string",
+            "example": "05535000"
+          },
+          "rua": {
+            "maxLength": 140,
+            "type": "string",
+            "description": "Endereço - Rua",
+            "example": "Rua dos coqueiros"
+          },
+          "numero": {
+            "maxLength": 12,
+            "type": "string",
+            "description": "Endereço - Número",
+            "example": "196"
+          },
+          "complemento": {
+            "maxLength": 150,
+            "type": "string",
+            "example": "Casa 2"
+          },
+          "bairro": {
+            "maxLength": 50,
+            "type": "string",
+            "example": "Vila dos Coqueiros"
+          },
+          "cidade": {
+            "maxLength": 50,
+            "type": "string",
+            "example": "São Paulo"
+          },
+          "estado": {
+            "maxLength": 2,
+            "minLength": 2,
+            "type": "string",
+            "description": "Código da UF",
+            "example": "SP"
+          },
+          "cidade_ibge": {
+            "type": "string",
+            "description": "Código IBGE da cidade",
+            "example": "02606"
+          }
+        }
+      },
+      "PessoaLista": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "100"
+          },
+          "nome": {
+            "type": "string",
+            "example": "João da Silva"
+          },
+          "data_nascimento": {
+            "type": "string",
+            "format": "date",
+            "example": "2000-01-01T00:00:00.000Z"
+          },
+          "cpf": {
+            "type": "string",
+            "example": "11122233345"
+          },
+          "sexo": {
+            "type": "string",
+            "format": "enum",
+            "example": "M"
+          },
+          "email": {
+            "type": "string",
+            "example": "email@provedor.com.br"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      }
     }
-  },
-  "security": [
-    {
-      "Bearer": []
-    }
-  ]
+  }
 }
