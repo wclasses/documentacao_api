@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "## API do Sistema WClasses Educacional\nDeve ser utilizado token do tipo **Bearer** em todas as requisições.\n\nExemplo: \n```Bearer NzM.HNWRIkyFLgrIduVuBitlrs9hoYtahwmYFlLDGVVu6wqn3ODElWV_cQQ_Uslo```\n\nPara obter o token de acesso entre em contato. ",
+    "description": "## API do Sistema WClasses Educacional\nDeve ser utilizado token do tipo **Bearer** em todas as requisições.\n\nExemplo: \n```Bearer NzM.HNWRIkyFLgrIduVuBitlrs9hoYtahwmYFlLDGVVu6wqn3ODElWV_cQQ_Uslo```\n\nPara obter o token de acesso entre em contato: suporte@wclasses.com.br",
     "version": "1.0.0",
     "title": "WClasses API - 1.0.0",
     "contact": {
