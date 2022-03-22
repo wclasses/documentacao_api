@@ -247,18 +247,15 @@
                     "properties": {
                       "codigo": {
                         "type": "string",
-                        "description": "Código da disciplina",
-                        "example": "001"
+                        "description": "Código da disciplina"
                       },
                       "nome": {
                         "type": "string",
-                        "description": "Nome da Disciplina",
-                        "example": "Português"
+                        "description": "Nome da Disciplina"
                       },
                       "nome_reduzido": {
                         "type": "string",
-                        "description": "Nome reduzido da Disciplina",
-                        "example": "POR"
+                        "description": "Nome reduzido da Disciplina"
                       }
                     }
                   }
