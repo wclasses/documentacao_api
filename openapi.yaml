@@ -241,10 +241,10 @@ paths:
               examples:
                 SUCESSO:
                   value:
-                   - codigo: 001
+                   - codigo: "001"
                      nome: "Português"
                      nome_reduzido: "POR"
-                   - codigo: 002
+                   - codigo: "002"
                      nome: "Matemática"
                      nome_reduzido: "MAT"
                         
@@ -495,6 +495,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErroToken'
+  
   /contrato/{id}:
     get:
       tags:
@@ -525,6 +526,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErroToken'
+  
   /fatura/pessoa/{id}:
     get:
       tags:

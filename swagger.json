@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "WClasses API - 1.0.0",
-    "description": " ## API do Sistema WClasses Educacional\nDeve ser utilizado token do tipo Bearer em todas as requisições. \n\nExemplo: ```Bearer NzM.HNWRIkyFLgrIduVuBitlrs9hoYtahwmYFlLDGVVu6wqn3ODElWV_cQQ_Uslo``` \n\nPara obter o token de acesso entre em contato: ```suporte@wclasses.com.br``` ",
+    "description": " ## API do Sistema WClasses Educacional\nDocumentação da API do Sistema <a href='https://wclasses.com.br' target='_blank'>WClasses Educacional.</a>\n<br />\nCaso tenha alguma dúvida entre  em contato com os nossos <a href='https://wclasses.freshdesk.com/a/' target='_blank'>Canais de Suporte</a>\n<br /><br />\n### Requisições\nDeve ser utilizado token do tipo Bearer em todas as requisições. <br>\nExemplo: ```Bearer NzM.HNWRIkyFLgrIduVuBitlrs9hoYtahwmYFlLDGVVu6wqn3ODElWV_cQQ_Uslo``` \n<br /> <br />\nPara obter o token de acesso entre em contato:  <a href='mailto:desenvolvimento@wclasses.com.br'>desenvolvimento@wclasses.com.br</a> ",
     "contact": {
       "email": "desenvolvimento@wclasses.com.br"
     },
@@ -227,6 +227,41 @@
         }
       }
     },
+    "/filial": {
+      "get": {
+        "tags": [
+          "Instituição"
+        ],
+        "summary": "Filial - Lista",
+        "description": "Lista as filiais cadastradas no sistema\n",
+        "operationId": "Filial - Index",
+        "responses": {
+          "200": {
+            "description": "Resposta da requisição",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Filial"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroToken"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/disciplina": {
       "get": {
         "tags": [
@@ -264,12 +299,12 @@
                   "SUCESSO": {
                     "value": [
                       {
-                        "codigo": 1,
+                        "codigo": "001",
                         "nome": "Português",
                         "nome_reduzido": "POR"
                       },
                       {
-                        "codigo": 2,
+                        "codigo": "002",
                         "nome": "Matemática",
                         "nome_reduzido": "MAT"
                       }
@@ -292,14 +327,14 @@
         }
       }
     },
-    "/filial": {
+    "/perletivo": {
       "get": {
         "tags": [
-          "Instituição"
+          "Acadêmico"
         ],
-        "summary": "Filial - Lista",
-        "description": "Lista as filiais cadastradas no sistema\n",
-        "operationId": "Filial - Index",
+        "summary": "Período Letivo - Lista",
+        "description": "Lista os períodos letivos cadastrados\n",
+        "operationId": "Perletivo - Index",
         "responses": {
           "200": {
             "description": "Resposta da requisição",
@@ -308,7 +343,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Filial"
+                    "$ref": "#/components/schemas/Perletivo"
                   }
                 }
               }
@@ -571,41 +606,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/NotFound"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/perletivo": {
-      "get": {
-        "tags": [
-          "Acadêmico"
-        ],
-        "summary": "Período Letivo - Lista",
-        "description": "Lista os períodos letivos cadastrados\n",
-        "operationId": "Perletivo - Index",
-        "responses": {
-          "200": {
-            "description": "Resposta da requisição",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Perletivo"
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Não autorizado",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErroToken"
                 }
               }
             }
