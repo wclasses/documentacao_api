@@ -39,7 +39,23 @@
             "schema" : {
               "type" : "array",
               "items" : {
-                "$ref" : "#/definitions/Coligada"
+                "properties" : {
+                  "codigo" : {
+                    "type" : "number",
+                    "description" : "Código da coligada",
+                    "example" : 1
+                  },
+                  "nome" : {
+                    "type" : "string",
+                    "description" : "Nome da Coligada",
+                    "example" : "Coligada WClasses"
+                  },
+                  "cnpj" : {
+                    "type" : "number",
+                    "description" : "CNPJ da coligada, apenas números",
+                    "example" : "03607190000106"
+                  }
+                }
               }
             }
           },
@@ -509,21 +525,6 @@
         "cidade" : {
           "type" : "string",
           "example" : "São Paulo",
-          "description" : "Endereço - Cidade"
-        },
-        "estado" : {
-          "type" : "string",
-          "example" : "SP",
-          "description" : "Endereço - UF - Estado"
-        },
-        "telefone1" : {
-          "type" : "string",
-          "example" : "1127966700",
-          "description" : "Telefone 1: Residencial"
-        },
-        "telefone2" : {
-          "type" : "string",
-          "example" : "11982913802",
           "description" : "Telefone 2: Celular"
         },
         "email" : {
