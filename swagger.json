@@ -40,9 +40,9 @@
               "type" : "array",
               "items" : {
                 "properties" : {
-                  "codigo" : {
+                  "id" : {
                     "type" : "number",
-                    "description" : "Código da coligada",
+                    "description" : "ID da coligada",
                     "example" : 1
                   },
                   "nome" : {
@@ -54,6 +54,47 @@
                     "type" : "number",
                     "description" : "CNPJ da coligada, apenas números",
                     "example" : "03607190000106"
+                  }
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Não autorizado",
+            "schema" : {
+              "$ref" : "#/definitions/ErroToken"
+            }
+          }
+        }
+      }
+    },
+    "/coligada/{id}" : {
+      "get" : {
+        "tags" : [ "Instituição" ],
+        "summary" : "Exibe os detalhes de uma Coligada",
+        "operationId" : "Coligada - View",
+        "description" : "Exibe todos os detalhes de uma coligada\n",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "ID da coligada",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Resposta da requisição",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "type" : "object",
+                "properties" : {
+                  "id" : {
+                    "type" : "number",
+                    "description" : "ID da Coligada",
+                    "example" : 1
                   }
                 }
               }
@@ -534,25 +575,6 @@
           "description" : "E-mail do aluno"
         }
       }
-    },
-    "Coligada" : {
-      "type" : "object",
-      "properties" : {
-        "coligadacodigo" : {
-          "type" : "integer",
-          "format" : "int64",
-          "example" : 1
-        },
-        "coligadanome" : {
-          "type" : "string",
-          "example" : "WClasses Educacional"
-        },
-        "cnpj" : {
-          "type" : "string",
-          "example" : "32409931000134"
-        }
-      },
-      "description" : "Dados da Coligada"
     },
     "Contrato" : {
       "type" : "object",
