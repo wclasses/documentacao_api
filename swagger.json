@@ -71,7 +71,7 @@
     "/coligada/{id}" : {
       "get" : {
         "tags" : [ "Instituição" ],
-        "summary" : "Exibe os detalhes de uma Coligada",
+        "summary" : "Detalhes da Coligada",
         "operationId" : "Coligada - View",
         "description" : "Exibe todos os detalhes de uma coligada\n",
         "produces" : [ "application/json" ],
