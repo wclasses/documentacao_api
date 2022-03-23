@@ -252,7 +252,6 @@ paths:
                          * `N` - Não
                       format: enum[S, N]
                       example: S
-                      
               examples:
                 Sucesso:
                   value:
@@ -272,6 +271,78 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErroToken'
+
+  /perletivo/{codigo}:
+    get:
+      tags:
+      - Acadêmico
+      summary: Período Letivo - Detalhes
+      description: |
+        Detalhes do período letivo
+      operationId: Perletivo - View
+      parameters:
+      - name: codigo
+        in: path
+        description: Código do Período Letivo
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: "Resposta da Requisição"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    codigo:
+                      type: string
+                      description: Código do período letivo
+                    descricao:
+                      type: string
+                      description: Descrição do período letivo
+                    ano:
+                      type: number
+                      description: Ano que o período letivo ocorre
+                    aberto:
+                      type: string
+                      description: |
+                        Se o período letivo esta aberto. Valores possíveis:
+                         * `S` - Sim
+                         * `N` - Não
+                      format: enum[S, N]
+                      example: S
+                    corrente:
+                      type: string
+                      description: |
+                        Se o período letivo é o período corrente Valores possíveis:
+                         * `S` - Sim
+                         * `N` - Não
+                      format: enum[S, N]
+                      example: S
+              examples:
+                Sucesso:
+                  value:
+                   - codigo: "2022"
+                     descricao: "Ano letivo 2022"
+                     ano: 2022
+                     aberto: "S"
+                     corrente: "S"
+        401:
+          description: Não autorizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroToken'
+        404:
+          description: Não encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
 
   /disciplina:
     get:
