@@ -2,7 +2,7 @@ openapi: 3.0.1
 info:
   title: WClasses API - 1.0.0
   description: >
-    ## API do Sistema WClasses Educacional
+    ## API WClasses Educacional
     
     Documentação da API do Sistema <a href='https://wclasses.com.br' target='_blank'>WClasses Educacional.</a>
     
@@ -209,6 +209,70 @@ paths:
 
 ##### Acadêmico 
   
+  /perletivo:
+    get:
+      tags:
+      - Acadêmico
+      summary: Período Letivo - Lista
+      description: |
+        Lista os períodos letivos cadastrados
+      operationId: Perletivo - Index
+      responses:
+        '200':
+          description: "Resposta da Requisição"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    codigo:
+                      type: string
+                      description: Código do período letivo
+                    descricao:
+                      type: string
+                      description: Descrição do período letivo
+                    ano:
+                      type: number
+                      description: Ano que o período letivo ocorre
+                    aberto:
+                      type: string
+                      description: |
+                        Se o período letivo esta aberto. Valores possíveis:
+                         * `S` - Sim
+                         * `N` - Não
+                      format: enum[S, N]
+                      example: S
+                    corrente:
+                      type: string
+                      description: |
+                        Se o período letivo é o período corrente Valores possíveis:
+                         * `S` - Sim
+                         * `N` - Não
+                      format: enum[S, N]
+                      example: S
+                      
+              examples:
+                Sucesso:
+                  value:
+                   - codigo: "2021"
+                     descricao: "Ano letivo 2021"
+                     ano: 2021
+                     aberto: "N"
+                     corrente: "N"
+                   - codigo: "2022"
+                     descricao: "Ano letivo 2022"
+                     ano: 2022
+                     aberto: "S"
+                     corrente: "S"
+        401:
+          description: Não autorizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroToken'
+
   /disciplina:
     get:
       tags:
@@ -237,7 +301,7 @@ paths:
                       type: string
                       description: Nome reduzido da Disciplina
               examples:
-                SUCESSO:
+                Sucesso:
                   value:
                    - codigo: "001"
                      nome: "Português"
@@ -253,30 +317,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErroToken'
 
-  /perletivo:
-    get:
-      tags:
-      - Acadêmico
-      summary: Período Letivo - Lista
-      description: |
-        Lista os períodos letivos cadastrados
-      operationId: Perletivo - Index
-      responses:
-        200:
-          description: Resposta da requisição
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Perletivo'
-        401:
-          description: Não autorizado
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErroToken'
-  
 ##### Usuários 
   
   /aluno:
@@ -596,7 +636,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErroToken'
 
-#####
+##### Components
 components:
   schemas:
     Aluno:
@@ -936,41 +976,6 @@ components:
         filialnome:
           type: string
           example: WClasses Educacional
-    Perletivo:
-      required:
-      - ano
-      - plcodigo
-      - pldescricao
-      type: object
-      properties:
-        plcodigo:
-          type: string
-          description: Ano letivo
-          example: "2021"
-        pldescricao:
-          type: string
-          description: Descrição do período
-          example: Período Letivo 2021
-        ano:
-          type: integer
-          description: Ano em que o período letivo irá ocorrer
-          example: 2021
-        plaberto:
-          type: string
-          description: |
-            Se o período letivo esta aberto. Valores possíveis:
-             * `S` - Sim
-             * `N` - Não
-          format: enum[S, N]
-          example: S
-        plcorrente:
-          type: string
-          description: |
-            Se o período letivo é o período corrente Valores possíveis:
-             * `S` - Sim
-             * `N` - Não
-          format: enum[S, N]
-          example: S
     Pessoa:
       required:
       - cpf

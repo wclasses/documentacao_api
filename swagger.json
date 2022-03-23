@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "WClasses API - 1.0.0",
-    "description": "## API do Sistema WClasses Educacional\nDocumentação da API do Sistema <a href='https://wclasses.com.br' target='_blank'>WClasses Educacional.</a>\n<br />\nCaso tenha alguma dúvida entre  em contato com os nossos <a href='https://wclasses.freshdesk.com/a/' target='_blank'>Canais de Suporte</a>\n<br /><br />\n### Requisições\nDeve ser utilizado token do tipo Bearer em todas as requisições. <br>\nExemplo: ```Bearer NzM.HNWRIkyFLgrIduVuBitlrs9hoYtahwmYFlLDGVVu6wqn3ODElWV_cQQ_Uslo``` \n<br /> <br />\nPara obter o token de acesso entre em contato:  <a href='mailto:desenvolvimento@wclasses.com.br'>desenvolvimento@wclasses.com.br</a>\n",
+    "description": "## API WClasses Educacional\nDocumentação da API do Sistema <a href='https://wclasses.com.br' target='_blank'>WClasses Educacional.</a>\n<br />\nCaso tenha alguma dúvida entre  em contato com os nossos <a href='https://wclasses.freshdesk.com/a/' target='_blank'>Canais de Suporte</a>\n<br /><br />\n### Requisições\nDeve ser utilizado token do tipo Bearer em todas as requisições. <br>\nExemplo: ```Bearer NzM.HNWRIkyFLgrIduVuBitlrs9hoYtahwmYFlLDGVVu6wqn3ODElWV_cQQ_Uslo``` \n<br /> <br />\nPara obter o token de acesso entre em contato:  <a href='mailto:desenvolvimento@wclasses.com.br'>desenvolvimento@wclasses.com.br</a>\n",
     "contact": {
       "email": "desenvolvimento@wclasses.com.br"
     },
@@ -262,6 +262,87 @@
         }
       }
     },
+    "/perletivo": {
+      "get": {
+        "tags": [
+          "Acadêmico"
+        ],
+        "summary": "Período Letivo - Lista",
+        "description": "Lista os períodos letivos cadastrados\n",
+        "operationId": "Perletivo - Index",
+        "responses": {
+          "200": {
+            "description": "Resposta da Requisição",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "codigo": {
+                        "type": "string",
+                        "description": "Código do período letivo"
+                      },
+                      "descricao": {
+                        "type": "string",
+                        "description": "Descrição do período letivo"
+                      },
+                      "ano": {
+                        "type": "number",
+                        "description": "Ano que o período letivo ocorre"
+                      },
+                      "aberto": {
+                        "type": "string",
+                        "description": "Se o período letivo esta aberto. Valores possíveis:\n * `S` - Sim\n * `N` - Não\n",
+                        "format": "enum[S, N]",
+                        "example": "S"
+                      },
+                      "corrente": {
+                        "type": "string",
+                        "description": "Se o período letivo é o período corrente Valores possíveis:\n * `S` - Sim\n * `N` - Não\n",
+                        "format": "enum[S, N]",
+                        "example": "S"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Sucesso": {
+                    "value": [
+                      {
+                        "codigo": "2021",
+                        "descricao": "Ano letivo 2021",
+                        "ano": 2021,
+                        "aberto": "N",
+                        "corrente": "N"
+                      },
+                      {
+                        "codigo": "2022",
+                        "descricao": "Ano letivo 2022",
+                        "ano": 2022,
+                        "aberto": "S",
+                        "corrente": "S"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroToken"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/disciplina": {
       "get": {
         "tags": [
@@ -296,7 +377,7 @@
                   }
                 },
                 "examples": {
-                  "SUCESSO": {
+                  "Sucesso": {
                     "value": [
                       {
                         "codigo": "001",
@@ -309,41 +390,6 @@
                         "nome_reduzido": "MAT"
                       }
                     ]
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Não autorizado",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErroToken"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/perletivo": {
-      "get": {
-        "tags": [
-          "Acadêmico"
-        ],
-        "summary": "Período Letivo - Lista",
-        "description": "Lista os períodos letivos cadastrados\n",
-        "operationId": "Perletivo - Index",
-        "responses": {
-          "200": {
-            "description": "Resposta da requisição",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Perletivo"
                   }
                 }
               }
@@ -1193,43 +1239,6 @@
           "filialnome": {
             "type": "string",
             "example": "WClasses Educacional"
-          }
-        }
-      },
-      "Perletivo": {
-        "required": [
-          "ano",
-          "plcodigo",
-          "pldescricao"
-        ],
-        "type": "object",
-        "properties": {
-          "plcodigo": {
-            "type": "string",
-            "description": "Ano letivo",
-            "example": "2021"
-          },
-          "pldescricao": {
-            "type": "string",
-            "description": "Descrição do período",
-            "example": "Período Letivo 2021"
-          },
-          "ano": {
-            "type": "integer",
-            "description": "Ano em que o período letivo irá ocorrer",
-            "example": 2021
-          },
-          "plaberto": {
-            "type": "string",
-            "description": "Se o período letivo esta aberto. Valores possíveis:\n * `S` - Sim\n * `N` - Não\n",
-            "format": "enum[S, N]",
-            "example": "S"
-          },
-          "plcorrente": {
-            "type": "string",
-            "description": "Se o período letivo é o período corrente Valores possíveis:\n * `S` - Sim\n * `N` - Não\n",
-            "format": "enum[S, N]",
-            "example": "S"
           }
         }
       },
