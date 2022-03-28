@@ -457,9 +457,9 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "codigo": {
+                      "id": {
                         "type": "string",
-                        "description": "Código da disciplina"
+                        "description": "ID da disciplina"
                       },
                       "nome": {
                         "type": "string",
@@ -476,12 +476,12 @@
                   "Sucesso": {
                     "value": [
                       {
-                        "codigo": "001",
+                        "id": "001",
                         "nome": "Português",
                         "nome_reduzido": "POR"
                       },
                       {
-                        "codigo": "002",
+                        "id": "002",
                         "nome": "Matemática",
                         "nome_reduzido": "MAT"
                       }
@@ -504,7 +504,7 @@
         }
       }
     },
-    "/disciplina/{codigo}": {
+    "/disciplina/{id}": {
       "get": {
         "tags": [
           "Acadêmico"
@@ -514,9 +514,9 @@
         "operationId": "Disciplina - View",
         "parameters": [
           {
-            "name": "codigo",
+            "name": "id",
             "in": "path",
-            "description": "Código da Disciplina",
+            "description": "ID da Disciplina",
             "required": true,
             "schema": {
               "type": "integer",
@@ -534,9 +534,9 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "codigo": {
+                      "id": {
                         "type": "string",
-                        "description": "Código da disciplina"
+                        "description": "ID da disciplina"
                       },
                       "nome": {
                         "type": "string",
@@ -553,7 +553,7 @@
                   "SUCESSO": {
                     "value": [
                       {
-                        "codigo": "001",
+                        "id": "001",
                         "nome": "Português",
                         "nome_reduzido": "POR"
                       }

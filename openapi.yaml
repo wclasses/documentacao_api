@@ -271,7 +271,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErroToken'
-
   /perletivo/{codigo}:
     get:
       tags:
@@ -362,9 +361,9 @@ paths:
                 items:
                   type: object
                   properties:
-                    codigo:
+                    id:
                       type: string
-                      description: Código da disciplina
+                      description: ID da disciplina
                     nome:
                       type: string
                       description: Nome da Disciplina
@@ -374,10 +373,10 @@ paths:
               examples:
                 Sucesso:
                   value:
-                   - codigo: "001"
+                   - id: "001"
                      nome: "Português"
                      nome_reduzido: "POR"
-                   - codigo: "002"
+                   - id: "002"
                      nome: "Matemática"
                      nome_reduzido: "MAT"
                         
@@ -387,8 +386,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErroToken'
-                
-  /disciplina/{codigo}:
+  /disciplina/{id}:
     get:
       tags:
       - Acadêmico
@@ -397,9 +395,9 @@ paths:
         Detalhe da disciplina
       operationId: Disciplina - View
       parameters:
-      - name: codigo
+      - name: id
         in: path
-        description: Código da Disciplina
+        description: ID da Disciplina
         required: true
         schema:
           type: integer
@@ -414,9 +412,9 @@ paths:
                 items:
                   type: object
                   properties:
-                    codigo:
+                    id:
                       type: string
-                      description: Código da disciplina
+                      description: ID da disciplina
                     nome:
                       type: string
                       description: Nome da Disciplina
@@ -426,7 +424,7 @@ paths:
               examples:
                 SUCESSO:
                   value:
-                   - codigo: "001"
+                   - id: "001"
                      nome: "Português"
                      nome_reduzido: "POR"
 
