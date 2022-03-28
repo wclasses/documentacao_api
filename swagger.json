@@ -504,6 +504,163 @@
         }
       }
     },
+    "/disciplina/{codigo}": {
+      "get": {
+        "tags": [
+          "Acadêmico"
+        ],
+        "summary": "Disciplina - Detalhes",
+        "description": "Detalhe da disciplina\n",
+        "operationId": "Disciplina - View",
+        "parameters": [
+          {
+            "name": "codigo",
+            "in": "path",
+            "description": "Código da Disciplina",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta da Requisição",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "codigo": {
+                        "type": "string",
+                        "description": "Código da disciplina"
+                      },
+                      "nome": {
+                        "type": "string",
+                        "description": "Nome da Disciplina"
+                      },
+                      "nome_reduzido": {
+                        "type": "string",
+                        "description": "Nome reduzido da Disciplina"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "SUCESSO": {
+                    "value": [
+                      {
+                        "codigo": "001",
+                        "nome": "Português",
+                        "nome_reduzido": "POR"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroToken"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cursosinstituicao": {
+      "get": {
+        "tags": [
+          "Acadêmico"
+        ],
+        "summary": "Cursos Instituição - Lista",
+        "description": "Lista dos cursos da instituição\n",
+        "operationId": "Cursos Instituição - Index",
+        "responses": {
+          "200": {
+            "description": "Resposta da Requisição",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "codigo": {
+                        "type": "number",
+                        "description": "Código do Curso Instituição"
+                      },
+                      "nome": {
+                        "type": "string",
+                        "description": "Nome do Curso Instituição"
+                      },
+                      "coligada_codigo": {
+                        "type": "number",
+                        "description": "ID/Código da coligada"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "SUCESSO": {
+                    "value": [
+                      {
+                        "codigo": 1,
+                        "nome": "Educação Infantil",
+                        "coligada_codigo": 1
+                      },
+                      {
+                        "codigo": 2,
+                        "nome": "Ensino Fundamental  I",
+                        "coligada_codigo": 1
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroToken"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/aluno": {
       "get": {
         "tags": [
