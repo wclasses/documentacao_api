@@ -489,6 +489,84 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFound'
+  /cursosinstituicao/{id}:
+    get:
+      tags:
+      - Acadêmico
+      summary: Cursos Instituição - Detalhes
+      description: |
+        Cursos da Instituição <br>
+        
+        Aqui são listados os tipos de cursos cadastrados nas coligadas. <br>
+        Ex: Curso "Ensino Fundamental II" na Coligada "WClasses Educacional"
+      
+      operationId: Cursos Instituição - View
+      parameters:
+      - name: id
+        in: path
+        description: ID do Curso
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: "Resposta da Requisição"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      description: ID do Curso
+                    nome:
+                      type: string
+                      description: Nome do Curso
+                    coligada_id:
+                      type: number
+                      description: ID da Coligada
+                    coligada_nome:
+                      type: string
+                      description: Nome da coligada que o Curso pertence
+                    tipo_curso_id:
+                      type: number
+                      description: ID do Tipo de Curso
+                    tipo_curso_descricao:
+                      type: string
+                      description: Descrição do tipo de curso.
+                    curso_modalidade_id:
+                      type: number
+                      description: ID da modalidade do Curso
+                    curso_modalidade_nome:
+                      type: string
+                      description: Nome da modalidade do curso
+              examples:
+                SUCESSO:
+                  value:
+                   - id: 1
+                     nome: "Educação Infantil"
+                     coligada_id: 1
+                     coligada_nome: "WClasses Educacional"
+                     tipo_curso_id: 1
+                     tipo_curso_descricao: "Ensino Infantil"
+                     curso_modalidade_id: 1
+                     curso_modalidade_nome: "Presencial"
+        401:
+          description: Não autorizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroToken'
+        404:
+          description: Não encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+
 
 ##### Usuários 
   
