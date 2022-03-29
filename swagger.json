@@ -24,6 +24,15 @@
   ],
   "x-tagGroups": [
     {
+      "name": "Cadastros",
+      "tags": [
+        "Aluno",
+        "Professor",
+        "Responsável",
+        "Pessoa"
+      ]
+    },
+    {
       "name": "Acadêmico",
       "tags": [
         "Coligada",
@@ -43,6 +52,22 @@
     }
   ],
   "tags": [
+    {
+      "name": "Alunos",
+      "description": "Lista, cadastro e edição de alunos"
+    },
+    {
+      "name": "Professor",
+      "description": "Lista, cadastro e edição de professores"
+    },
+    {
+      "name": "Responsável",
+      "description": "Lista, cadastro e edição de responsáveis acadêmicos e financeiros"
+    },
+    {
+      "name": "Pessoa",
+      "description": "Detalhes cadastrais de qualquer pessoa independente do perfil"
+    },
     {
       "name": "Coligada",
       "description": "Dados da Coligada"
@@ -77,6 +102,257 @@
     }
   ],
   "paths": {
+    "/aluno": {
+      "get": {
+        "tags": [
+          "Aluno"
+        ],
+        "summary": "Aluno - Lista",
+        "description": "Lista os alunos cadastrados no sistema, pode ser utilizado paginação\n",
+        "operationId": "Aluno - Index",
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Paginação offset",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Paginação limit",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta da requisição",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Aluno"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroToken"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Aluno"
+        ],
+        "summary": "Aluno - Cadastro",
+        "description": "Cadastra um aluno no sistema\n",
+        "operationId": "Aluno - Create",
+        "requestBody": {
+          "description": "Dados do aluno",
+          "content": {
+            "*/*": {
+              "schema": {
+                "$ref": "#/components/schemas/AlunoCadastro"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Resposta da requisição",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "nome": {
+                      "type": "string",
+                      "description": "Nome Cadastrado",
+                      "example": "Arthur da Silva"
+                    },
+                    "matricula": {
+                      "type": "string",
+                      "description": "Matrícula Cadastrada",
+                      "example": "MAT-1234"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroToken"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Erro de validação de dados",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "rule": {
+                        "type": "string",
+                        "description": "Regra quebrada que retornou o erro",
+                        "example": "required"
+                      },
+                      "field": {
+                        "type": "string",
+                        "description": "Campo que apresenta o erro",
+                        "example": "matricula"
+                      },
+                      "message": {
+                        "type": "string",
+                        "description": "Mensagem de errro",
+                        "example": "required validation failed"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body,"
+      }
+    },
+    "/pessoa": {
+      "get": {
+        "tags": [
+          "Pessoa"
+        ],
+        "summary": "Pesosa - Lista",
+        "description": "Lista as pessoas cadastradas no sistema, pode ser utilizado paginação. Retorna todos os tipo de usuários/perfis.\n",
+        "operationId": "Pessoa - Index",
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Paginação offset",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Paginação limit",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta da requisição",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PessoaLista"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroToken"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pessoa/{id}": {
+      "get": {
+        "tags": [
+          "Pessoa"
+        ],
+        "summary": "Pessoa - Detalhes",
+        "description": "Detalhe da pessoa cadastrada no sistema\n",
+        "operationId": "Pessoa - View",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID da pessoa",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta da requisição",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Pessoa"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroToken"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/coligada": {
       "get": {
         "tags": [
@@ -923,257 +1199,6 @@
                         "filial_id": 3
                       }
                     ]
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Não autorizado",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErroToken"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Não encontrado",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NotFound"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/aluno": {
-      "get": {
-        "tags": [
-          "Usuários"
-        ],
-        "summary": "Aluno - Lista",
-        "description": "Lista os alunos cadastrados no sistema, pode ser utilizado paginação\n",
-        "operationId": "Aluno - Index",
-        "parameters": [
-          {
-            "name": "offset",
-            "in": "query",
-            "description": "Paginação offset",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "Paginação limit",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resposta da requisição",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Aluno"
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Não autorizado",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErroToken"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Usuários"
-        ],
-        "summary": "Aluno - Cadastro",
-        "description": "Cadastra um aluno no sistema\n",
-        "operationId": "Aluno - Create",
-        "requestBody": {
-          "description": "Dados do aluno",
-          "content": {
-            "*/*": {
-              "schema": {
-                "$ref": "#/components/schemas/AlunoCadastro"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Resposta da requisição",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
-                    },
-                    "nome": {
-                      "type": "string",
-                      "description": "Nome Cadastrado",
-                      "example": "Arthur da Silva"
-                    },
-                    "matricula": {
-                      "type": "string",
-                      "description": "Matrícula Cadastrada",
-                      "example": "MAT-1234"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Não autorizado",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErroToken"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Erro de validação de dados",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "rule": {
-                        "type": "string",
-                        "description": "Regra quebrada que retornou o erro",
-                        "example": "required"
-                      },
-                      "field": {
-                        "type": "string",
-                        "description": "Campo que apresenta o erro",
-                        "example": "matricula"
-                      },
-                      "message": {
-                        "type": "string",
-                        "description": "Mensagem de errro",
-                        "example": "required validation failed"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-codegen-request-body-name": "body,"
-      }
-    },
-    "/pessoa": {
-      "get": {
-        "tags": [
-          "Usuários"
-        ],
-        "summary": "Pesosa - Lista",
-        "description": "Lista as pessoas cadastradas no sistema, pode ser utilizado paginação. Retorna todos os tipo de usuários/perfis.\n",
-        "operationId": "Pessoa - Index",
-        "parameters": [
-          {
-            "name": "offset",
-            "in": "query",
-            "description": "Paginação offset",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "Paginação limit",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resposta da requisição",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/PessoaLista"
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Não autorizado",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErroToken"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/pessoa/{id}": {
-      "get": {
-        "tags": [
-          "Usuários"
-        ],
-        "summary": "Pessoa - Detalhes",
-        "description": "Detalhe da pessoa cadastrada no sistema\n",
-        "operationId": "Pessoa - View",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "ID da pessoa",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resposta da requisição",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Pessoa"
                   }
                 }
               }
