@@ -363,7 +363,7 @@
         "operationId": "Coligada - Index",
         "responses": {
           "200": {
-            "description": "Resposta da requisição",
+            "description": "Resposta da Requisição",
             "content": {
               "application/json": {
                 "schema": {
@@ -373,20 +373,33 @@
                     "properties": {
                       "id": {
                         "type": "number",
-                        "description": "ID da coligada",
-                        "example": 1
+                        "description": "ID da Coligada"
                       },
                       "nome": {
                         "type": "string",
-                        "description": "Nome da Coligada",
-                        "example": "Coligada WClasses"
+                        "description": "Nome da Coligada"
                       },
                       "cnpj": {
-                        "type": "number",
-                        "description": "CNPJ da coligada, apenas números",
-                        "example": 3607190000106
+                        "type": "string",
+                        "description": "CNPJ da Coligada"
                       }
                     }
+                  }
+                },
+                "examples": {
+                  "SUCESSO": {
+                    "value": [
+                      {
+                        "id": 1,
+                        "nome": "WClasses Escola de Ensino Infantil e Fundamental",
+                        "cnpj": "16590268000160"
+                      },
+                      {
+                        "id": 2,
+                        "nome": "WClasses Escola de Ensino Médio",
+                        "cnpj": "59500702000187"
+                      }
+                    ]
                   }
                 }
               }
@@ -446,9 +459,9 @@
                         "example": "WClasses Educacional"
                       },
                       "cnpj": {
-                        "type": "number",
+                        "type": "string",
                         "description": "CNPJ da coligada",
-                        "example": 16590268000160
+                        "example": "16590268000160"
                       },
                       "razao_social": {
                         "type": "string",
@@ -461,9 +474,9 @@
                         "example": "WClasses Sistema de Gestão Educacional"
                       },
                       "cep": {
-                        "type": "number",
+                        "type": "string",
                         "description": "CEP da Coligada",
-                        "example": 4207900
+                        "example": "04739010"
                       },
                       "endereco": {
                         "type": "string",
@@ -471,9 +484,9 @@
                         "example": "R. Nove de Julho"
                       },
                       "numero": {
-                        "type": "number",
+                        "type": "string",
                         "description": "Número do endereço",
-                        "example": 72
+                        "example": "72"
                       },
                       "bairro": {
                         "type": "string",
@@ -549,13 +562,48 @@
         "operationId": "Filial - Index",
         "responses": {
           "200": {
-            "description": "Resposta da requisição",
+            "description": "Resposta da Requisição",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Filial"
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "ID da Filial"
+                      },
+                      "nome": {
+                        "type": "string",
+                        "description": "Nome da Filial"
+                      },
+                      "cnpj": {
+                        "type": "string",
+                        "description": "CNPJ da Filial"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "SUCESSO": {
+                    "value": [
+                      {
+                        "id": 1,
+                        "nome": "WClasses - Santo Amaro",
+                        "cnpj": "69639665000146"
+                      },
+                      {
+                        "id": 2,
+                        "nome": "WClasses - Centro",
+                        "cnpj": "93868150000100"
+                      },
+                      {
+                        "id": 3,
+                        "nome": "WClasses - São Caetano",
+                        "cnpj": "43300630000194"
+                      }
+                    ]
                   }
                 }
               }
