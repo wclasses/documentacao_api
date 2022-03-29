@@ -22,6 +22,22 @@
       "Bearer": []
     }
   ],
+  "x-tagGroups": [
+    {
+      "name": "Acadêmico",
+      "tags": [
+        "Instituição",
+        "Usuários",
+        "Acadêmico"
+      ]
+    },
+    {
+      "name": "Financeiro",
+      "tags": [
+        "Financeiro"
+      ]
+    }
+  ],
   "tags": [
     {
       "name": "Instituição",
@@ -36,8 +52,12 @@
       "description": "Usuários, funcionários, professores, responsáveis e alunos"
     },
     {
-      "name": "Financeiro",
-      "description": "Contratos, lançamentos, faturas, dados financeiros"
+      "name": "Contrato",
+      "description": "Contratos adquiridos pelos responsáveis"
+    },
+    {
+      "name": "Fatura",
+      "description": "Faturas geradas para um responsável"
     }
   ],
   "paths": {
@@ -1169,7 +1189,7 @@
     "/contrato/pessoa/{id}": {
       "get": {
         "tags": [
-          "Financeiro"
+          "Contrato"
         ],
         "summary": "Contratos do Responsável",
         "description": "Lista os contratos de um responsável financeiro\n",
@@ -1227,7 +1247,7 @@
     "/contrato/{id}": {
       "get": {
         "tags": [
-          "Financeiro"
+          "Contrato"
         ],
         "summary": "Contrato - Detalhes",
         "description": "Exibe os detalhes do contrato\n",
@@ -1273,7 +1293,7 @@
     "/fatura/pessoa/{id}": {
       "get": {
         "tags": [
-          "Financeiro"
+          "Fatura"
         ],
         "summary": "Faturas do responsável",
         "description": "Retorna as Faturas de um responsável financeiro.\nPode ser utilizado filtros como \"ano\", \"mes\" e \"status\"\n",

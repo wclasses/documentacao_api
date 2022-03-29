@@ -34,6 +34,15 @@ servers:
 - url: https://api.wclasses.com.br/
 security:
 - Bearer: []
+x-tagGroups:
+  - name: Acadêmico
+    tags:
+      - Instituição
+      - Usuários
+      - Acadêmico
+  - name: Financeiro
+    tags:
+      - Financeiro
 tags:
 - name: Instituição
   description: Coligada, filial, dados da instituição de ensino
@@ -41,8 +50,10 @@ tags:
   description: Período Letivo, Cursos, Turmas, Currículos, Diário, etc
 - name: Usuários
   description: Usuários, funcionários, professores, responsáveis e alunos
-- name: Financeiro
-  description: Contratos, lançamentos, faturas, dados financeiros
+- name: Contrato
+  description: Contratos adquiridos pelos responsáveis
+- name: Fatura
+  description: Faturas geradas para um responsável
 paths:
 
 ##### Instituição 
@@ -843,7 +854,7 @@ paths:
   /contrato/pessoa/{id}:
     get:
       tags:
-      - Financeiro
+      - Contrato
       summary: Contratos do Responsável
       description: |
         Lista os contratos de um responsável financeiro
@@ -886,7 +897,7 @@ paths:
   /contrato/{id}:
     get:
       tags:
-      - Financeiro
+      - Contrato
       summary: Contrato - Detalhes
       description: |
         Exibe os detalhes do contrato
@@ -917,7 +928,7 @@ paths:
   /fatura/pessoa/{id}:
     get:
       tags:
-      - Financeiro
+      - Fatura
       summary: Faturas do responsável
       description: |
         Retorna as Faturas de um responsável financeiro.
