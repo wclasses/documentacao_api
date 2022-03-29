@@ -331,7 +331,7 @@ paths:
                     nome:
                       type: string
                       description: Nome da coligada
-                      example: WClasses Educacional
+                      example: "WClasses Escola de Ensino Infantil e Fundamental"
                     cnpj:
                       type: string
                       description: CNPJ da coligada
@@ -339,11 +339,11 @@ paths:
                     razao_social:
                       type: string
                       description: Razão social da Coligada
-                      example: WClasses Educacional LTDA
+                      example: "WClasses Escola de Ensino Infantil e Fundamental LTDA"
                     nome_fantasia:
                       type: string
                       description: Nome Fantasia da Coligada
-                      example: WClasses Sistema de Gestão Educacional
+                      example: "WClasses Educacional"
                     cep:
                       type: string
                       description: CEP da Coligada
