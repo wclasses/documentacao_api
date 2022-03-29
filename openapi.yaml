@@ -42,7 +42,8 @@ x-tagGroups:
       - Acadêmico
   - name: Financeiro
     tags:
-      - Financeiro
+      - Contrato
+      - Fatura
 tags:
 - name: Instituição
   description: Coligada, filial, dados da instituição de ensino
@@ -50,6 +51,8 @@ tags:
   description: Período Letivo, Cursos, Turmas, Currículos, Diário, etc
 - name: Usuários
   description: Usuários, funcionários, professores, responsáveis e alunos
+  
+  ### Financeiro
 - name: Contrato
   description: Contratos adquiridos pelos responsáveis
 - name: Fatura
