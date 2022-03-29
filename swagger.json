@@ -268,8 +268,26 @@
           "Acadêmico"
         ],
         "summary": "Período Letivo - Lista",
-        "description": "Lista os períodos letivos cadastrados\n",
+        "description": "Lista de períodos letivos cadastrados.\n",
         "operationId": "Perletivo - Index",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Paginação offset"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Paginação limit"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Resposta da Requisição",
@@ -445,8 +463,26 @@
           "Acadêmico"
         ],
         "summary": "Disciplinas - Lista",
-        "description": "Lista as disciplinas cadastradas no sistema\n",
+        "description": "Lista as disciplinas cadastradas no sistema. <br>\nAs disciplinas são cadastradas globalmente e compartilhadas entre as instituições.\n",
         "operationId": "Disciplina - Index",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Paginação offset"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Paginação limit"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Resposta da Requisição",
@@ -457,9 +493,9 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "id": {
+                      "codigo": {
                         "type": "string",
-                        "description": "ID da disciplina"
+                        "description": "Código da disciplina"
                       },
                       "nome": {
                         "type": "string",
@@ -476,12 +512,12 @@
                   "Sucesso": {
                     "value": [
                       {
-                        "id": "001",
+                        "codigo": "001",
                         "nome": "Português",
                         "nome_reduzido": "POR"
                       },
                       {
-                        "id": "002",
+                        "codigo": "002",
                         "nome": "Matemática",
                         "nome_reduzido": "MAT"
                       }
@@ -504,7 +540,7 @@
         }
       }
     },
-    "/disciplina/{id}": {
+    "/disciplina/{codigo}": {
       "get": {
         "tags": [
           "Acadêmico"
@@ -514,9 +550,9 @@
         "operationId": "Disciplina - View",
         "parameters": [
           {
-            "name": "id",
+            "name": "codigo",
             "in": "path",
-            "description": "ID da Disciplina",
+            "description": "Código da Disciplina",
             "required": true,
             "schema": {
               "type": "integer",
@@ -534,7 +570,7 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "id": {
+                      "codigo": {
                         "type": "string",
                         "description": "ID da disciplina"
                       },
@@ -553,7 +589,7 @@
                   "SUCESSO": {
                     "value": [
                       {
-                        "id": "001",
+                        "codigo": "001",
                         "nome": "Português",
                         "nome_reduzido": "POR"
                       }
@@ -592,8 +628,26 @@
           "Acadêmico"
         ],
         "summary": "Cursos Instituição - Lista",
-        "description": "Lista dos cursos da instituição\n",
+        "description": "Cursos que foram cadastrados e disponibilizados para a instituição de ensino. <br>\nOs cursos são separados por coligada. Geralmente seguem um padrão:\n\n* Ensino Infantil\n* Ensino Fundamental I\n* Ensino Fundamental II\n* Ensino Médio\n",
         "operationId": "Cursos Instituição - Index",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Paginação offset"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Paginação limit"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Resposta da Requisição",
@@ -738,6 +792,99 @@
                         "tipo_curso_descricao": "Ensino Infantil",
                         "curso_modalidade_id": 1,
                         "curso_modalidade_nome": "Presencial"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroToken"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cursos": {
+      "get": {
+        "tags": [
+          "Acadêmico"
+        ],
+        "summary": "Cursos da Filial - Lista",
+        "description": "Lista os Cursos relacionados as filiais\n",
+        "operationId": "Cursos - Index",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Paginação offset"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Paginação limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta da Requisição",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "description": "ID do curso"
+                      },
+                      "nome": {
+                        "type": "string",
+                        "description": "Nome do Curso"
+                      },
+                      "filial_id": {
+                        "type": "number",
+                        "description": "ID da Filial"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "SUCESSO": {
+                    "value": [
+                      {
+                        "id": 1,
+                        "nome": "Educação Infantil",
+                        "filial_id": 1
+                      },
+                      {
+                        "id": 2,
+                        "nome": "Ensino Fundamental I",
+                        "filial_id": 3
                       }
                     ]
                   }

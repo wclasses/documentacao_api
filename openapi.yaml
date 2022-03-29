@@ -215,8 +215,19 @@ paths:
       - Acadêmico
       summary: Período Letivo - Lista
       description: |
-        Lista os períodos letivos cadastrados
+        Lista de períodos letivos cadastrados.
       operationId: Perletivo - Index
+      parameters:
+        - in: query
+          name: offset
+          schema:
+            type: integer
+          description: Paginação offset
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: Paginação limit
       responses:
         '200':
           description: "Resposta da Requisição"
@@ -349,8 +360,20 @@ paths:
       - Acadêmico
       summary: Disciplinas - Lista
       description: |
-        Lista as disciplinas cadastradas no sistema
+        Lista as disciplinas cadastradas no sistema. <br>
+        As disciplinas são cadastradas globalmente e compartilhadas entre as instituições.
       operationId: Disciplina - Index
+      parameters:
+        - in: query
+          name: offset
+          schema:
+            type: integer
+          description: Paginação offset
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: Paginação limit
       responses:
         '200':
           description: "Resposta da Requisição"
@@ -361,9 +384,9 @@ paths:
                 items:
                   type: object
                   properties:
-                    id:
+                    codigo:
                       type: string
-                      description: ID da disciplina
+                      description: Código da disciplina
                     nome:
                       type: string
                       description: Nome da Disciplina
@@ -373,10 +396,10 @@ paths:
               examples:
                 Sucesso:
                   value:
-                   - id: "001"
+                   - codigo: "001"
                      nome: "Português"
                      nome_reduzido: "POR"
-                   - id: "002"
+                   - codigo: "002"
                      nome: "Matemática"
                      nome_reduzido: "MAT"
                         
@@ -386,7 +409,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErroToken'
-  /disciplina/{id}:
+  /disciplina/{codigo}:
     get:
       tags:
       - Acadêmico
@@ -395,9 +418,9 @@ paths:
         Detalhe da disciplina
       operationId: Disciplina - View
       parameters:
-      - name: id
+      - name: codigo
         in: path
-        description: ID da Disciplina
+        description: Código da Disciplina
         required: true
         schema:
           type: integer
@@ -412,7 +435,7 @@ paths:
                 items:
                   type: object
                   properties:
-                    id:
+                    codigo:
                       type: string
                       description: ID da disciplina
                     nome:
@@ -424,7 +447,7 @@ paths:
               examples:
                 SUCESSO:
                   value:
-                   - id: "001"
+                   - codigo: "001"
                      nome: "Português"
                      nome_reduzido: "POR"
 
@@ -447,8 +470,25 @@ paths:
       - Acadêmico
       summary: Cursos Instituição - Lista
       description: |
-        Lista dos cursos da instituição
+        Cursos que foram cadastrados e disponibilizados para a instituição de ensino. <br>
+        Os cursos são separados por coligada. Geralmente seguem um padrão:
+        
+        * Ensino Infantil
+        * Ensino Fundamental I
+        * Ensino Fundamental II
+        * Ensino Médio
       operationId: Cursos Instituição - Index
+      parameters:
+        - in: query
+          name: offset
+          schema:
+            type: integer
+          description: Paginação offset
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: Paginação limit
       responses:
         '200':
           description: "Resposta da Requisição"
@@ -567,6 +607,65 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
 
+  /cursos:
+    get:
+      tags:
+      - Acadêmico
+      summary: Cursos da Filial - Lista
+      description: |
+        Lista os Cursos relacionados as filiais
+      operationId: Cursos - Index
+      parameters:
+        - in: query
+          name: offset
+          schema:
+            type: integer
+          description: Paginação offset
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: Paginação limit
+      responses:
+        '200':
+          description: "Resposta da Requisição"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      description: ID do curso
+                    nome:
+                      type: string
+                      description: Nome do Curso
+                    filial_id:
+                      type: number
+                      description: ID da Filial
+              examples:
+                SUCESSO:
+                  value:
+                   - id: 1
+                     nome: "Educação Infantil"
+                     filial_id: 1
+                   - id: 2
+                     nome: "Ensino Fundamental I"
+                     filial_id: 3
+        401:
+          description: Não autorizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroToken'
+        404:
+          description: Não encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
 
 ##### Usuários 
   
