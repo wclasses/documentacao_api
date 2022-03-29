@@ -37,20 +37,29 @@ security:
 x-tagGroups:
   - name: Acadêmico
     tags:
-      - Instituição
-      - Usuários
-      - Acadêmico
+      - Coligada
+      - Filial
+      - Período Letivo
+      - Disciplinas
+      - Cursos da Instituição
+      - Cursos por Filial
   - name: Financeiro
     tags:
       - Contrato
       - Fatura
 tags:
-- name: Instituição
-  description: Coligada, filial, dados da instituição de ensino
-- name: Acadêmico
-  description: Período Letivo, Cursos, Turmas, Currículos, Diário, etc
-- name: Usuários
-  description: Usuários, funcionários, professores, responsáveis e alunos
+- name: Coligada
+  description: "Dados da Coligada"
+- name: Filial
+  description: "Dados da Filial"
+- name: Período Letivo
+  description: "Períodos letivos cadastrados no sistema"
+- name: Disciplinas
+  description: "Disciplinas cadastradas"
+- name: Cursos da Instituição
+  description: "Cursos da Instituição"
+- name: Cursos por Filial
+  description: "Cursos da Instituição"
   
   ### Financeiro
 - name: Contrato
@@ -59,12 +68,13 @@ tags:
   description: Faturas geradas para um responsável
 paths:
 
-##### Instituição 
+
+##### Acadêmico 
 
   /coligada:
     get:
       tags:
-      - Instituição
+      - Coligada
       summary: Coligada - Lista
       description: |
         Lista as coligadas cadastradas no sistema
@@ -97,11 +107,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErroToken'
-  
   /coligada/{id}:
     get:
       tags:
-      - Instituição
+      - Coligada
       summary: Coligada - Detalhes
       description: |
         Exibe todos os detalhes de uma coligada
@@ -200,7 +209,7 @@ paths:
   /filial:
     get:
       tags:
-      - Instituição
+      - Filial
       summary: Filial - Lista
       description: |
         Lista as filiais cadastradas no sistema
@@ -220,13 +229,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErroToken'
-
-##### Acadêmico 
   
   /perletivo:
     get:
       tags:
-      - Acadêmico
+      - Período Letivo
       summary: Período Letivo - Lista
       description: |
         Lista de períodos letivos cadastrados.
@@ -299,7 +306,7 @@ paths:
   /perletivo/{codigo}:
     get:
       tags:
-      - Acadêmico
+      - Período Letivo
       summary: Período Letivo - Detalhes
       description: |
         Detalhes do período letivo
@@ -371,7 +378,7 @@ paths:
   /disciplina:
     get:
       tags:
-      - Acadêmico
+      - Disciplinas
       summary: Disciplinas - Lista
       description: |
         Lista as disciplinas cadastradas no sistema. <br>
@@ -426,7 +433,7 @@ paths:
   /disciplina/{codigo}:
     get:
       tags:
-      - Acadêmico
+      - Disciplinas
       summary: Disciplina - Detalhes
       description: |
         Detalhe da disciplina
@@ -481,7 +488,7 @@ paths:
   /cursosinstituicao:
     get:
       tags:
-      - Acadêmico
+      - Cursos da Instituição
       summary: Cursos Instituição - Lista
       description: |
         Cursos que foram cadastrados e disponibilizados para a instituição de ensino. <br>
@@ -546,7 +553,7 @@ paths:
   /cursosinstituicao/{id}:
     get:
       tags:
-      - Acadêmico
+      - Cursos da Instituição
       summary: Cursos Instituição - Detalhes
       description: |
         Cursos da Instituição <br>
@@ -624,7 +631,7 @@ paths:
   /cursos:
     get:
       tags:
-      - Acadêmico
+      - Cursos por Filial
       summary: Cursos da Filial - Lista
       description: |
         Lista os Cursos relacionados as filiais
@@ -896,7 +903,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErroToken'
-  
   /contrato/{id}:
     get:
       tags:

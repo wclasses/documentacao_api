@@ -26,9 +26,12 @@
     {
       "name": "Acadêmico",
       "tags": [
-        "Instituição",
-        "Usuários",
-        "Acadêmico"
+        "Coligada",
+        "Filial",
+        "Período Letivo",
+        "Disciplinas",
+        "Cursos da Instituição",
+        "Cursos por Filial"
       ]
     },
     {
@@ -41,16 +44,28 @@
   ],
   "tags": [
     {
-      "name": "Instituição",
-      "description": "Coligada, filial, dados da instituição de ensino"
+      "name": "Coligada",
+      "description": "Dados da Coligada"
     },
     {
-      "name": "Acadêmico",
-      "description": "Período Letivo, Cursos, Turmas, Currículos, Diário, etc"
+      "name": "Filial",
+      "description": "Dados da Filial"
     },
     {
-      "name": "Usuários",
-      "description": "Usuários, funcionários, professores, responsáveis e alunos"
+      "name": "Período Letivo",
+      "description": "Períodos letivos cadastrados no sistema"
+    },
+    {
+      "name": "Disciplinas",
+      "description": "Disciplinas cadastradas"
+    },
+    {
+      "name": "Cursos da Instituição",
+      "description": "Cursos da Instituição"
+    },
+    {
+      "name": "Cursos por Filial",
+      "description": "Cursos da Instituição"
     },
     {
       "name": "Contrato",
@@ -65,7 +80,7 @@
     "/coligada": {
       "get": {
         "tags": [
-          "Instituição"
+          "Coligada"
         ],
         "summary": "Coligada - Lista",
         "description": "Lista as coligadas cadastradas no sistema\n",
@@ -117,7 +132,7 @@
     "/coligada/{id}": {
       "get": {
         "tags": [
-          "Instituição"
+          "Coligada"
         ],
         "summary": "Coligada - Detalhes",
         "description": "Exibe todos os detalhes de uma coligada\n",
@@ -251,7 +266,7 @@
     "/filial": {
       "get": {
         "tags": [
-          "Instituição"
+          "Filial"
         ],
         "summary": "Filial - Lista",
         "description": "Lista as filiais cadastradas no sistema\n",
@@ -286,7 +301,7 @@
     "/perletivo": {
       "get": {
         "tags": [
-          "Acadêmico"
+          "Período Letivo"
         ],
         "summary": "Período Letivo - Lista",
         "description": "Lista de períodos letivos cadastrados.\n",
@@ -385,7 +400,7 @@
     "/perletivo/{codigo}": {
       "get": {
         "tags": [
-          "Acadêmico"
+          "Período Letivo"
         ],
         "summary": "Período Letivo - Detalhes",
         "description": "Detalhes do período letivo\n",
@@ -481,7 +496,7 @@
     "/disciplina": {
       "get": {
         "tags": [
-          "Acadêmico"
+          "Disciplinas"
         ],
         "summary": "Disciplinas - Lista",
         "description": "Lista as disciplinas cadastradas no sistema. <br>\nAs disciplinas são cadastradas globalmente e compartilhadas entre as instituições.\n",
@@ -564,7 +579,7 @@
     "/disciplina/{codigo}": {
       "get": {
         "tags": [
-          "Acadêmico"
+          "Disciplinas"
         ],
         "summary": "Disciplina - Detalhes",
         "description": "Detalhe da disciplina\n",
@@ -646,7 +661,7 @@
     "/cursosinstituicao": {
       "get": {
         "tags": [
-          "Acadêmico"
+          "Cursos da Instituição"
         ],
         "summary": "Cursos Instituição - Lista",
         "description": "Cursos que foram cadastrados e disponibilizados para a instituição de ensino. <br>\nOs cursos são separados por coligada. Geralmente seguem um padrão:\n\n* Ensino Infantil\n* Ensino Fundamental I\n* Ensino Fundamental II\n* Ensino Médio\n",
@@ -739,7 +754,7 @@
     "/cursosinstituicao/{id}": {
       "get": {
         "tags": [
-          "Acadêmico"
+          "Cursos da Instituição"
         ],
         "summary": "Cursos Instituição - Detalhes",
         "description": "Cursos da Instituição <br>\n\nAqui são listados os tipos de cursos cadastrados nas coligadas. <br>\nEx: Curso \"Ensino Fundamental II\" na Coligada \"WClasses Educacional\"\n",
@@ -846,7 +861,7 @@
     "/cursos": {
       "get": {
         "tags": [
-          "Acadêmico"
+          "Cursos por Filial"
         ],
         "summary": "Cursos da Filial - Lista",
         "description": "Lista os Cursos relacionados as filiais\n",
