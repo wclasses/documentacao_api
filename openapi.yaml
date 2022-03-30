@@ -226,9 +226,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Aluno'
+                $ref: '#/components/schemas/Aluno'
         401:
           description: Não autorizado
           content:
@@ -264,8 +262,6 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
                   $ref: '#/components/schemas/Aluno'
         401:
           description: Não autorizado
