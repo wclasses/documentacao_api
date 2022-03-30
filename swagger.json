@@ -26,7 +26,7 @@
     {
       "name": "Cadastros",
       "tags": [
-        "Aluno",
+        "Alunos",
         "Pessoa"
       ]
     },
@@ -148,9 +148,9 @@
                         "type": "string",
                         "description": "Nome do aluno"
                       },
-                      "cpf": {
+                      "data_nascimento": {
                         "type": "string",
-                        "description": "CPF do aluno"
+                        "description": "Data de nascimento do aluno"
                       }
                     }
                   }
@@ -162,13 +162,13 @@
                         "id": 1282,
                         "matricula": "SB-10015",
                         "nome": "Miriam Amaral Dambros",
-                        "cpf": "23012297421"
+                        "data_nascimento": "2015-11-23"
                       },
                       {
                         "id": 1287,
                         "matricula": "SB-10020",
                         "nome": "Margarida Alvarenga Nuness",
-                        "cpf": "07364253068"
+                        "data_nascimento": "2015-09-22"
                       }
                     ]
                   }
@@ -276,6 +276,120 @@
           }
         },
         "x-codegen-request-body-name": "body,"
+      }
+    },
+    "/aluno/{pessoa_id}": {
+      "get": {
+        "tags": [
+          "Alunos"
+        ],
+        "summary": "Aluno - Busca por ID de Pessoa",
+        "description": "Detalhes do aluno\n",
+        "operationId": "Aluno - View Pessoa ID",
+        "parameters": [
+          {
+            "name": "pessoa_id",
+            "in": "path",
+            "description": "ID da pessoa",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta da requisição",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Aluno"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroToken"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/aluno/{matricula}": {
+      "get": {
+        "tags": [
+          "Alunos"
+        ],
+        "summary": "Aluno - Busca pela Matrícula",
+        "description": "Detalhes do aluno\n",
+        "operationId": "Aluno - View Matrícula",
+        "parameters": [
+          {
+            "name": "matricula",
+            "in": "path",
+            "description": "Matrícula do aluno",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta da requisição",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Aluno"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroToken"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/pessoa": {
@@ -1467,6 +1581,106 @@
   },
   "components": {
     "schemas": {
+      "Aluno": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "ID da Pessoa",
+            "example": 1234
+          },
+          "matricula": {
+            "type": "string",
+            "description": "Matrícula do Aluno",
+            "example": "MAT-1234"
+          },
+          "nome": {
+            "type": "string",
+            "description": "Nome do Aluno",
+            "example": "Emanuel Sacramento Braga"
+          },
+          "data_nascimento": {
+            "type": "string",
+            "format": "date",
+            "description": "Data de nascimento do aluno formato yyyy-mm-dd",
+            "example": "2015-05-14"
+          },
+          "cpf": {
+            "type": "string",
+            "description": "CPF do aluno",
+            "example": "94358274897"
+          },
+          "email": {
+            "type": "string",
+            "description": "Email do aluno",
+            "example": "email@provedor.com.br"
+          },
+          "nome_social": {
+            "type": "string",
+            "description": "Nome social do aluno, se existir deve ser o nome principal a ser utilizado"
+          },
+          "nome_afetivo": {
+            "type": "string",
+            "description": "Nome social do aluno, se existir e não houver nome social cadastrado deve ser o nome principal a ser utilizado"
+          },
+          "status": {
+            "type": "string",
+            "description": "Sexo do aluno:<br> * `M` - Masculino * `F` - Feminino * `N` - Não declarar",
+            "format": "enum[\"M\", \"F\", \"N\"]",
+            "example": "M"
+          },
+          "rua": {
+            "type": "string",
+            "description": "Endereço - Rua",
+            "example": "Rua Roberto Lopes"
+          },
+          "numero": {
+            "type": "string",
+            "description": "Endereço - Número",
+            "example": "123"
+          },
+          "complemento": {
+            "type": "string",
+            "description": "Endereço - Complemento",
+            "example": "Ap 26"
+          },
+          "bairro": {
+            "type": "string",
+            "description": "Endereço - Bairro",
+            "example": "Parque Sao Lucas"
+          },
+          "cidade": {
+            "type": "string",
+            "description": "Endereço - Cidade",
+            "example": "São Paulo"
+          },
+          "estado": {
+            "type": "string",
+            "description": "Endereço - Estado (2 caracteres)",
+            "example": "SP"
+          },
+          "cep": {
+            "type": "string",
+            "description": "Endereço - CEP (8 caracteres)",
+            "example": "03263110"
+          },
+          "telefone1": {
+            "type": "string",
+            "description": "Telefone do aluno",
+            "example": "1155712458"
+          },
+          "telefone2": {
+            "type": "string",
+            "description": "Telefone 2 do aluno",
+            "example": "11955515059"
+          },
+          "data_criacao": {
+            "type": "string",
+            "description": "Data do cadastro",
+            "example": "2021-08-26T11:49:33.000-03:00"
+          }
+        }
+      },
       "AlunoCadastro": {
         "required": [
           "data_nascimento",
