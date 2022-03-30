@@ -38,8 +38,6 @@ x-tagGroups:
   - name: Cadastros
     tags: 
       - Aluno
-      - Professor
-      - Responsável
       - Pessoa
   - name: Acadêmico
     tags:
