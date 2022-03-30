@@ -296,12 +296,55 @@ paths:
         schema:
           type: string
       responses:
+        '200':
+          description: "Resposta da Requisição"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      description: ID da Pessoa
+                    nome:
+                      type: string
+                      description: Nome da Pessoa
+                    data_nascimento:
+                      type: string
+                      description: Data de nascimento
+                    cpf:
+                      type: string
+                      description: CPF da pessoa
+                    sexo:
+                      type: string
+                      description: Sexo da pessoa
+                    email:
+                      type: string
+                      description: Email
+              examples:
+                SUCESSO:
+                  value:
+                   - id: 1277
+                     nome: "Fabiana Policarpo Leitão"
+                     data_nascimento: "2015-07-14"
+                     cpf: "62887035240"
+                     sexo: "F"
+                     email: "email@provedor.com.br"
+                   - id: 1281
+                     nome: "Maria Luiza Nunes"
+                     data_nascimento: "2015-03-23"
+                     cpf: "92541018851"
+                     sexo: "F"
+                     email: "email2@provedor.com.br"
         401:
           description: Não autorizado
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErroToken'
+
   /pessoa/{id}:
     get:
       tags:
@@ -319,6 +362,12 @@ paths:
           type: integer
           format: int64
       responses:
+        200:
+          description: Resposta da requisição
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pessoa'
         401:
           description: Não autorizado
           content:
@@ -1293,7 +1342,7 @@ components:
           description: E-mail do aluno
           format: email
           example: arthur.silva@email.com.br
-  
+
     Contrato:
       type: object
       properties:
@@ -1327,6 +1376,7 @@ components:
           description: "Lista de Status:\n * `1` - Ativo\n * `2` - Cancelado\n \n"
           format: enum[1, 2]
           example: 1.0
+
     ContratoView:
       type: object
       properties:
@@ -1433,6 +1483,7 @@ components:
           description: Data de cadastro/contratação
           format: date
           example: 2021-06-10
+
     ErroToken:
       type: object
       properties:
@@ -1445,6 +1496,7 @@ components:
                 type: string
                 description: Descrição do erro
                 example: 'E_INVALID_API_TOKEN: Invalid API token'
+
     NotFound:
       type: object
       properties:
@@ -1460,6 +1512,7 @@ components:
           type: string
           description: Descriçao técnica do erro
           example: E_ROW_NOT_FOUND
+
     Fatura:
       type: object
       properties:
@@ -1522,6 +1575,7 @@ components:
              * `3` - Não registrado
           format: enum[0, 1, 2, 3]
           example: 1.0
+
     Pessoa:
       required:
       - cpf
@@ -1535,7 +1589,7 @@ components:
       properties:
         id:
           type: string
-          format: uuid
+          example: 120
         tipo_pessoa:
           type: string
           description: |
@@ -1549,17 +1603,18 @@ components:
         nome:
           type: string
           example: João da Silva
-        nomesocial:
+          description: "Nome da Pessoa"
+        nome_social:
           type: string
-          example: Maria da Silva
+          description: "Nome Social, se existir deve ser o nome principal a ser utilizado"
+        nome_afetivo:
+          type: string
+          description: "Nome Afetivo, se existir e não houver nome social, deve ser o principal"
         data_nascimento:
           type: string
           format: date
-          example: 1990-01-01
-        cpf:
-          type: string
-          example: "08654587075"
-        estadocivil:
+          example: "1990-01-01"
+        estado_civil:
           type: string
           example: Casado
         sexo:
@@ -1574,15 +1629,6 @@ components:
           - M
           - F
           - N
-        email:
-          type: string
-          format: email
-          example: contato@email.com.br
-        cep:
-          maxLength: 8
-          minLength: 8
-          type: string
-          example: "05535000"
         rua:
           maxLength: 140
           type: string
@@ -1611,10 +1657,33 @@ components:
           type: string
           description: Código da UF
           example: SP
-        cidade_ibge:
+        cep:
+          maxLength: 8
+          minLength: 8
           type: string
-          description: Código IBGE da cidade
-          example: "02606"
+          example: "05535000"
+        cpf:
+          type: string
+          description: "CPF da pessoa, apenas os números"
+          example: "08654587075"
+        telefone1:
+          type: string
+          description: "Telefone 1"
+          example: "1155712458"
+        telefone2:
+          type: string
+          description: "Telefone 2"
+          example: "11955515059"
+        email:
+          type: string
+          format: email
+          description: "E-mail"
+          example: "contato@email.com.br"
+        data_criacao:
+          type: string
+          format: date
+          example: "2021-08-26T11:49:33.000-03:00"
+        
   securitySchemes:
     Bearer:
       type: apiKey
