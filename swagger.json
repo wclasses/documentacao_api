@@ -1469,26 +1469,6 @@
   },
   "components": {
     "schemas": {
-      "Aluno": {
-        "type": "object",
-        "properties": {
-          "matricula": {
-            "type": "string",
-            "example": "MAT-1234"
-          },
-          "ra": {
-            "type": "string",
-            "example": "RA-1234"
-          },
-          "pessoa_id": {
-            "type": "integer",
-            "example": 100
-          },
-          "pessoa": {
-            "$ref": "#/components/schemas/Pessoa"
-          }
-        }
-      },
       "AlunoCadastro": {
         "required": [
           "data_nascimento",
@@ -1841,19 +1821,6 @@
           }
         }
       },
-      "Filial": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "filialnome": {
-            "type": "string",
-            "example": "WClasses Educacional"
-          }
-        }
-      },
       "Pessoa": {
         "required": [
           "cpf",
@@ -1959,37 +1926,6 @@
             "type": "string",
             "description": "Código IBGE da cidade",
             "example": "02606"
-          }
-        }
-      },
-      "PessoaLista": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "example": "100"
-          },
-          "nome": {
-            "type": "string",
-            "example": "João da Silva"
-          },
-          "data_nascimento": {
-            "type": "string",
-            "format": "date",
-            "example": "2000-01-01T00:00:00.000Z"
-          },
-          "cpf": {
-            "type": "string",
-            "example": "11122233345"
-          },
-          "sexo": {
-            "type": "string",
-            "format": "enum",
-            "example": "M"
-          },
-          "email": {
-            "type": "string",
-            "example": "email@provedor.com.br"
           }
         }
       }
