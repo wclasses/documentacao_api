@@ -88,7 +88,7 @@ paths:
   /aluno:
     get:
       tags:
-      - Aluno
+      - Alunos
       summary: Aluno - Lista
       description: |
         Lista os alunos cadastrados no sistema, pode ser utilizado paginação
@@ -105,14 +105,38 @@ paths:
         schema:
           type: string
       responses:
-        200:
-          description: Resposta da requisição
+        '200':
+          description: "Resposta da Requisição"
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Aluno'
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      description: ID da Pessoa
+                    matricula:
+                      type: string
+                      description: Matrícula do aluno
+                    nome:
+                      type: string
+                      description: Nome do aluno
+                    cpf:
+                      type: string
+                      description: CPF do aluno
+              examples:
+                SUCESSO:
+                  value:
+                   - id: 1282
+                     matricula: "SB-10015"
+                     nome: "Miriam Amaral Dambros"
+                     cpf: "23012297421"
+                   - id: 1287
+                     matricula: "SB-10020"
+                     nome: "Margarida Alvarenga Nuness"
+                     cpf: "07364253068"
         401:
           description: Não autorizado
           content:
@@ -121,7 +145,7 @@ paths:
                 $ref: '#/components/schemas/ErroToken'
     post:
       tags:
-      - Aluno
+      - Alunos
       summary: Aluno - Cadastro
       description: |
         Cadastra um aluno no sistema
@@ -142,8 +166,9 @@ paths:
                 type: object
                 properties:
                   id:
-                    type: string
-                    format: uuid
+                    type: number
+                    description: ID da Pessoa
+                    example: 1234
                   nome:
                     type: string
                     description: Nome Cadastrado
@@ -201,14 +226,6 @@ paths:
         schema:
           type: string
       responses:
-        200:
-          description: Resposta da requisição
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PessoaLista'
         401:
           description: Não autorizado
           content:
@@ -232,14 +249,6 @@ paths:
           type: integer
           format: int64
       responses:
-        200:
-          description: Resposta da requisição
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Pessoa'
         401:
           description: Não autorizado
           content:
