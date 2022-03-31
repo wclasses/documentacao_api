@@ -156,7 +156,7 @@
                   }
                 },
                 "examples": {
-                  "SUCESSO": {
+                  "Sucesso": {
                     "value": [
                       {
                         "id": 1282,
@@ -208,7 +208,7 @@
         },
         "responses": {
           "200": {
-            "description": "Resposta da requisição",
+            "description": "Sucesso",
             "content": {
               "application/json": {
                 "schema": {
@@ -249,25 +249,45 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "rule": {
-                        "type": "string",
-                        "description": "Regra quebrada que retornou o erro",
-                        "example": "required"
-                      },
-                      "field": {
-                        "type": "string",
-                        "description": "Campo que apresenta o erro",
-                        "example": "matricula"
-                      },
-                      "message": {
-                        "type": "string",
-                        "description": "Mensagem de errro",
-                        "example": "required validation failed"
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "rule": {
+                            "type": "string",
+                            "description": "Regra ou campo que  que retornou erro"
+                          },
+                          "field": {
+                            "type": "string",
+                            "description": "Campo que gerou o erro"
+                          },
+                          "message": {
+                            "type": "string",
+                            "description": "Descrição do erro"
+                          }
+                        }
                       }
+                    }
+                  }
+                },
+                "examples": {
+                  "Unprocessable Entity": {
+                    "value": {
+                      "errors": [
+                        {
+                          "rule": "unique",
+                          "field": "cpf",
+                          "message": "cpf already exists"
+                        },
+                        {
+                          "rule": "unique",
+                          "field": "email",
+                          "message": "email already exists"
+                        }
+                      ]
                     }
                   }
                 }
@@ -450,7 +470,7 @@
                   }
                 },
                 "examples": {
-                  "SUCESSO": {
+                  "Sucesso": {
                     "value": [
                       {
                         "id": 1277,
@@ -575,7 +595,7 @@
                   }
                 },
                 "examples": {
-                  "SUCESSO": {
+                  "Sucesso": {
                     "value": [
                       {
                         "id": 1,
@@ -771,7 +791,7 @@
                   }
                 },
                 "examples": {
-                  "SUCESSO": {
+                  "Sucesso": {
                     "value": [
                       {
                         "id": 1,
@@ -1123,7 +1143,7 @@
                   }
                 },
                 "examples": {
-                  "SUCESSO": {
+                  "Sucesso": {
                     "value": {
                       "codigo": "001",
                       "nome": "Português",
@@ -1209,7 +1229,7 @@
                   }
                 },
                 "examples": {
-                  "SUCESSO": {
+                  "Sucesso": {
                     "value": [
                       {
                         "codigo": 1,
@@ -1316,7 +1336,7 @@
                   }
                 },
                 "examples": {
-                  "SUCESSO": {
+                  "Sucesso": {
                     "value": {
                       "id": 1,
                       "nome": "Educação Infantil",
@@ -1407,7 +1427,7 @@
                   }
                 },
                 "examples": {
-                  "SUCESSO": {
+                  "Sucesso": {
                     "value": [
                       {
                         "id": 1,
