@@ -59,10 +59,6 @@
       "description": "Lista, cadastro e edição de professores"
     },
     {
-      "name": "Responsável",
-      "description": "Lista, cadastro e edição de responsáveis acadêmicos e financeiros"
-    },
-    {
       "name": "Pessoa",
       "description": "Detalhes cadastrais de qualquer pessoa independente do perfil"
     },
@@ -303,8 +299,8 @@
         "tags": [
           "Alunos"
         ],
-        "summary": "Aluno - Busca por ID de Pessoa",
-        "description": "Detalhes do aluno\n",
+        "summary": "Aluno - Busca por ID",
+        "description": "Busca os dados cadastrais do aluno utiliando o ID (da Pessoa)",
         "operationId": "Aluno - View Pessoa ID",
         "parameters": [
           {
@@ -358,7 +354,7 @@
           "Alunos"
         ],
         "summary": "Aluno - Busca pela Matrícula",
-        "description": "Detalhes do aluno\n",
+        "description": "Busca os dados cadastrais do aluno utiliando a matrícula.",
         "operationId": "Aluno - View Matrícula",
         "parameters": [
           {
@@ -412,7 +408,7 @@
           "Pessoa"
         ],
         "summary": "Pesosa - Lista",
-        "description": "Lista as pessoas cadastradas no sistema, pode ser utilizado paginação. Retorna todos os tipo de usuários/perfis.\n",
+        "description": "Lista as pessoas cadastradas no sistema, pode ser utilizado paginação\n",
         "operationId": "Pessoa - Index",
         "parameters": [
           {
@@ -513,7 +509,7 @@
           "Pessoa"
         ],
         "summary": "Pessoa - Detalhes",
-        "description": "Detalhe da pessoa cadastrada no sistema\n",
+        "description": "Detalhe da pessoa cadastrada no sistema independente do perfil. <br>\nNão irá exibir o dado da matrícula ou código de professor, apenas os dados cadastrais mais detalhados.\n",
         "operationId": "Pessoa - View",
         "parameters": [
           {
@@ -1771,7 +1767,8 @@
           "data_nascimento",
           "matricula",
           "nome",
-          "senha"
+          "senha",
+          "filial"
         ],
         "type": "object",
         "properties": {

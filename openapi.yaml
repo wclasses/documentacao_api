@@ -56,8 +56,6 @@ tags:
   description: "Lista, cadastro e edição de alunos"
 - name: Professor
   description: "Lista, cadastro e edição de professores"
-- name: Responsável
-  description: "Lista, cadastro e edição de responsáveis acadêmicos e financeiros"
 - name: Pessoa
   description: "Detalhes cadastrais de qualquer pessoa independente do perfil"  
 
@@ -218,9 +216,8 @@ paths:
     get:
       tags:
       - Alunos
-      summary: Aluno - Busca por ID de Pessoa
-      description: |
-        Detalhes do aluno
+      summary: "Aluno - Busca por ID"
+      description: "Busca os dados cadastrais do aluno utiliando o ID (da Pessoa)"
       operationId: Aluno - View Pessoa ID
       parameters:
       - name: pessoa_id
@@ -254,8 +251,7 @@ paths:
       tags:
       - Alunos
       summary: Aluno - Busca pela Matrícula
-      description: |
-        Detalhes do aluno
+      description: "Busca os dados cadastrais do aluno utiliando a matrícula."
       operationId: Aluno - View Matrícula
       parameters:
       - name: matricula
@@ -291,7 +287,7 @@ paths:
       - Pessoa
       summary: Pesosa - Lista
       description: |
-        Lista as pessoas cadastradas no sistema, pode ser utilizado paginação. Retorna todos os tipo de usuários/perfis.
+        Lista as pessoas cadastradas no sistema, pode ser utilizado paginação
       operationId: Pessoa - Index
       parameters:
       - name: offset
@@ -360,7 +356,8 @@ paths:
       - Pessoa
       summary: Pessoa - Detalhes
       description: |
-        Detalhe da pessoa cadastrada no sistema
+        Detalhe da pessoa cadastrada no sistema independente do perfil. <br>
+        Não irá exibir o dado da matrícula ou código de professor, apenas os dados cadastrais mais detalhados.
       operationId: Pessoa - View
       parameters:
       - name: id
@@ -1271,6 +1268,7 @@ components:
       - matricula
       - nome
       - senha
+      - filial
       type: object
       properties:
         nome:
