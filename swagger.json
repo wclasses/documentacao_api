@@ -2129,7 +2129,13 @@
         "properties": {
           "id": {
             "type": "string",
+            "description": "ID da Pessoa",
             "example": 120
+          },
+          "cpf": {
+            "type": "string",
+            "description": "CPF da pessoa, apenas os números",
+            "example": "08654587075"
           },
           "tipo_pessoa": {
             "type": "string",
@@ -2142,8 +2148,8 @@
           },
           "nome": {
             "type": "string",
-            "example": "João da Silva",
-            "description": "Nome da Pessoa"
+            "description": "Nome completo da Pessoa",
+            "example": "João da Silva"
           },
           "nome_social": {
             "type": "string",
@@ -2155,12 +2161,23 @@
           },
           "data_nascimento": {
             "type": "string",
+            "description": "Data de nascimento formato yyyy-mm-dd",
             "format": "date",
             "example": "1990-01-01"
           },
           "estado_civil": {
+            "description": "Estado civil, valores possíveis:\n  * `Solteiro (a)` - Solteiro (a)\n  * `Casado (a)` - Casado (a)\n  * `Divorciado (a)` - Divorciado (a)\n  * `Viúvo (a)` - Viúvo (a)\n  * `Marital (a)` - Marital (a)\n  * `Separado (a)` - Separado (a)\n  * `União Estável (a)` - União Estável (a)\n",
             "type": "string",
-            "example": "Casado"
+            "example": "Casado (a)",
+            "enum": [
+              "Solteiro (a)` - Solteiro (a)",
+              "Casado (a)` - Casado (a)",
+              "Divorciado (a)` - Divorciado (a)",
+              "Viúvo (a)` - Viúvo (a)",
+              "Marital (a)` - Marital (a)",
+              "Separado (a)` - Separado (a)",
+              "União Estável (a)` - União Estável (a)"
+            ]
           },
           "sexo": {
             "type": "string",
@@ -2172,68 +2189,142 @@
               "N"
             ]
           },
-          "rua": {
-            "maxLength": 140,
-            "type": "string",
-            "description": "Endereço - Rua",
-            "example": "Rua dos coqueiros"
+          "endereco": {
+            "description": "Objeto com os dados do endereço residencial",
+            "type": "object",
+            "properties": {
+              "cep": {
+                "description": "",
+                "maxLength": 8,
+                "minLength": 8,
+                "type": "string",
+                "example": "05535000"
+              },
+              "rua": {
+                "description": "Endereço - Rua",
+                "maxLength": 140,
+                "type": "string",
+                "example": "Rua dos coqueiros"
+              },
+              "numero": {
+                "description": "Endereço - Número",
+                "maxLength": 12,
+                "type": "string",
+                "example": "196"
+              },
+              "complemento": {
+                "description": "Endereço - Complemento",
+                "maxLength": 150,
+                "type": "string",
+                "example": "Casa 2"
+              },
+              "bairro": {
+                "maxLength": 50,
+                "type": "string",
+                "example": "Vila dos Coqueiros"
+              },
+              "cidade": {
+                "maxLength": 50,
+                "type": "string",
+                "example": "São Paulo"
+              },
+              "estado": {
+                "maxLength": 2,
+                "minLength": 2,
+                "type": "string",
+                "description": "Código da UF",
+                "example": "SP"
+              },
+              "cidade_ibge": {
+                "maxLength": 50,
+                "description": "Código da Cidade no IBGE",
+                "type": "string",
+                "example": "3550308"
+              }
+            }
           },
-          "numero": {
-            "maxLength": 12,
-            "type": "string",
-            "description": "Endereço - Número",
-            "example": "196"
+          "endereco_comercial": {
+            "description": "Objeto com os dados do endereço residencial",
+            "type": "object",
+            "properties": {
+              "empresa": {
+                "description": "Nome da empresa",
+                "type": "string",
+                "example": "Empresa de Tecidos LTDA"
+              },
+              "cep": {
+                "description": "",
+                "maxLength": 8,
+                "minLength": 8,
+                "type": "string",
+                "example": "05569090"
+              },
+              "rua": {
+                "description": "Endereço Comercial - Rua",
+                "maxLength": 140,
+                "type": "string",
+                "example": "Rua Frei Clemente"
+              },
+              "numero": {
+                "description": "Endereço Comercial - Número",
+                "maxLength": 12,
+                "type": "string",
+                "example": "655"
+              },
+              "complemento": {
+                "description": "Endereço Comercial - Complemento",
+                "maxLength": 150,
+                "type": "string",
+                "example": "Fundos"
+              },
+              "bairro": {
+                "maxLength": 50,
+                "type": "string",
+                "example": "Vila Feliz"
+              },
+              "cidade": {
+                "maxLength": 50,
+                "type": "string",
+                "example": "São Paulo"
+              },
+              "estado": {
+                "maxLength": 2,
+                "minLength": 2,
+                "type": "string",
+                "description": "Código da UF",
+                "example": "SP"
+              }
+            }
           },
-          "complemento": {
-            "maxLength": 150,
+          "email": {
+            "description": "E-mail",
             "type": "string",
-            "example": "Casa 2"
-          },
-          "bairro": {
-            "maxLength": 50,
-            "type": "string",
-            "example": "Vila dos Coqueiros"
-          },
-          "cidade": {
-            "maxLength": 50,
-            "type": "string",
-            "example": "São Paulo"
-          },
-          "estado": {
-            "maxLength": 2,
-            "minLength": 2,
-            "type": "string",
-            "description": "Código da UF",
-            "example": "SP"
-          },
-          "cep": {
-            "maxLength": 8,
-            "minLength": 8,
-            "type": "string",
-            "example": "05535000"
-          },
-          "cpf": {
-            "type": "string",
-            "description": "CPF da pessoa, apenas os números",
-            "example": "08654587075"
+            "format": "email",
+            "example": "contato@email.com.br"
           },
           "telefone1": {
-            "type": "string",
             "description": "Telefone 1",
+            "type": "string",
             "example": "1155712458"
           },
           "telefone2": {
-            "type": "string",
             "description": "Telefone 2",
+            "type": "string",
             "example": "11955515059"
           },
-          "email": {
-            "type": "string",
-            "format": "email",
-            "description": "E-mail",
-            "example": "contato@email.com.br"
+          "autoriza_imagem": {
+            "description": "Se o usuário autoriza o uso da imagem",
+            "type": "boolean",
+            "example": 1
           },
           "data_criacao": {
+            "description": "Data da criação do usuário",
+            "type": "string",
+            "format": "date",
+            "example": "2021-08-26T11:49:33.000-03:00"
+          },
+          "data_alteracao": {
+            "description": "Data da última alteração do usuário",
             "type": "string",
             "format": "date",
             "example": "2021-08-26T11:49:33.000-03:00"
