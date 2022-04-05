@@ -1709,8 +1709,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Default error sample response",
+          "200": {
+            "description": "Resposta da Requisição",
             "content": {
               "application/json": {
                 "examples": {
