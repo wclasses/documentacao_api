@@ -38,7 +38,8 @@
         "Período Letivo",
         "Disciplinas",
         "Cursos da Instituição",
-        "Cursos por Filial"
+        "Cursos por Filial",
+        "Ocorrências"
       ]
     },
     {
@@ -93,6 +94,10 @@
     {
       "name": "Fatura",
       "description": "Faturas geradas para um responsável"
+    },
+    {
+      "name": "Ocorrências",
+      "description": "Ocorrência Escolar"
     }
   ],
   "paths": {
@@ -1658,6 +1663,66 @@
           }
         }
       }
+    },
+    "/ocorrencia-escolar/perletivo/{perletivo}/matricula/{matricula}": {
+      "get": {
+        "tags": [
+          "Ocorrências"
+        ],
+        "summary": "Listar Ocorrências do aluno por período letivo",
+        "description": "Listar todas as ocorrências do aluno por período letivo",
+        "operationId": "Ocorrências Aluno",
+        "parameters": [
+          {
+            "name": "perletivo",
+            "in": "path",
+            "description": "Código do período letivo",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "matricula",
+            "in": "path",
+            "description": "Matrícula do(a) aluno(a)",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Paginação offset"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Paginação limit"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default error sample response",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "success": {
+                    "value": "[\n  {\n    \"id\": 1,\n    \"matricula\": \"0992\",\n    \"disciplina_codigo\": \"5\",\n    \"data_ocorrencia\": \"2021-03-08T03:00:00.000Z\",\n    \"turma_id\": 14,\n    \"relator_id\": 158,\n    \"tipo_ocorrencia_id\": 28,\n    \"observacao\": \"Os alunos foram avisados quanto as atividades que começaram a perder nota para cada lição não feita.\",\n    \"observacao_individual\": \"Não fez em casa e durante a aula só fez a número 1 incompleta\",\n    \"turma\": {\n      \"id\": 14,\n      \"codigo\": \"EFII6T\",\n      \"nome\": \"6°Ano T\"\n    },\n    \"tipoOcorrencia\": {\n      \"id\": 28,\n      \"descricao\": \"Falta de Tarefa / Trabalho - Tarefas de Casa\",\n      \"grupo_ocorrencia_id\": 1\n    },\n    \"disciplina\": {\n      \"codigo\": \"5\",\n      \"nome\": \"Geografia\"\n    },\n    \"relatorPessoa\": {\n      \"nome\": \"Nome do Relator\",\n      \"id\": 158\n    }\n  }\n]"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1874,13 +1939,13 @@
             "type": "string",
             "description": "Validade Inicial do contrato",
             "format": "date",
-            "example": "2021-01-01T00:00:00.000Z"
+            "example": {}
           },
           "validade_fim": {
             "type": "string",
             "description": "Validade Final do contrato",
             "format": "date",
-            "example": "2021-12-30T00:00:00.000Z"
+            "example": {}
           },
           "parcelas": {
             "type": "string",
@@ -1921,13 +1986,13 @@
             "type": "string",
             "description": "Validade Inicial do contrato",
             "format": "date",
-            "example": "2021-01-01T00:00:00.000Z"
+            "example": {}
           },
           "validade_fim": {
             "type": "string",
             "description": "Validade Final do contrato",
             "format": "date",
-            "example": "2021-12-30T00:00:00.000Z"
+            "example": {}
           },
           "status": {
             "type": "number",
@@ -1949,13 +2014,13 @@
             "type": "string",
             "description": "Início da prestação do serviço contratado",
             "format": "date",
-            "example": "2021-01-15T00:00:00.000Z"
+            "example": {}
           },
           "servico_periodo_fim": {
             "type": "string",
             "description": "Fim da prestação do serviço contratado",
             "format": "date",
-            "example": "2021-12-15T00:00:00.000Z"
+            "example": {}
           },
           "plano_nome": {
             "type": "string",
@@ -2012,7 +2077,7 @@
             "type": "string",
             "description": "Data de cadastro/contratação",
             "format": "date",
-            "example": "2021-06-10T00:00:00.000Z"
+            "example": {}
           }
         }
       },
@@ -2065,7 +2130,7 @@
             "type": "string",
             "description": "Data de vencimento da fatura",
             "format": "date",
-            "example": "2021-10-15T00:00:00.000Z"
+            "example": {}
           },
           "valor_bruto": {
             "type": "number",

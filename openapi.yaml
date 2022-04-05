@@ -3,27 +3,29 @@ info:
   title: WClasses API - 1.0.0
   description: >
     ## API WClasses Educacional
-    
-    Documentação da API do Sistema <a href='https://wclasses.com.br' target='_blank'>WClasses Educacional.</a>
-    
-    <br />
-    
-    Caso tenha alguma dúvida entre 
-    em contato com os nossos <a href='https://wclasses.freshdesk.com/a/' target='_blank'>Canais de Suporte</a>
-    
-    <br /><br />
-    
-    ### Requisições
-    
-    Deve ser utilizado token do tipo Bearer em todas as requisições. <br>
-  
-    Exemplo: ```Bearer NzM.HNWRIkyFLgrIduVuBitlrs9hoYtahwmYFlLDGVVu6wqn3ODElWV_cQQ_Uslo``` 
-    
-    <br />
+
+    Documentação da API do Sistema <a href='https://wclasses.com.br'
+    target='_blank'>WClasses Educacional.</a>
+
     <br />
 
-    Para obter o token de acesso entre em contato: 
-    <a href='mailto:desenvolvimento@wclasses.com.br'>desenvolvimento@wclasses.com.br</a>
+    Caso tenha alguma dúvida entre  em contato com os nossos <a
+    href='https://wclasses.freshdesk.com/a/' target='_blank'>Canais de
+    Suporte</a>
+
+    <br /><br />
+
+    ### Requisições
+
+    Deve ser utilizado token do tipo Bearer em todas as requisições. <br>
+
+    Exemplo: ```Bearer
+    NzM.HNWRIkyFLgrIduVuBitlrs9hoYtahwmYFlLDGVVu6wqn3ODElWV_cQQ_Uslo``` 
+
+    <br /> <br />
+
+    Para obter o token de acesso entre em contato:  <a
+    href='mailto:desenvolvimento@wclasses.com.br'>desenvolvimento@wclasses.com.br</a>
   contact:
     email: desenvolvimento@wclasses.com.br
   license:
@@ -31,12 +33,12 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   version: 1.0.0
 servers:
-- url: https://api.wclasses.com.br/
+  - url: https://api.wclasses.com.br/
 security:
-- Bearer: []
+  - Bearer: []
 x-tagGroups:
   - name: Cadastros
-    tags: 
+    tags:
       - Alunos
       - Pessoa
   - name: Acadêmico
@@ -47,62 +49,59 @@ x-tagGroups:
       - Disciplinas
       - Cursos da Instituição
       - Cursos por Filial
+      - Ocorrências
   - name: Financeiro
     tags:
       - Contrato
       - Fatura
 tags:
-- name: Alunos
-  description: "Lista, cadastro e edição de alunos"
-- name: Professor
-  description: "Lista, cadastro e edição de professores"
-- name: Pessoa
-  description: "Detalhes cadastrais de qualquer pessoa independente do perfil"  
-
-- name: Coligada
-  description: "Dados da Coligada"
-- name: Filial
-  description: "Dados da Filial"
-- name: Período Letivo
-  description: "Períodos letivos cadastrados no sistema"
-- name: Disciplinas
-  description: "Disciplinas cadastradas"
-- name: Cursos da Instituição
-  description: "Cursos da Instituição"
-- name: Cursos por Filial
-  description: "Cursos da Instituição"
-  
-- name: Contrato
-  description: Contratos adquiridos pelos responsáveis
-- name: Fatura
-  description: Faturas geradas para um responsável
+  - name: Alunos
+    description: Lista, cadastro e edição de alunos
+  - name: Professor
+    description: Lista, cadastro e edição de professores
+  - name: Pessoa
+    description: Detalhes cadastrais de qualquer pessoa independente do perfil
+  - name: Coligada
+    description: Dados da Coligada
+  - name: Filial
+    description: Dados da Filial
+  - name: Período Letivo
+    description: Períodos letivos cadastrados no sistema
+  - name: Disciplinas
+    description: Disciplinas cadastradas
+  - name: Cursos da Instituição
+    description: Cursos da Instituição
+  - name: Cursos por Filial
+    description: Cursos da Instituição
+  - name: Contrato
+    description: Contratos adquiridos pelos responsáveis
+  - name: Fatura
+    description: Faturas geradas para um responsável
+  - name: Ocorrências
+    description: Ocorrência Escolar
 paths:
-
-
-##### Cadastros 
-  
   /aluno:
     get:
       tags:
-      - Alunos
+        - Alunos
       summary: Aluno - Lista
       description: |
         Lista os alunos cadastrados no sistema, pode ser utilizado paginação
       operationId: Aluno - Index
       parameters:
-      - name: offset
-        in: query
-        description: Paginação offset
-        schema:
-          type: string
-      - name: limit
-        in: query
-        description: Paginação limit
-        schema:
-          type: string
+        - name: offset
+          in: query
+          description: Paginação offset
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: Paginação limit
+          schema:
+            type: string
       responses:
         '200':
-          description: "Resposta da Requisição"
+          description: Resposta da Requisição
           content:
             application/json:
               schema:
@@ -125,15 +124,15 @@ paths:
               examples:
                 Sucesso:
                   value:
-                   - id: 1282
-                     matricula: "SB-10015"
-                     nome: "Miriam Amaral Dambros"
-                     data_nascimento: "2015-11-23"
-                   - id: 1287
-                     matricula: "SB-10020"
-                     nome: "Margarida Alvarenga Nuness"
-                     data_nascimento: "2015-09-22"
-        401:
+                    - id: 1282
+                      matricula: SB-10015
+                      nome: Miriam Amaral Dambros
+                      data_nascimento: '2015-11-23'
+                    - id: 1287
+                      matricula: SB-10020
+                      nome: Margarida Alvarenga Nuness
+                      data_nascimento: '2015-09-22'
+        '401':
           description: Não autorizado
           content:
             application/json:
@@ -141,7 +140,7 @@ paths:
                 $ref: '#/components/schemas/ErroToken'
     post:
       tags:
-      - Alunos
+        - Alunos
       summary: Aluno - Cadastro
       description: |
         Cadastra um aluno no sistema
@@ -154,7 +153,7 @@ paths:
               $ref: '#/components/schemas/AlunoCadastro'
         required: true
       responses:
-        200:
+        '200':
           description: Sucesso
           content:
             application/json:
@@ -173,13 +172,13 @@ paths:
                     type: string
                     description: Matrícula Cadastrada
                     example: MAT-1234
-        401:
+        '401':
           description: Não autorizado
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErroToken'
-        422:
+        '422':
           description: Erro de validação de dados
           content:
             application/json:
@@ -193,54 +192,53 @@ paths:
                       properties:
                         rule:
                           type: string
-                          description: "Regra ou campo que  que retornou erro"
+                          description: Regra ou campo que  que retornou erro
                         field:
                           type: string
-                          description: "Campo que gerou o erro"
+                          description: Campo que gerou o erro
                         message:
                           type: string
-                          description: "Descrição do erro"
+                          description: Descrição do erro
               examples:
                 Unprocessable Entity:
                   value:
                     errors:
-                      - rule: "unique"
-                        field: "cpf"
-                        message: "cpf already exists"
-                      - rule: "unique"
-                        field: "email"
-                        message: "email already exists"
-
+                      - rule: unique
+                        field: cpf
+                        message: cpf already exists
+                      - rule: unique
+                        field: email
+                        message: email already exists
       x-codegen-request-body-name: body,
   /aluno/{pessoa_id}:
     get:
       tags:
-      - Alunos
-      summary: "Aluno - Busca por ID"
-      description: "Busca os dados cadastrais do aluno utiliando o ID (da Pessoa)"
+        - Alunos
+      summary: Aluno - Busca por ID
+      description: Busca os dados cadastrais do aluno utiliando o ID (da Pessoa)
       operationId: Aluno - View Pessoa ID
       parameters:
-      - name: pessoa_id
-        in: path
-        description: ID da pessoa
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: pessoa_id
+          in: path
+          description: ID da pessoa
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
-        200:
+        '200':
           description: Resposta da requisição
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Aluno'
-        401:
+        '401':
           description: Não autorizado
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErroToken'
-        404:
+        '404':
           description: Não encontrado
           content:
             application/json:
@@ -249,60 +247,59 @@ paths:
   /aluno/{matricula}:
     get:
       tags:
-      - Alunos
+        - Alunos
       summary: Aluno - Busca pela Matrícula
-      description: "Busca os dados cadastrais do aluno utiliando a matrícula."
+      description: Busca os dados cadastrais do aluno utiliando a matrícula.
       operationId: Aluno - View Matrícula
       parameters:
-      - name: matricula
-        in: path
-        description: Matrícula do aluno
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: matricula
+          in: path
+          description: Matrícula do aluno
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
-        200:
+        '200':
           description: Resposta da requisição
           content:
             application/json:
               schema:
-                  $ref: '#/components/schemas/Aluno'
-        401:
+                $ref: '#/components/schemas/Aluno'
+        '401':
           description: Não autorizado
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErroToken'
-        404:
+        '404':
           description: Não encontrado
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFound'
-
   /pessoa:
     get:
       tags:
-      - Pessoa
+        - Pessoa
       summary: Pesosa - Lista
       description: |
         Lista as pessoas cadastradas no sistema, pode ser utilizado paginação
       operationId: Pessoa - Index
       parameters:
-      - name: offset
-        in: query
-        description: Paginação offset
-        schema:
-          type: string
-      - name: limit
-        in: query
-        description: Paginação limit
-        schema:
-          type: string
+        - name: offset
+          in: query
+          description: Paginação offset
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: Paginação limit
+          schema:
+            type: string
       responses:
         '200':
-          description: "Resposta da Requisição"
+          description: Resposta da Requisição
           content:
             application/json:
               schema:
@@ -331,76 +328,73 @@ paths:
               examples:
                 Sucesso:
                   value:
-                   - id: 1277
-                     nome: "Fabiana Policarpo Leitão"
-                     data_nascimento: "2015-07-14"
-                     cpf: "62887035240"
-                     sexo: "F"
-                     email: "email@provedor.com.br"
-                   - id: 1281
-                     nome: "Maria Luiza Nunes"
-                     data_nascimento: "2015-03-23"
-                     cpf: "92541018851"
-                     sexo: "F"
-                     email: "email2@provedor.com.br"
-        401:
+                    - id: 1277
+                      nome: Fabiana Policarpo Leitão
+                      data_nascimento: '2015-07-14'
+                      cpf: '62887035240'
+                      sexo: F
+                      email: email@provedor.com.br
+                    - id: 1281
+                      nome: Maria Luiza Nunes
+                      data_nascimento: '2015-03-23'
+                      cpf: '92541018851'
+                      sexo: F
+                      email: email2@provedor.com.br
+        '401':
           description: Não autorizado
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErroToken'
-
   /pessoa/{id}:
     get:
       tags:
-      - Pessoa
+        - Pessoa
       summary: Pessoa - Detalhes
-      description: |
+      description: >
         Detalhe da pessoa cadastrada no sistema independente do perfil. <br>
-        Não irá exibir o dado da matrícula ou código de professor, apenas os dados cadastrais mais detalhados.
+
+        Não irá exibir o dado da matrícula ou código de professor, apenas os
+        dados cadastrais mais detalhados.
       operationId: Pessoa - View
       parameters:
-      - name: id
-        in: path
-        description: ID da pessoa
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          description: ID da pessoa
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
-        200:
+        '200':
           description: Resposta da requisição
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Pessoa'
-        401:
+        '401':
           description: Não autorizado
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErroToken'
-        404:
+        '404':
           description: Não encontrado
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFound'
-
-
-##### Acadêmico 
-
   /coligada:
     get:
       tags:
-      - Coligada
+        - Coligada
       summary: Coligada - Lista
       description: |
         Lista as coligadas cadastradas no sistema
       operationId: Coligada - Index
       responses:
         '200':
-          description: "Resposta da Requisição"
+          description: Resposta da Requisição
           content:
             application/json:
               schema:
@@ -420,13 +414,13 @@ paths:
               examples:
                 Sucesso:
                   value:
-                   - id: 1
-                     nome: "WClasses Escola de Ensino Infantil e Fundamental"
-                     cnpj: "16590268000160"
-                   - id: 2
-                     nome: "WClasses Escola de Ensino Médio"
-                     cnpj: "59500702000187"
-        401:
+                    - id: 1
+                      nome: WClasses Escola de Ensino Infantil e Fundamental
+                      cnpj: '16590268000160'
+                    - id: 2
+                      nome: WClasses Escola de Ensino Médio
+                      cnpj: '59500702000187'
+        '401':
           description: Não autorizado
           content:
             application/json:
@@ -435,21 +429,21 @@ paths:
   /coligada/{id}:
     get:
       tags:
-      - Coligada
+        - Coligada
       summary: Coligada - Detalhes
       description: |
         Exibe todos os detalhes de uma coligada
       operationId: Coligada - View
       parameters:
-      - name: id
-        in: path
-        description: ID da coligada
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          description: ID da coligada
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
-        200:
+        '200':
           description: Resposta da requisição
           content:
             application/json:
@@ -459,43 +453,43 @@ paths:
                   id:
                     type: number
                     description: ID da Coligada
-                    example: 1.0
+                    example: 1
                   nome:
                     type: string
                     description: Nome da coligada
-                    example: "WClasses Escola de Ensino Infantil e Fundamental"
+                    example: WClasses Escola de Ensino Infantil e Fundamental
                   cnpj:
                     type: string
                     description: CNPJ da coligada
-                    example: "16590268000160"
+                    example: '16590268000160'
                   razao_social:
                     type: string
                     description: Razão social da Coligada
-                    example: "WClasses Escola de Ensino Infantil e Fundamental LTDA"
+                    example: WClasses Escola de Ensino Infantil e Fundamental LTDA
                   nome_fantasia:
                     type: string
                     description: Nome Fantasia da Coligada
-                    example: "WClasses Educacional"
+                    example: WClasses Educacional
                   cep:
                     type: string
                     description: CEP da Coligada
-                    example: "04739010"
+                    example: '04739010'
                   endereco:
                     type: string
                     description: Endereço da Coligada
-                    example: "R. Nove de Julho"
+                    example: R. Nove de Julho
                   numero:
                     type: string
                     description: Número do endereço
-                    example: "72"
+                    example: '72'
                   bairro:
                     type: string
                     description: Bairro da coligada
-                    example: "Santo Amaro"
+                    example: Santo Amaro
                   cidade:
                     type: string
                     description: Cidade da Coligada
-                    example: "São Paulo"
+                    example: São Paulo
                   estado:
                     type: string
                     description: Estado da Coligada
@@ -503,44 +497,42 @@ paths:
                   complemento:
                     type: string
                     description: Complemento do endereço
-                    example: "Sala 116"
+                    example: Sala 116
                   telefone1:
                     type: string
                     description: Telefone 1 - Coligada
-                    example: "1133118185"
+                    example: '1133118185'
                   telefone2:
                     type: string
                     description: Telefone 2 - Coligada
-                    example: "11999995555"
+                    example: '11999995555'
                   site:
                     type: string
                     description: Site da Coligada
-                    example: "https://wclasses.com.br"
-                  
-        401:
+                    example: https://wclasses.com.br
+        '401':
           description: Não autorizado
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErroToken'
-        404:
+        '404':
           description: Não encontrado
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFound'
-  
   /filial:
     get:
       tags:
-      - Filial
+        - Filial
       summary: Filial - Lista
       description: |
         Lista as filiais cadastradas no sistema
       operationId: Filial - Index
       responses:
         '200':
-          description: "Resposta da Requisição"
+          description: Resposta da Requisição
           content:
             application/json:
               schema:
@@ -550,36 +542,35 @@ paths:
                   properties:
                     id:
                       type: string
-                      description: "ID da Filial"
+                      description: ID da Filial
                     nome:
                       type: string
-                      description: "Nome da Filial"
+                      description: Nome da Filial
                     cnpj:
                       type: string
-                      description: "CNPJ da Filial"
+                      description: CNPJ da Filial
               examples:
                 Sucesso:
                   value:
-                   - id: 1
-                     nome: "WClasses - Santo Amaro"
-                     cnpj: "69639665000146"
-                   - id: 2
-                     nome: "WClasses - Centro"
-                     cnpj: "93868150000100"
-                   - id: 3
-                     nome: "WClasses - São Caetano"
-                     cnpj: "43300630000194"
-        401:
+                    - id: 1
+                      nome: WClasses - Santo Amaro
+                      cnpj: '69639665000146'
+                    - id: 2
+                      nome: WClasses - Centro
+                      cnpj: '93868150000100'
+                    - id: 3
+                      nome: WClasses - São Caetano
+                      cnpj: '43300630000194'
+        '401':
           description: Não autorizado
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErroToken'
-  
   /perletivo:
     get:
       tags:
-      - Período Letivo
+        - Período Letivo
       summary: Período Letivo - Lista
       description: |
         Lista de períodos letivos cadastrados.
@@ -597,7 +588,7 @@ paths:
           description: Paginação limit
       responses:
         '200':
-          description: "Resposta da Requisição"
+          description: Resposta da Requisição
           content:
             application/json:
               schema:
@@ -624,8 +615,9 @@ paths:
                       example: S
                     corrente:
                       type: string
-                      description: |
-                        Se o período letivo é o período corrente Valores possíveis:
+                      description: >
+                        Se o período letivo é o período corrente Valores
+                        possíveis:
                          * `S` - Sim
                          * `N` - Não
                       format: enum[S, N]
@@ -633,17 +625,17 @@ paths:
               examples:
                 Sucesso:
                   value:
-                   - codigo: "2021"
-                     descricao: "Ano letivo 2021"
-                     ano: 2021
-                     aberto: "N"
-                     corrente: "N"
-                   - codigo: "2022"
-                     descricao: "Ano letivo 2022"
-                     ano: 2022
-                     aberto: "S"
-                     corrente: "S"
-        401:
+                    - codigo: '2021'
+                      descricao: Ano letivo 2021
+                      ano: 2021
+                      aberto: 'N'
+                      corrente: 'N'
+                    - codigo: '2022'
+                      descricao: Ano letivo 2022
+                      ano: 2022
+                      aberto: S
+                      corrente: S
+        '401':
           description: Não autorizado
           content:
             application/json:
@@ -652,22 +644,22 @@ paths:
   /perletivo/{codigo}:
     get:
       tags:
-      - Período Letivo
+        - Período Letivo
       summary: Período Letivo - Detalhes
       description: |
         Detalhes do período letivo
       operationId: Perletivo - View
       parameters:
-      - name: codigo
-        in: path
-        description: Código do Período Letivo
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: codigo
+          in: path
+          description: Código do Período Letivo
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         '200':
-          description: "Resposta da Requisição"
+          description: Resposta da Requisição
           content:
             application/json:
               schema:
@@ -691,40 +683,42 @@ paths:
                       format: enum[S, N]
                   corrente:
                     type: string
-                    description: |
-                      Se o período letivo é o período corrente Valores possíveis:
+                    description: >
+                      Se o período letivo é o período corrente Valores
+                      possíveis:
                        * `S` - Sim
                        * `N` - Não
                     format: enum[S, N]
               examples:
                 Sucesso:
                   value:
-                     codigo: "2022"
-                     descricao: "Ano letivo 2022"
-                     ano: 2022
-                     aberto: "S"
-                     corrente: "S"
-        401:
+                    codigo: '2022'
+                    descricao: Ano letivo 2022
+                    ano: 2022
+                    aberto: S
+                    corrente: S
+        '401':
           description: Não autorizado
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErroToken'
-        404:
+        '404':
           description: Não encontrado
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFound'
-
   /disciplina:
     get:
       tags:
-      - Disciplinas
+        - Disciplinas
       summary: Disciplinas - Lista
-      description: |
+      description: >
         Lista as disciplinas cadastradas no sistema. <br>
-        As disciplinas são cadastradas globalmente e compartilhadas entre as instituições.
+
+        As disciplinas são cadastradas globalmente e compartilhadas entre as
+        instituições.
       operationId: Disciplina - Index
       parameters:
         - in: query
@@ -739,7 +733,7 @@ paths:
           description: Paginação limit
       responses:
         '200':
-          description: "Resposta da Requisição"
+          description: Resposta da Requisição
           content:
             application/json:
               schema:
@@ -759,14 +753,13 @@ paths:
               examples:
                 Sucesso:
                   value:
-                   - codigo: "001"
-                     nome: "Português"
-                     nome_reduzido: "POR"
-                   - codigo: "002"
-                     nome: "Matemática"
-                     nome_reduzido: "MAT"
-                        
-        401:
+                    - codigo: '001'
+                      nome: Português
+                      nome_reduzido: POR
+                    - codigo: '002'
+                      nome: Matemática
+                      nome_reduzido: MAT
+        '401':
           description: Não autorizado
           content:
             application/json:
@@ -775,22 +768,22 @@ paths:
   /disciplina/{codigo}:
     get:
       tags:
-      - Disciplinas
+        - Disciplinas
       summary: Disciplina - Detalhes
       description: |
         Detalhe da disciplina
       operationId: Disciplina - View
       parameters:
-      - name: codigo
-        in: path
-        description: Código da Disciplina
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: codigo
+          in: path
+          description: Código da Disciplina
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         '200':
-          description: "Resposta da Requisição"
+          description: Resposta da Requisição
           content:
             application/json:
               schema:
@@ -810,35 +803,39 @@ paths:
               examples:
                 Sucesso:
                   value:
-                     codigo: "001"
-                     nome: "Português"
-                     nome_reduzido: "POR"
-
-        401:
+                    codigo: '001'
+                    nome: Português
+                    nome_reduzido: POR
+        '401':
           description: Não autorizado
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErroToken'
-        404:
+        '404':
           description: Não encontrado
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFound'                
-
+                $ref: '#/components/schemas/NotFound'
   /cursosinstituicao:
     get:
       tags:
-      - Cursos da Instituição
+        - Cursos da Instituição
       summary: Cursos Instituição - Lista
-      description: |
-        Cursos que foram cadastrados e disponibilizados para a instituição de ensino. <br>
+      description: >
+        Cursos que foram cadastrados e disponibilizados para a instituição de
+        ensino. <br>
+
         Os cursos são separados por coligada. Geralmente seguem um padrão:
-        
+
+
         * Ensino Infantil
+
         * Ensino Fundamental I
+
         * Ensino Fundamental II
+
         * Ensino Médio
       operationId: Cursos Instituição - Index
       parameters:
@@ -854,7 +851,7 @@ paths:
           description: Paginação limit
       responses:
         '200':
-          description: "Resposta da Requisição"
+          description: Resposta da Requisição
           content:
             application/json:
               schema:
@@ -874,19 +871,19 @@ paths:
               examples:
                 Sucesso:
                   value:
-                   - codigo: 1
-                     nome: "Educação Infantil"
-                     coligada_codigo: 1
-                   - codigo: 2
-                     nome: "Ensino Fundamental  I"
-                     coligada_codigo: 1
-        401:
+                    - codigo: 1
+                      nome: Educação Infantil
+                      coligada_codigo: 1
+                    - codigo: 2
+                      nome: Ensino Fundamental  I
+                      coligada_codigo: 1
+        '401':
           description: Não autorizado
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErroToken'
-        404:
+        '404':
           description: Não encontrado
           content:
             application/json:
@@ -895,26 +892,25 @@ paths:
   /cursosinstituicao/{id}:
     get:
       tags:
-      - Cursos da Instituição
+        - Cursos da Instituição
       summary: Cursos Instituição - Detalhes
       description: |
         Cursos da Instituição <br>
-        
+
         Aqui são listados os tipos de cursos cadastrados nas coligadas. <br>
         Ex: Curso "Ensino Fundamental II" na Coligada "WClasses Educacional"
-      
       operationId: Cursos Instituição - View
       parameters:
-      - name: id
-        in: path
-        description: ID do Curso
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          description: ID do Curso
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         '200':
-          description: "Resposta da Requisição"
+          description: Resposta da Requisição
           content:
             application/json:
               schema:
@@ -949,31 +945,30 @@ paths:
               examples:
                 Sucesso:
                   value:
-                     id: 1
-                     nome: "Educação Infantil"
-                     coligada_id: 1
-                     coligada_nome: "WClasses Educacional"
-                     tipo_curso_id: 1
-                     tipo_curso_descricao: "Ensino Infantil"
-                     curso_modalidade_id: 1
-                     curso_modalidade_nome: "Presencial"
-        401:
+                    id: 1
+                    nome: Educação Infantil
+                    coligada_id: 1
+                    coligada_nome: WClasses Educacional
+                    tipo_curso_id: 1
+                    tipo_curso_descricao: Ensino Infantil
+                    curso_modalidade_id: 1
+                    curso_modalidade_nome: Presencial
+        '401':
           description: Não autorizado
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErroToken'
-        404:
+        '404':
           description: Não encontrado
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFound'
-
   /cursos:
     get:
       tags:
-      - Cursos por Filial
+        - Cursos por Filial
       summary: Cursos da Filial - Lista
       description: |
         Lista os Cursos relacionados as filiais
@@ -991,7 +986,7 @@ paths:
           description: Paginação limit
       responses:
         '200':
-          description: "Resposta da Requisição"
+          description: Resposta da Requisição
           content:
             application/json:
               schema:
@@ -1011,57 +1006,53 @@ paths:
               examples:
                 Sucesso:
                   value:
-                   - id: 1
-                     nome: "Educação Infantil"
-                     filial_id: 1
-                   - id: 2
-                     nome: "Ensino Fundamental I"
-                     filial_id: 3
-        401:
+                    - id: 1
+                      nome: Educação Infantil
+                      filial_id: 1
+                    - id: 2
+                      nome: Ensino Fundamental I
+                      filial_id: 3
+        '401':
           description: Não autorizado
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErroToken'
-        404:
+        '404':
           description: Não encontrado
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFound'
-
-
-##### Financeiro 
-  
   /contrato/pessoa/{id}:
     get:
       tags:
-      - Contrato
+        - Contrato
       summary: Contratos do Responsável
       description: |
         Lista os contratos de um responsável financeiro
       operationId: Contrato - Index
       parameters:
-      - name: id
-        in: path
-        description: ID da pessoa
-        required: true
-        schema:
-          type: integer
-      - name: status
-        in: query
-        description: |
-          Status do contrato.
-          Lista de Status:
-           * `1` - Ativo
-           * `2` - Cancelado
-        schema:
-          type: integer
-          enum:
-          - 1
-          - 2
+        - name: id
+          in: path
+          description: ID da pessoa
+          required: true
+          schema:
+            type: integer
+        - name: status
+          in: query
+          description: |
+            Status do contrato.
+            Lista de Status:
+             * `1` - Ativo
+             * `2` - Cancelado
+          schema:
+            type: integer
+            enum:
+              - 1
+              - 2
       responses:
-        200:
+        '200':
           description: Resposta da requisição
           content:
             application/json:
@@ -1069,7 +1060,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Contrato'
-        401:
+        '401':
           description: Não autorizado
           content:
             application/json:
@@ -1078,20 +1069,20 @@ paths:
   /contrato/{id}:
     get:
       tags:
-      - Contrato
+        - Contrato
       summary: Contrato - Detalhes
       description: |
         Exibe os detalhes do contrato
       operationId: Contrato - View
       parameters:
-      - name: id
-        in: path
-        description: ID do contrato
-        required: true
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: ID do contrato
+          required: true
+          schema:
+            type: integer
       responses:
-        200:
+        '200':
           description: Resposta da requisição
           content:
             application/json:
@@ -1099,71 +1090,70 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ContratoView'
-        401:
+        '401':
           description: Não autorizado
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErroToken'
-  
   /fatura/pessoa/{id}:
     get:
       tags:
-      - Fatura
+        - Fatura
       summary: Faturas do responsável
       description: |
         Retorna as Faturas de um responsável financeiro.
         Pode ser utilizado filtros como "ano", "mes" e "status"
       operationId: Fatura - View
       parameters:
-      - name: id
-        in: path
-        description: ID da Pessoa (Responsável)
-        required: true
-        schema:
-          type: number
-      - name: ano
-        in: query
-        description: Ano de vencimento da Fatura
-        schema:
-          type: integer
-      - name: mes
-        in: query
-        description: Mês de vencimento da Fatura
-        schema:
-          type: integer
-          enum:
-          - 1
-          - 2
-          - 3
-          - 4
-          - 5
-          - 6
-          - 7
-          - 8
-          - 9
-          - 10
-          - 11
-          - 12
-      - name: status
-        in: query
-        description: |
-          Lista de Status:
-           * `1` - Aberto
-           * `2` - Baixado
-           * `3` - Baixa Parcial
-           * `4` - Baixa Manual
-           * `5` - Cancelado
-        schema:
-          type: integer
-          enum:
-          - 1
-          - 2
-          - 3
-          - 4
-          - 5
+        - name: id
+          in: path
+          description: ID da Pessoa (Responsável)
+          required: true
+          schema:
+            type: number
+        - name: ano
+          in: query
+          description: Ano de vencimento da Fatura
+          schema:
+            type: integer
+        - name: mes
+          in: query
+          description: Mês de vencimento da Fatura
+          schema:
+            type: integer
+            enum:
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
+              - 6
+              - 7
+              - 8
+              - 9
+              - 10
+              - 11
+              - 12
+        - name: status
+          in: query
+          description: |
+            Lista de Status:
+             * `1` - Aberto
+             * `2` - Baixado
+             * `3` - Baixa Parcial
+             * `4` - Baixa Manual
+             * `5` - Cancelado
+          schema:
+            type: integer
+            enum:
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
       responses:
-        200:
+        '200':
           description: Resposta da requisição
           content:
             application/json:
@@ -1171,15 +1161,81 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Fatura'
-        401:
+        '401':
           description: Não autorizado
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErroToken'
-
-
-##### Components
+  /ocorrencia-escolar/perletivo/{perletivo}/matricula/{matricula}:
+    get:
+      tags:
+        - Ocorrências
+      summary: Listar Ocorrências do aluno por período letivo
+      description: Listar todas as ocorrências do aluno por período letivo
+      operationId: Ocorrências Aluno
+      parameters:
+        - name: perletivo
+          in: path
+          description: Código do período letivo
+          required: true
+          schema:
+            type: string
+        - name: matricula
+          in: path
+          description: Matrícula do(a) aluno(a)
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: offset
+          schema:
+            type: integer
+          description: Paginação offset
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: Paginação limit
+      responses:
+        default:
+          description: Default error sample response
+          content:
+            application/json:
+              examples:
+                success:
+                  value: |-
+                    [
+                      {
+                        "id": 1,
+                        "matricula": "0992",
+                        "disciplina_codigo": "5",
+                        "data_ocorrencia": "2021-03-08T03:00:00.000Z",
+                        "turma_id": 14,
+                        "relator_id": 158,
+                        "tipo_ocorrencia_id": 28,
+                        "observacao": "Os alunos foram avisados quanto as atividades que começaram a perder nota para cada lição não feita.",
+                        "observacao_individual": "Não fez em casa e durante a aula só fez a número 1 incompleta",
+                        "turma": {
+                          "id": 14,
+                          "codigo": "EFII6T",
+                          "nome": "6°Ano T"
+                        },
+                        "tipoOcorrencia": {
+                          "id": 28,
+                          "descricao": "Falta de Tarefa / Trabalho - Tarefas de Casa",
+                          "grupo_ocorrencia_id": 1
+                        },
+                        "disciplina": {
+                          "codigo": "5",
+                          "nome": "Geografia"
+                        },
+                        "relatorPessoa": {
+                          "nome": "Nome do Relator",
+                          "id": 158
+                        }
+                      }
+                    ]
 components:
   schemas:
     Aluno:
@@ -1192,83 +1248,88 @@ components:
         matricula:
           type: string
           description: Matrícula do Aluno
-          example: "MAT-1234"
+          example: MAT-1234
         nome:
           type: string
           description: Nome do Aluno
-          example: "Emanuel Sacramento Braga"
+          example: Emanuel Sacramento Braga
         data_nascimento:
           type: string
           format: date
           description: Data de nascimento do aluno formato yyyy-mm-dd
-          example: "2015-05-14"
+          example: '2015-05-14'
         cpf:
           type: string
           description: CPF do aluno
-          example: "94358274897"
+          example: '94358274897'
         email:
           type: string
           description: Email do aluno
-          example: "email@provedor.com.br"
+          example: email@provedor.com.br
         nome_social:
           type: string
-          description: Nome social do aluno, se existir deve ser o nome principal a ser utilizado
+          description: >-
+            Nome social do aluno, se existir deve ser o nome principal a ser
+            utilizado
         nome_afetivo:
           type: string
-          description: "Nome social do aluno, se existir e não houver nome social cadastrado deve ser o nome principal a ser utilizado"
+          description: >-
+            Nome social do aluno, se existir e não houver nome social cadastrado
+            deve ser o nome principal a ser utilizado
         status:
           type: string
-          description: "Sexo do aluno:<br> * `M` - Masculino * `F` - Feminino * `N` - Não declarar"
+          description: >-
+            Sexo do aluno:<br> * `M` - Masculino * `F` - Feminino * `N` - Não
+            declarar
           format: enum["M", "F", "N"]
-          example: "M"
+          example: M
         rua:
           type: string
-          description: "Endereço - Rua"
-          example: "Rua Roberto Lopes"
+          description: Endereço - Rua
+          example: Rua Roberto Lopes
         numero:
           type: string
-          description: "Endereço - Número"
-          example: "123"
+          description: Endereço - Número
+          example: '123'
         complemento:
           type: string
-          description: "Endereço - Complemento"
-          example: "Ap 26"
+          description: Endereço - Complemento
+          example: Ap 26
         bairro:
           type: string
-          description: "Endereço - Bairro"
-          example: "Parque Sao Lucas"
+          description: Endereço - Bairro
+          example: Parque Sao Lucas
         cidade:
           type: string
-          description: "Endereço - Cidade"
-          example: "São Paulo"
+          description: Endereço - Cidade
+          example: São Paulo
         estado:
           type: string
-          description: "Endereço - Estado (2 caracteres)"
-          example: "SP"
+          description: Endereço - Estado (2 caracteres)
+          example: SP
         cep:
           type: string
-          description: "Endereço - CEP (8 caracteres)"
-          example: "03263110"
+          description: Endereço - CEP (8 caracteres)
+          example: '03263110'
         telefone1:
           type: string
-          description: "Telefone do aluno"
-          example: "1155712458"
+          description: Telefone do aluno
+          example: '1155712458'
         telefone2:
           type: string
-          description: "Telefone 2 do aluno"
-          example: "11955515059"
+          description: Telefone 2 do aluno
+          example: '11955515059'
         data_criacao:
           type: string
-          description: "Data do cadastro"
-          example: "2021-08-26T11:49:33.000-03:00"
-
+          description: Data do cadastro
+          example: '2021-08-26T11:49:33.000-03:00'
     AlunoCadastro:
       required:
-      - data_nascimento
-      - matricula
-      - nome
-      - senha
-      - filial
+        - data_nascimento
+        - matricula
+        - nome
+        - senha
+        - filial
       type: object
       properties:
         nome:
@@ -1279,7 +1340,7 @@ components:
           type: string
           description: Data de nascimento formato yyyy-mm-dd
           format: date
-          example: "2012-01-20"
+          example: '2012-01-20'
         matricula:
           type: string
           description: Matrícula do Aluno
@@ -1304,7 +1365,7 @@ components:
         filial:
           type: number
           description: ID da filial que o aluno será cadastrado, deve ser um ID válido
-          example: 1.0
+          example: 1
         estadocivil:
           type: string
           description: |
@@ -1317,13 +1378,14 @@ components:
              * `Marital`
              * `Separado Judicialmente`
              * `União Estável`
-          format: enum["Solteiro", "Casado", "Separado", "Divorciado", "Viuvo", "Marital",
-            "Separado Judicialmente", "União Estável"]
+          format: >-
+            enum["Solteiro", "Casado", "Separado", "Divorciado", "Viuvo",
+            "Marital", "Separado Judicialmente", "União Estável"]
           example: Solteiro
         cep:
           type: string
           description: Endereço - CEP
-          example: "08473805"
+          example: '08473805'
         rua:
           type: string
           description: Endereço - Rua
@@ -1331,7 +1393,7 @@ components:
         numero:
           type: string
           description: Endereço - Número
-          example: "35"
+          example: '35'
         complemento:
           type: string
           description: Endereço - Complemento
@@ -1349,7 +1411,6 @@ components:
           description: E-mail do aluno
           format: email
           example: arthur.silva@email.com.br
-
     Contrato:
       type: object
       properties:
@@ -1368,22 +1429,25 @@ components:
           type: string
           description: Validade Inicial do contrato
           format: date
-          example: 2021-01-01
+          example: {}
         validade_fim:
           type: string
           description: Validade Final do contrato
           format: date
-          example: 2021-12-30
+          example: {}
         parcelas:
           type: string
           description: Total de parcelas (parcelamento)
-          example: "12"
+          example: '12'
         status:
           type: number
-          description: "Lista de Status:\n * `1` - Ativo\n * `2` - Cancelado\n \n"
+          description: |
+            Lista de Status:
+             * `1` - Ativo
+             * `2` - Cancelado
+             
           format: enum[1, 2]
-          example: 1.0
-
+          example: 1
     ContratoView:
       type: object
       properties:
@@ -1406,12 +1470,12 @@ components:
           type: string
           description: Validade Inicial do contrato
           format: date
-          example: 2021-01-01
+          example: {}
         validade_fim:
           type: string
           description: Validade Final do contrato
           format: date
-          example: 2021-12-30
+          example: {}
         status:
           type: number
           description: |
@@ -1419,7 +1483,7 @@ components:
              * `1` - Ativo
              * `2` - Cancelado
           format: enum[1, 2]
-          example: 1.0
+          example: 1
         servico_nome:
           type: string
           description: Nome do serviço contratado
@@ -1432,51 +1496,53 @@ components:
           type: string
           description: Início da prestação do serviço contratado
           format: date
-          example: 2021-01-15
+          example: {}
         servico_periodo_fim:
           type: string
           description: Fim da prestação do serviço contratado
           format: date
-          example: 2021-12-15
+          example: {}
         plano_nome:
           type: string
           description: Nome do Plano de Pagamento contratado
           example: Mensalidade EF - 2021 - 12x
         total_bruto:
           type: number
-          description: Total Bruto do Contrato, sem considerar descontos ou valor
+          description: >-
+            Total Bruto do Contrato, sem considerar descontos ou valor
             proporcional
           format: decimal
-          example: 1200.0
+          example: 1200
         valor_poporcional:
           type: number
           description: Valor Proporcional ao período de ingresso/contratação
           format: decimal
-          example: 6000.0
+          example: 6000
         desconto_incondicional:
           type: number
           description: Desconto incondicional aplicado
           format: decimal
-          example: 1000.0
+          example: 1000
         desconto_condicional:
           type: number
           description: Desconto condicional aplicado
           format: decimal
-          example: 500.0
+          example: 500
         total_liquido:
           type: number
-          description: Total líquido do contrato, aplicado descontos (apenas incondicionais)
-            em cima do valor proporcional
+          description: >-
+            Total líquido do contrato, aplicado descontos (apenas
+            incondicionais) em cima do valor proporcional
           format: decimal
-          example: 5000.0
+          example: 5000
         parcelas:
           type: string
           description: Total de parcelas (parcelamento)
-          example: "12"
+          example: '12'
         dia_vencimento:
           type: string
           description: Dia selecionado para vencimento das faturas
-          example: "15"
+          example: '15'
         tipo:
           type: string
           description: |
@@ -1489,8 +1555,7 @@ components:
           type: string
           description: Data de cadastro/contratação
           format: date
-          example: 2021-06-10
-
+          example: {}
     ErroToken:
       type: object
       properties:
@@ -1503,7 +1568,6 @@ components:
                 type: string
                 description: Descrição do erro
                 example: 'E_INVALID_API_TOKEN: Invalid API token'
-
     NotFound:
       type: object
       properties:
@@ -1514,12 +1578,11 @@ components:
         code:
           type: number
           description: Código do erro
-          example: 404.0
+          example: 404
         error:
           type: string
           description: Descriçao técnica do erro
           example: E_ROW_NOT_FOUND
-
     Fatura:
       type: object
       properties:
@@ -1530,7 +1593,7 @@ components:
           type: string
           description: Data de vencimento da fatura
           format: date
-          example: 2021-10-15
+          example: {}
         valor_bruto:
           type: number
           description: Valor Bruto - Sem descontos aplicados
@@ -1570,7 +1633,7 @@ components:
              * `4` - Baixa Manual
              * `5` - Cancelado
           format: enum[1, 2, 3, 4, 5]
-          example: 1.0
+          example: 1
         status_remessa:
           type: number
           description: |
@@ -1581,27 +1644,26 @@ components:
              * `2` - Registrado
              * `3` - Não registrado
           format: enum[0, 1, 2, 3]
-          example: 1.0
-
+          example: 1
     Pessoa:
       required:
-      - cpf
-      - data_nascimento
-      - email
-      - id
-      - nome
-      - sexo
-      - tipo_pessoa
+        - cpf
+        - data_nascimento
+        - email
+        - id
+        - nome
+        - sexo
+        - tipo_pessoa
       type: object
       properties:
         id:
           type: string
-          description: "ID da Pessoa"
+          description: ID da Pessoa
           example: 120
         cpf:
           type: string
-          description: "CPF da pessoa, apenas os números"
-          example: "08654587075"
+          description: CPF da pessoa, apenas os números
+          example: '08654587075'
         tipo_pessoa:
           type: string
           description: |
@@ -1610,25 +1672,27 @@ components:
              * `J` - Jurídica
           example: F
           enum:
-          - F
-          - J
+            - F
+            - J
         nome:
           type: string
-          description: "Nome completo da Pessoa"
-          example: "João da Silva"
+          description: Nome completo da Pessoa
+          example: João da Silva
         nome_social:
           type: string
-          description: "Nome Social, se existir deve ser o nome principal a ser utilizado"
+          description: Nome Social, se existir deve ser o nome principal a ser utilizado
         nome_afetivo:
           type: string
-          description: "Nome Afetivo, se existir e não houver nome social, deve ser o principal"
+          description: >-
+            Nome Afetivo, se existir e não houver nome social, deve ser o
+            principal
         data_nascimento:
           type: string
-          description: "Data de nascimento formato yyyy-mm-dd"
+          description: Data de nascimento formato yyyy-mm-dd
           format: date
-          example: "1990-01-01"
+          example: '1990-01-01'
         estado_civil:
-          description: | 
+          description: |
             Estado civil, valores possíveis:
               * `Solteiro (a)` - Solteiro (a)
               * `Casado (a)` - Casado (a)
@@ -1638,15 +1702,15 @@ components:
               * `Separado (a)` - Separado (a)
               * `União Estável (a)` - União Estável (a)
           type: string
-          example: "Casado (a)"
+          example: Casado (a)
           enum:
-          - Solteiro (a)` - Solteiro (a)
-          - Casado (a)` - Casado (a)
-          - Divorciado (a)` - Divorciado (a)
-          - Viúvo (a)` - Viúvo (a)
-          - Marital (a)` - Marital (a)
-          - Separado (a)` - Separado (a)
-          - União Estável (a)` - União Estável (a)
+            - Solteiro (a)` - Solteiro (a)
+            - Casado (a)` - Casado (a)
+            - Divorciado (a)` - Divorciado (a)
+            - Viúvo (a)` - Viúvo (a)
+            - Marital (a)` - Marital (a)
+            - Separado (a)` - Separado (a)
+            - União Estável (a)` - União Estável (a)
         sexo:
           type: string
           description: |
@@ -1656,34 +1720,34 @@ components:
              * `N` - Não declarar
           example: M
           enum:
-          - M
-          - F
-          - N
+            - M
+            - F
+            - 'N'
         endereco:
-          description: "Objeto com os dados do endereço residencial"
+          description: Objeto com os dados do endereço residencial
           type: object
           properties:
             cep:
-              description: ""
+              description: ''
               maxLength: 8
               minLength: 8
               type: string
-              example: "05535000"
+              example: '05535000'
             rua:
-              description: "Endereço - Rua"
+              description: Endereço - Rua
               maxLength: 140
               type: string
               example: Rua dos coqueiros
             numero:
-              description: "Endereço - Número"
+              description: Endereço - Número
               maxLength: 12
               type: string
-              example: "196"
+              example: '196'
             complemento:
-              description: "Endereço - Complemento"
+              description: Endereço - Complemento
               maxLength: 150
               type: string
-              example: "Casa 2"
+              example: Casa 2
             bairro:
               maxLength: 50
               type: string
@@ -1700,79 +1764,79 @@ components:
               example: SP
             cidade_ibge:
               maxLength: 50
-              description: "Código da Cidade no IBGE"
+              description: Código da Cidade no IBGE
               type: string
-              example: "3550308"
+              example: '3550308'
         endereco_comercial:
-          description: "Objeto com os dados do endereço residencial"
+          description: Objeto com os dados do endereço residencial
           type: object
           properties:
             empresa:
-              description: "Nome da empresa"
+              description: Nome da empresa
               type: string
-              example: "Empresa de Tecidos LTDA"
+              example: Empresa de Tecidos LTDA
             cep:
-              description: ""
+              description: ''
               maxLength: 8
               minLength: 8
               type: string
-              example: "05569090"
+              example: '05569090'
             rua:
-              description: "Endereço Comercial - Rua"
+              description: Endereço Comercial - Rua
               maxLength: 140
               type: string
-              example: "Rua Frei Clemente"
+              example: Rua Frei Clemente
             numero:
-              description: "Endereço Comercial - Número"
+              description: Endereço Comercial - Número
               maxLength: 12
               type: string
-              example: "655"
+              example: '655'
             complemento:
-              description: "Endereço Comercial - Complemento"
+              description: Endereço Comercial - Complemento
               maxLength: 150
               type: string
-              example: "Fundos"
+              example: Fundos
             bairro:
               maxLength: 50
               type: string
-              example: "Vila Feliz"
+              example: Vila Feliz
             cidade:
               maxLength: 50
               type: string
-              example: "São Paulo"
+              example: São Paulo
             estado:
               maxLength: 2
               minLength: 2
               type: string
-              description: "Código da UF"
-              example: "SP"
+              description: Código da UF
+              example: SP
         email:
-          description: "E-mail"
+          description: E-mail
           type: string
           format: email
-          example: "contato@email.com.br"
+          example: contato@email.com.br
         telefone1:
-          description: "Telefone 1"
+          description: Telefone 1
           type: string
-          example: "1155712458"
+          example: '1155712458'
         telefone2:
-          description: "Telefone 2"
+          description: Telefone 2
           type: string
-          example: "11955515059"
+          example: '11955515059'
         autoriza_imagem:
-          description: "Se o usuário autoriza o uso da imagem"
+          description: Se o usuário autoriza o uso da imagem
           type: boolean
           example: 1
         data_criacao:
-          description: "Data da criação do usuário"
+          description: Data da criação do usuário
           type: string
           format: date
-          example: "2021-08-26T11:49:33.000-03:00"
+          example: '2021-08-26T11:49:33.000-03:00'
         data_alteracao:
-          description: "Data da última alteração do usuário"
+          description: Data da última alteração do usuário
           type: string
           format: date
-          example: "2021-08-26T11:49:33.000-03:00"
+          example: '2021-08-26T11:49:33.000-03:00'
   securitySchemes:
     Bearer:
       type: apiKey
