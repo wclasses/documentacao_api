@@ -72,13 +72,14 @@ tags:
   - name: Cursos da Instituição
     description: Cursos da Instituição
   - name: Cursos por Filial
-    description: Cursos da Instituição
+    description: Cursos por Filial
+  - name: Ocorrências
+    description: Ocorrência Escolar
   - name: Contrato
     description: Contratos adquiridos pelos responsáveis
   - name: Fatura
     description: Faturas geradas para um responsável
-  - name: Ocorrências
-    description: Ocorrência Escolar
+
 paths:
   /aluno:
     get:
@@ -153,7 +154,7 @@ paths:
               $ref: '#/components/schemas/AlunoCadastro'
         required: true
       responses:
-        '200':
+        '201':
           description: Sucesso
           content:
             application/json:
@@ -1202,6 +1203,49 @@ paths:
           description: "Resposta da Requisição"
           content:
             application/json:
+              schema:
+                type: array
+                items:
+                 type: object
+                 properties:
+                   id:
+                     type: number
+                     description: "ID da ococrrência"
+                   matricula:
+                      type: string
+                      description: "Matrícula do aluno"
+                   disciplina_codigo:
+                      type: string
+                      description: "Código da disciplina"
+                   data_ocorrencia:
+                      type: string
+                      description: "Data da ocorrência"
+                   turma_id:
+                      type: number
+                      description: "ID da turma"     
+                   tipo_ocorrencia_id:
+                      type: number
+                      description: "ID do tipo de ocorrência"
+                   observacao:
+                      type: string
+                      description: "Observação geral"      
+                   observacao_individual:
+                      type: string
+                      description: "Observação individual"
+                   turma:
+                      type: object
+                      description: "Dados da turma"
+                      properties:
+                         id:
+                          type: number
+                          description: "Chave primária da turma"
+                         codigo:
+                          type: string
+                          description: "Código da turma"
+                         nome:
+                          type: string
+                          description: "Nome da turma"
+                  
               examples:
                 success:
                   value:
@@ -1217,7 +1261,7 @@ paths:
                      turma: 
                           id : 14
                           codigo: "EFII6T"
-                          nome": "6°Ano T"
+                          nome: "6°Ano T"
                      tipoOcorrencia:
                           id: 28
                           descricao: "Falta de Tarefa / Trabalho - Tarefas de Casa"
