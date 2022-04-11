@@ -1282,6 +1282,7 @@ paths:
                 $ref: '#/components/schemas/ErroToken'              
 components:
   schemas:
+    
     Aluno:
       type: object
       properties:
@@ -1291,25 +1292,21 @@ components:
           example: 1234
         matricula:
           type: string
-          description: Matrícula do Aluno
-          example: MAT-1234
+          description: "Matrícula do Aluno"
+          example: "MAT-1234"
         nome:
           type: string
           description: Nome do Aluno
-          example: Emanuel Sacramento Braga
+          example: "Emanuel Sacramento Braga"
         data_nascimento:
           type: string
           format: date
-          description: Data de nascimento do aluno formato yyyy-mm-dd
-          example: '2015-05-14'
+          description: "Data de nascimento do aluno formato yyyy-mm-dd"
+          example: "2015-05-14"
         cpf:
           type: string
-          description: CPF do aluno
+          description: "CPF do aluno"
           example: '94358274897'
-        email:
-          type: string
-          description: Email do aluno
-          example: email@provedor.com.br
         nome_social:
           type: string
           description: >-
@@ -1320,53 +1317,130 @@ components:
           description: >-
             Nome social do aluno, se existir e não houver nome social cadastrado
             deve ser o nome principal a ser utilizado
-        status:
+        sexo:
           type: string
           description: >-
             Sexo do aluno:<br> * `M` - Masculino * `F` - Feminino * `N` - Não
             declarar
           format: enum["M", "F", "N"]
-          example: M
-        rua:
+          example: "M"
+        endereco:
+          description: Objeto com os dados do endereço residencial
+          type: object
+          properties:
+            cep:
+              description: ''
+              maxLength: 8
+              minLength: 8
+              type: string
+              example: '05535000'
+            rua:
+              description: "Endereço - Rua"
+              maxLength: 140
+              type: string
+              example: "Rua dos coqueiros"
+            numero:
+              description: "Endereço - Número"
+              maxLength: 12
+              type: string
+              example: '196'
+            complemento:
+              description: "Endereço - Complemento"
+              maxLength: 150
+              type: string
+              example: Casa 2
+            bairro:
+              maxLength: 50
+              type: string
+              example: "Vila dos Coqueiros"
+            cidade:
+              maxLength: 50
+              type: string
+              example: "São Paulo"
+            estado:
+              maxLength: 2
+              minLength: 2
+              type: string
+              description: "Código da UF"
+              example: SP
+            cidade_ibge:
+              maxLength: 50
+              description: "Código da Cidade no IBGE"
+              type: string
+              example: '3550308'
+        email:
           type: string
-          description: Endereço - Rua
-          example: Rua Roberto Lopes
-        numero:
-          type: string
-          description: Endereço - Número
-          example: '123'
-        complemento:
-          type: string
-          description: Endereço - Complemento
-          example: Ap 26
-        bairro:
-          type: string
-          description: Endereço - Bairro
-          example: Parque Sao Lucas
-        cidade:
-          type: string
-          description: Endereço - Cidade
-          example: São Paulo
-        estado:
-          type: string
-          description: Endereço - Estado (2 caracteres)
-          example: SP
-        cep:
-          type: string
-          description: Endereço - CEP (8 caracteres)
-          example: '03263110'
+          description: "Email do aluno"
+          example: "email@provedor.com.br"
         telefone1:
           type: string
           description: Telefone do aluno
           example: '1155712458'
         telefone2:
           type: string
-          description: Telefone 2 do aluno
+          description: "Telefone 2 do aluno"
           example: '11955515059'
         data_criacao:
           type: string
-          description: Data do cadastro
+          description: "Data do cadastro"
           example: '2021-08-26T11:49:33.000-03:00'
+        responsaveis:
+          description: |
+            Array com os responsáveis, os objetos são separados pelo tipo de relação
+          type: array
+          items:
+            type: object
+            properties:
+              pessoa_id:
+                description: "ID da pessoa"
+                type: number
+                example: 123
+              nome: 
+                description: "Nome do Responsável"
+                type: string
+                example: "Paulo da Silva"
+              tipo_relacao_id:
+                description: | 
+                  ID da relação aluno x pessoa. Valores Possíveis: <br>
+                  * `1` - Responsável Acadêmico
+                  * `2` - Responsável Financeiro
+                  * `3` - Pai
+                  * `4` - Mãe
+                  * `5` - Irmão(a)
+                  * `7` - Tio(a)
+                  * `9` - Avô(ó)
+                  * `11` - Primo(a)
+                  * `13` - Responsável Legal
+                  * `14` - Padastro
+                  * `15` - Madastra
+                type: number
+                example: 1
+              tipo_relacao: 
+                description: "Descrição do tipo da relação"
+                type: string
+                example: "Responsável Acadêmico"
+        matriculas: 
+          description: "Últimas 3 matrículas do aluno na instituição"
+          type: array
+          items:
+            type: object
+            properties:
+              id: 
+                type: number
+                example: 121
+              periodo_letivo:
+                type: string
+                example: "2022"
+              curso: 
+                type: string
+                example: "Ensino Fundamental I"
+              periodo:
+                type: string
+                example: "2º ano"
+              turno:
+                type: string
+                example: "Manhã"
+
     AlunoCadastro:
       required:
         - data_nascimento
@@ -1455,6 +1529,7 @@ components:
           description: E-mail do aluno
           format: email
           example: arthur.silva@email.com.br
+    
     Contrato:
       type: object
       properties:
@@ -1492,6 +1567,7 @@ components:
              
           format: enum[1, 2]
           example: 1
+    
     ContratoView:
       type: object
       properties:
@@ -1600,6 +1676,7 @@ components:
           description: Data de cadastro/contratação
           format: date
           example: {}
+    
     ErroToken:
       type: object
       properties:
@@ -1612,6 +1689,7 @@ components:
                 type: string
                 description: Descrição do erro
                 example: 'E_INVALID_API_TOKEN: Invalid API token'
+    
     NotFound:
       type: object
       properties:
@@ -1627,6 +1705,7 @@ components:
           type: string
           description: Descriçao técnica do erro
           example: E_ROW_NOT_FOUND
+    
     Fatura:
       type: object
       properties:
@@ -1689,6 +1768,7 @@ components:
              * `3` - Não registrado
           format: enum[0, 1, 2, 3]
           example: 1
+    
     Pessoa:
       required:
         - cpf
@@ -1881,6 +1961,7 @@ components:
           type: string
           format: date
           example: '2021-08-26T11:49:33.000-03:00'
+  
   securitySchemes:
     Bearer:
       type: apiKey
