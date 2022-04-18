@@ -39,6 +39,7 @@
         "Disciplinas",
         "Cursos da Instituição",
         "Cursos por Filial",
+        "Turmas",
         "Ocorrências"
       ]
     },
@@ -86,6 +87,10 @@
     {
       "name": "Cursos por Filial",
       "description": "Cursos por Filial"
+    },
+    {
+      "name": "Turmas",
+      "description": "Turmas cadastradas"
     },
     {
       "name": "Ocorrências",
@@ -1439,6 +1444,111 @@
                         "id": 2,
                         "nome": "Ensino Fundamental I",
                         "filial_id": 3
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroToken"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/turma": {
+      "get": {
+        "tags": [
+          "Turmas"
+        ],
+        "summary": "Turma - Index",
+        "description": "Lista as turmas cadastradas no sistema, pode ser utilizado paginação.\n",
+        "operationId": "Turma - View",
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Paginação offset",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Paginação limit",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta da Requisição",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "description": "ID da Turma"
+                      },
+                      "nome": {
+                        "type": "string",
+                        "description": "Nome da Turma"
+                      },
+                      "codigo": {
+                        "type": "string",
+                        "description": "Código da Turma"
+                      },
+                      "periodo_letivo_id": {
+                        "type": "number",
+                        "description": "ID do Período letivo"
+                      },
+                      "curso_id": {
+                        "type": "number",
+                        "description": "ID do Período letivo"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "SUCESSO": {
+                    "value": [
+                      {
+                        "id": 1,
+                        "nome": "Infantil I - Manhã",
+                        "codigo": "INF1M",
+                        "periodo_letivo_id": 2022,
+                        "curso_id": 1
+                      },
+                      {
+                        "id": 2,
+                        "nome": "3º Ano Fundamental I",
+                        "codigo": "EFI-3A",
+                        "periodo_letivo_id": 2022,
+                        "curso_id": 4
                       }
                     ]
                   }
