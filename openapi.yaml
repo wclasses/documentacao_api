@@ -1326,6 +1326,36 @@ paths:
                          nome:
                           type: string
                           description: "Nome da turma"
+                   tipoOcorrencia:
+                       type: object
+                       description: "Dados do tipo de ocorrência"
+                       properties:
+                         id:
+                          type: number
+                          description: "Chave primária do tipo de ocorrências"
+                         descricao:
+                          type: string
+                          description: "Descrição do grupo de ocorrências"
+                   disciplina:
+                      type: object
+                      description: "Dados da disciplina"
+                      properties:
+                        codigo: 
+                          type: string
+                          description: "Código da disciplina"
+                        nome: 
+                          type: string
+                          description: "Nome da disciplina"
+                   relatorPessoa:
+                      type: object
+                      properties:
+                        nome:
+                          type: string
+                          description: "Nome do relator da ococcência"
+                        id:
+                          type: number
+                          description: "ID do Relator da ocorrência"
+                        
                   
               examples:
                 success:
