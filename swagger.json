@@ -1908,6 +1908,7 @@
                       },
                       "relatorPessoa": {
                         "type": "object",
+                        "description": "Dados do relator da ocorrência",
                         "properties": {
                           "nome": {
                             "type": "string",
